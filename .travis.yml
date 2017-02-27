@@ -14,6 +14,7 @@ matrix:
 before_install:
   - composer self-update
   - curl -L https://github.com/FriendsOfPHP/PHP-CS-Fixer/releases/download/v2.1.0/php-cs-fixer.phar -o php-cs-fixer
+  - sudo chmod a+x php-cs-fixer
 
 install:
   - composer install
