@@ -1,5 +1,5 @@
 language: php
-sudo: true
+sudo: false
 
 cache:
   directories:
@@ -13,15 +13,12 @@ matrix:
 
 before_install:
   - composer self-update
-  - curl -L https://github.com/FriendsOfPHP/PHP-CS-Fixer/releases/download/v2.1.0/php-cs-fixer.phar -o php-cs-fixer
-  - sudo chmod a+x php-cs-fixer
 
 install:
   - composer install
 
 script:
   - ./vendor/bin/phpunit
-  - ./php-cs-fixer fix --diff --dry-run -v
   - ./bin/console lint:yaml app/config
   - ./bin/console lint:twig app/Resources
   - ./bin/console security:check
