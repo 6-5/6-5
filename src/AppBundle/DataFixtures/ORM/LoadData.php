@@ -3,6 +3,7 @@
 namespace AppBundle\DataFixtures\ORM;
 
 use AppBundle\Entity\Decision;
+use AppBundle\Entity\File;
 use AppBundle\Entity\Report;
 use AppBundle\Entity\User;
 use AppBundle\Manager\ReportManager;
@@ -107,6 +108,9 @@ class LoadData implements FixtureInterface, ContainerAwareInterface
             ->setCreatedAt($createdAt = $this->faker->dateTimeBetween('-14 days', '-7 days'))
             ->setObject(ucfirst($this->faker->words(3, true)))
         ;
+
+        $file = new File();
+        $report->addFile($file);
 
         if ($addressTo) {
             $report = $this->reportManager->addressTo($report, $addressTo);
