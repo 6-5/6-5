@@ -41,7 +41,12 @@ class User extends BaseUser
     /**
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Report", mappedBy="createdBy")
      */
-    protected $reports;
+    protected $createdReports;
+
+    /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Report", mappedBy="addressedTo")
+     */
+    protected $addressedReports;
 
     /**
      * Set grade
@@ -127,37 +132,72 @@ class User extends BaseUser
     }
 
     /**
-     * Add report
+     * Add createdReport
      *
-     * @param \AppBundle\Entity\Report $report
+     * @param \AppBundle\Entity\Report $createdReport
      *
      * @return User
      */
-    public function addReport(\AppBundle\Entity\Report $report)
+    public function addCreatedReport(\AppBundle\Entity\Report $createdReport)
     {
-        $this->reports[] = $report;
-        $report->setCreatedBy($report);
+        $this->createdReports[] = $createdReport;
+        $createdReport->setCreatedBy($this);
 
         return $this;
     }
 
     /**
-     * Remove report
+     * Remove createdReport
      *
-     * @param \AppBundle\Entity\Report $report
+     * @param \AppBundle\Entity\Report $createdReport
      */
-    public function removeReport(\AppBundle\Entity\Report $report)
+    public function removeCreatedReport(\AppBundle\Entity\Report $createdReport)
     {
-        $this->reports->removeElement($report);
+        $this->createdReports->removeElement($createdReport);
     }
 
     /**
-     * Get reports
+     * Get createdReports
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getReports()
+    public function getCreatedReports()
     {
-        return $this->reports;
+        return $this->createdReports;
+    }
+
+    /**
+     * Add addressedReport
+     *
+     * @param \AppBundle\Entity\Report $addressedReport
+     *
+     * @return User
+     */
+    public function addAddressedReport(\AppBundle\Entity\Report $addressedReport)
+    {
+        $this->addressedReports[] = $addressedReport;
+        $addressedReport->setAddressedTo($this);
+
+        return $this;
+    }
+
+    /**
+     * Remove addressedReport
+     *
+     * @param \AppBundle\Entity\Report $addressedReport
+     */
+    public function removeAddressedReport(\AppBundle\Entity\Report $addressedReport)
+    {
+        $this->addressedReports->removeElement($addressedReport);
+    }
+
+    /**
+     * Get addressedReports
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getAddressedReports()
+    {
+        return $this->addressedReports;
     }
 }

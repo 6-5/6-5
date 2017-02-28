@@ -32,9 +32,14 @@ class Report
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User", inversedBy="reports")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User", inversedBy="createdReports")
      */
     private $createdBy;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User", inversedBy="addressedReports")
+     */
+    private $addressedTo;
 
     /**
      * @var string
@@ -105,7 +110,6 @@ class Report
      * @ORM\Column(name="createdAt", type="datetime")
      */
     private $createdAt;
-
 
     /**
      * Get id
@@ -379,5 +383,29 @@ class Report
     public function getCreatedBy()
     {
         return $this->createdBy;
+    }
+
+    /**
+     * Set addressedTo
+     *
+     * @param \AppBundle\Entity\User $addressedTo
+     *
+     * @return Report
+     */
+    public function setAddressedTo(\AppBundle\Entity\User $addressedTo = null)
+    {
+        $this->addressedTo = $addressedTo;
+
+        return $this;
+    }
+
+    /**
+     * Get addressedTo
+     *
+     * @return \AppBundle\Entity\User
+     */
+    public function getAddressedTo()
+    {
+        return $this->addressedTo;
     }
 }
