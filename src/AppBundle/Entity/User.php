@@ -11,10 +11,113 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class User extends BaseUser
 {
+    const GRADE_RECRUIT = 'recruit';
+    const GRADE_SOLDIER = 'soldier';
+
     /**
      * @ORM\Id
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
+
+    /**
+     * @ORM\Column(type="text", length=64)
+     */
+    protected $grade;
+
+    /**
+     * One Category has Many Categories.
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\User", mappedBy="supervisedBy")
+     */
+    protected $subordinates;
+
+    /**
+     * Many Categories have One Category.
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User", inversedBy="subordinates")
+     */
+    protected $supervisedBy;
+
+    /**
+     * Set grade
+     *
+     * @param string $grade
+     *
+     * @return User
+     */
+    public function setGrade($grade)
+    {
+        $this->grade = $grade;
+
+        return $this;
+    }
+
+    /**
+     * Get grade
+     *
+     * @return string
+     */
+    public function getGrade()
+    {
+        return $this->grade;
+    }
+
+    /**
+     * Add subordinate
+     *
+     * @param \AppBundle\Entity\User $subordinate
+     *
+     * @return User
+     */
+    public function addSubordinate(\AppBundle\Entity\User $subordinate)
+    {
+        $this->subordinates[] = $subordinate;
+        $subordinate->setSupervisedBy($this);
+
+        return $this;
+    }
+
+    /**
+     * Remove subordinate
+     *
+     * @param \AppBundle\Entity\User $subordinate
+     */
+    public function removeSubordinate(\AppBundle\Entity\User $subordinate)
+    {
+        $this->subordinates->removeElement($subordinate);
+    }
+
+    /**
+     * Get subordinates
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getSubordinates()
+    {
+        return $this->subordinates;
+    }
+
+    /**
+     * Set supervisedBy
+     *
+     * @param \AppBundle\Entity\User $supervisedBy
+     *
+     * @return User
+     */
+    public function setSupervisedBy(\AppBundle\Entity\User $supervisedBy = null)
+    {
+        $this->supervisedBy = $supervisedBy;
+
+        return $this;
+    }
+
+    /**
+     * Get supervisedBy
+     *
+     * @return \AppBundle\Entity\User
+     */
+    public function getSupervisedBy()
+    {
+        return $this->supervisedBy;
+    }
 }
