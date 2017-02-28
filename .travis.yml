@@ -19,9 +19,11 @@ before_install:
 
 install:
   - composer install
+  - ./bin/console doctrine:database:create --if-not-exists --env test
 
 script:
   - ./vendor/bin/phpunit
   - ./bin/console lint:yaml app/config
   - ./bin/console lint:twig app/Resources
   - ./bin/console security:check
+  - ./bin/console doctrine:schema:update --dump-sql --env test
