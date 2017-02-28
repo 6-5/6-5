@@ -10,4 +10,12 @@ namespace AppBundle\Repository;
  */
 class ReportRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function findOneByReference($reference)
+    {
+        return $this->createQueryBuilder('r')
+            ->where('r.reference = :reference')->setParameter('reference', $reference)
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+    }
 }
