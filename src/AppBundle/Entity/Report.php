@@ -32,6 +32,11 @@ class Report
     private $id;
 
     /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User", inversedBy="reports")
+     */
+    private $createdBy;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="reference", type="string", length=6, unique=true)
@@ -351,5 +356,28 @@ class Report
     {
         return $this->createdAt;
     }
-}
 
+    /**
+     * Set createdBy
+     *
+     * @param \AppBundle\Entity\User $createdBy
+     *
+     * @return Report
+     */
+    public function setCreatedBy(\AppBundle\Entity\User $createdBy = null)
+    {
+        $this->createdBy = $createdBy;
+
+        return $this;
+    }
+
+    /**
+     * Get createdBy
+     *
+     * @return \AppBundle\Entity\User
+     */
+    public function getCreatedBy()
+    {
+        return $this->createdBy;
+    }
+}

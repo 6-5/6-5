@@ -187,4 +187,3 @@ class Desicion
         return $this->comment;
     }
 }
-

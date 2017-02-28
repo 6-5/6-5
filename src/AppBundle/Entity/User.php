@@ -39,6 +39,11 @@ class User extends BaseUser
     protected $supervisedBy;
 
     /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Report", mappedBy="createdBy")
+     */
+    protected $reports;
+
+    /**
      * Set grade
      *
      * @param string $grade
@@ -119,5 +124,40 @@ class User extends BaseUser
     public function getSupervisedBy()
     {
         return $this->supervisedBy;
+    }
+
+    /**
+     * Add report
+     *
+     * @param \AppBundle\Entity\Report $report
+     *
+     * @return User
+     */
+    public function addReport(\AppBundle\Entity\Report $report)
+    {
+        $this->reports[] = $report;
+        $report->setCreatedBy($report);
+
+        return $this;
+    }
+
+    /**
+     * Remove report
+     *
+     * @param \AppBundle\Entity\Report $report
+     */
+    public function removeReport(\AppBundle\Entity\Report $report)
+    {
+        $this->reports->removeElement($report);
+    }
+
+    /**
+     * Get reports
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getReports()
+    {
+        return $this->reports;
     }
 }
