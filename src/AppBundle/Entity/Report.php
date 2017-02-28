@@ -112,7 +112,7 @@ class Report
     private $createdAt;
 
     /**
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\File", mappedBy="report")
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\File", mappedBy="report", cascade={"all"})
      */
     private $files;
 
