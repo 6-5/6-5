@@ -49,6 +49,11 @@ class User extends BaseUser
     protected $addressedReports;
 
     /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Desicion", mappedBy="user")
+     */
+    private $decisions;
+
+    /**
      * Set grade
      *
      * @param string $grade
@@ -199,5 +204,40 @@ class User extends BaseUser
     public function getAddressedReports()
     {
         return $this->addressedReports;
+    }
+
+    /**
+     * Add decision
+     *
+     * @param \AppBundle\Entity\Desicion $decision
+     *
+     * @return User
+     */
+    public function addDecision(\AppBundle\Entity\Desicion $decision)
+    {
+        $this->decisions[] = $decision;
+        $decision->setUser($this);
+
+        return $this;
+    }
+
+    /**
+     * Remove decision
+     *
+     * @param \AppBundle\Entity\Desicion $decision
+     */
+    public function removeDecision(\AppBundle\Entity\Desicion $decision)
+    {
+        $this->decisions->removeElement($decision);
+    }
+
+    /**
+     * Get decisions
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getDecisions()
+    {
+        return $this->decisions;
     }
 }

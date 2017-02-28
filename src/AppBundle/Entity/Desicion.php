@@ -62,6 +62,11 @@ class Desicion
     private $report;
 
     /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User", inversedBy="decisions")
+     */
+    private $user;
+
+    /**
      * Get id
      *
      * @return int
@@ -213,5 +218,29 @@ class Desicion
     public function getReport()
     {
         return $this->report;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \AppBundle\Entity\User $user
+     *
+     * @return Desicion
+     */
+    public function setUser(\AppBundle\Entity\User $user = null)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \AppBundle\Entity\User
+     */
+    public function getUser()
+    {
+        return $this->user;
     }
 }
