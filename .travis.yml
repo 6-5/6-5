@@ -27,3 +27,4 @@ script:
   - ./bin/console lint:twig app/Resources
   - ./bin/console security:check
   - ./bin/console doctrine:schema:update --dump-sql --force
+  - ./bin/console doctrine:fixtures:load -n
