@@ -21,6 +21,10 @@ class File
      */
     private $id;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Report", inversedBy="files")
+     */
+    private $report;
 
     /**
      * Get id
@@ -30,5 +34,29 @@ class File
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Set report
+     *
+     * @param \AppBundle\Entity\Report $report
+     *
+     * @return File
+     */
+    public function setReport(\AppBundle\Entity\Report $report = null)
+    {
+        $this->report = $report;
+
+        return $this;
+    }
+
+    /**
+     * Get report
+     *
+     * @return \AppBundle\Entity\Report
+     */
+    public function getReport()
+    {
+        return $this->report;
     }
 }

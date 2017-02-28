@@ -112,6 +112,11 @@ class Report
     private $createdAt;
 
     /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\File", mappedBy="report")
+     */
+    private $files;
+
+    /**
      * Get id
      *
      * @return int
@@ -407,5 +412,47 @@ class Report
     public function getAddressedTo()
     {
         return $this->addressedTo;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->files = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add file
+     *
+     * @param \AppBundle\Entity\File $file
+     *
+     * @return Report
+     */
+    public function addFile(\AppBundle\Entity\File $file)
+    {
+        $this->files[] = $file;
+        $file->setReport($this);
+
+        return $this;
+    }
+
+    /**
+     * Remove file
+     *
+     * @param \AppBundle\Entity\File $file
+     */
+    public function removeFile(\AppBundle\Entity\File $file)
+    {
+        $this->files->removeElement($file);
+    }
+
+    /**
+     * Get files
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getFiles()
+    {
+        return $this->files;
     }
 }
