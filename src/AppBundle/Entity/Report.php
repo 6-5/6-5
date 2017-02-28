@@ -117,6 +117,11 @@ class Report
     private $files;
 
     /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Desicion", mappedBy="report")
+     */
+    private $decisions;
+
+    /**
      * Get id
      *
      * @return int
@@ -454,5 +459,39 @@ class Report
     public function getFiles()
     {
         return $this->files;
+    }
+
+    /**
+     * Add decision
+     *
+     * @param \AppBundle\Entity\Desicion $decision
+     *
+     * @return Report
+     */
+    public function addDecision(\AppBundle\Entity\Desicion $decision)
+    {
+        $this->decisions[] = $decision;
+
+        return $this;
+    }
+
+    /**
+     * Remove decision
+     *
+     * @param \AppBundle\Entity\Desicion $decision
+     */
+    public function removeDecision(\AppBundle\Entity\Desicion $decision)
+    {
+        $this->decisions->removeElement($decision);
+    }
+
+    /**
+     * Get decisions
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getDecisions()
+    {
+        return $this->decisions;
     }
 }

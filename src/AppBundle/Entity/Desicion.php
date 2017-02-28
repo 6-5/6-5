@@ -56,6 +56,10 @@ class Desicion
      */
     private $comment;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Report", inversedBy="decisions")
+     */
+    private $report;
 
     /**
      * Get id
@@ -185,5 +189,29 @@ class Desicion
     public function getComment()
     {
         return $this->comment;
+    }
+
+    /**
+     * Set report
+     *
+     * @param \AppBundle\Entity\Report $report
+     *
+     * @return Desicion
+     */
+    public function setReport(\AppBundle\Entity\Report $report = null)
+    {
+        $this->report = $report;
+
+        return $this;
+    }
+
+    /**
+     * Get report
+     *
+     * @return \AppBundle\Entity\Report
+     */
+    public function getReport()
+    {
+        return $this->report;
     }
 }
