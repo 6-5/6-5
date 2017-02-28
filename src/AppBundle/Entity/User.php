@@ -13,6 +13,9 @@ class User extends BaseUser
 {
     const GRADE_RECRUIT = 'recruit';
     const GRADE_SOLDIER = 'soldier';
+    const GRADE_LIEUTENANT = 'lieutenant';
+    const GRADE_CAPTAIN = 'captain';
+    const GRADE_COLONEL = 'colonel';
 
     /**
      * @ORM\Id
@@ -22,19 +25,28 @@ class User extends BaseUser
     protected $id;
 
     /**
-     * @ORM\Column(type="text", length=64)
+     * @ORM\Column(type="string", length=31)
      */
     protected $grade;
 
     /**
-     * One Category has Many Categories.
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\User", mappedBy="supervisedBy")
+     * @ORM\Column(type="string", length=31)
+     */
+    protected $firstname;
+
+    /**
+     * @ORM\Column(type="string", length=31)
+     */
+    protected $lastname;
+
+    /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\User", mappedBy="supervisedBy", )
      */
     protected $subordinates;
 
     /**
-     * Many Categories have One Category.
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User", inversedBy="subordinates")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User", inversedBy="subordinates", cascade={"remove"})
+     * @ORM\JoinColumn(onDelete="SET NULL")
      */
     protected $supervisedBy;
 
@@ -239,5 +251,53 @@ class User extends BaseUser
     public function getDecisions()
     {
         return $this->decisions;
+    }
+
+    /**
+     * Set firstname
+     *
+     * @param string $firstname
+     *
+     * @return User
+     */
+    public function setFirstname($firstname)
+    {
+        $this->firstname = $firstname;
+
+        return $this;
+    }
+
+    /**
+     * Get firstname
+     *
+     * @return string
+     */
+    public function getFirstname()
+    {
+        return $this->firstname;
+    }
+
+    /**
+     * Set lastname
+     *
+     * @param string $lastname
+     *
+     * @return User
+     */
+    public function setLastname($lastname)
+    {
+        $this->lastname = $lastname;
+
+        return $this;
+    }
+
+    /**
+     * Get lastname
+     *
+     * @return string
+     */
+    public function getLastname()
+    {
+        return $this->lastname;
     }
 }
