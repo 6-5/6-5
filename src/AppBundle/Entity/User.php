@@ -61,7 +61,7 @@ class User extends BaseUser
     protected $addressedReports;
 
     /**
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Desicion", mappedBy="user")
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Decision", mappedBy="user")
      */
     private $decisions;
 
@@ -221,11 +221,11 @@ class User extends BaseUser
     /**
      * Add decision
      *
-     * @param \AppBundle\Entity\Desicion $decision
+     * @param \AppBundle\Entity\Decision $decision
      *
      * @return User
      */
-    public function addDecision(\AppBundle\Entity\Desicion $decision)
+    public function addDecision(\AppBundle\Entity\Decision $decision)
     {
         $this->decisions[] = $decision;
         $decision->setUser($this);
@@ -236,9 +236,9 @@ class User extends BaseUser
     /**
      * Remove decision
      *
-     * @param \AppBundle\Entity\Desicion $decision
+     * @param \AppBundle\Entity\Decision $decision
      */
-    public function removeDecision(\AppBundle\Entity\Desicion $decision)
+    public function removeDecision(\AppBundle\Entity\Decision $decision)
     {
         $this->decisions->removeElement($decision);
     }
