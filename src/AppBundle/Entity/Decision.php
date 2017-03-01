@@ -5,13 +5,17 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Desicion
+ * Decision
  *
- * @ORM\Table(name="desicion")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\DesicionRepository")
+ * @ORM\Table(name="decision")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\DecisionRepository")
  */
-class Desicion
+class Decision
 {
+    const STATE_ACCEPTED = 'accepted';
+    const STATE_REFUSED = 'refused';
+    const STATE_TRANSFERRED = 'transferred';
+
     /**
      * @var int
      *
@@ -31,28 +35,28 @@ class Desicion
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="readedAt", type="datetime")
+     * @ORM\Column(name="readedAt", type="datetime", nullable=true)
      */
     private $readedAt;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="decidedAt", type="datetime")
+     * @ORM\Column(name="decidedAt", type="datetime", nullable=true)
      */
     private $decidedAt;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="state", type="string", length=15)
+     * @ORM\Column(name="state", type="string", length=15, nullable=true)
      */
     private $state;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="comment", type="text")
+     * @ORM\Column(name="comment", type="text", nullable=true)
      */
     private $comment;
 
@@ -65,6 +69,11 @@ class Desicion
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User", inversedBy="decisions")
      */
     private $user;
+
+    public function __construct()
+    {
+        $this->createdAt = new \DateTime();
+    }
 
     /**
      * Get id
@@ -81,7 +90,7 @@ class Desicion
      *
      * @param \DateTime $createdAt
      *
-     * @return Desicion
+     * @return Decision
      */
     public function setCreatedAt($createdAt)
     {
@@ -105,7 +114,7 @@ class Desicion
      *
      * @param \DateTime $readedAt
      *
-     * @return Desicion
+     * @return Decision
      */
     public function setReadedAt($readedAt)
     {
@@ -129,7 +138,7 @@ class Desicion
      *
      * @param \DateTime $decidedAt
      *
-     * @return Desicion
+     * @return Decision
      */
     public function setDecidedAt($decidedAt)
     {
@@ -153,7 +162,7 @@ class Desicion
      *
      * @param string $state
      *
-     * @return Desicion
+     * @return Decision
      */
     public function setState($state)
     {
@@ -177,7 +186,7 @@ class Desicion
      *
      * @param string $comment
      *
-     * @return Desicion
+     * @return Decision
      */
     public function setComment($comment)
     {
@@ -201,7 +210,7 @@ class Desicion
      *
      * @param \AppBundle\Entity\Report $report
      *
-     * @return Desicion
+     * @return Decision
      */
     public function setReport(\AppBundle\Entity\Report $report = null)
     {
@@ -225,7 +234,7 @@ class Desicion
      *
      * @param \AppBundle\Entity\User $user
      *
-     * @return Desicion
+     * @return Decision
      */
     public function setUser(\AppBundle\Entity\User $user = null)
     {

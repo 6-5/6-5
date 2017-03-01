@@ -65,21 +65,21 @@ class Report
     /**
      * @var string
      *
-     * @ORM\Column(name="message", type="text")
+     * @ORM\Column(name="message", type="text", nullable=true)
      */
     private $message;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="startedAt", type="datetime")
+     * @ORM\Column(name="startedAt", type="datetime", nullable=true)
      */
     private $startedAt;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="place", type="string", length=255)
+     * @ORM\Column(name="place", type="string", length=255, nullable=true)
      */
     private $place;
 
@@ -112,14 +112,28 @@ class Report
     private $createdAt;
 
     /**
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\File", mappedBy="report")
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\File", mappedBy="report", cascade={"all"})
      */
     private $files;
 
     /**
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Desicion", mappedBy="report")
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Decision", mappedBy="report", cascade={"all"})
      */
     private $decisions;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->files = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->decisions = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->urgency = self::URGENCY_NORMAL;
+        $this->classification = self::CLASSIFICATION_INTERN;
+        $this->createdAt = new \DateTime();
+        $this->isDraft = true;
+        $this->isHierarchical = false;
+    }
 
     /**
      * Get id
@@ -418,13 +432,6 @@ class Report
     {
         return $this->addressedTo;
     }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->files = new \Doctrine\Common\Collections\ArrayCollection();
-    }
 
     /**
      * Add file
@@ -464,13 +471,14 @@ class Report
     /**
      * Add decision
      *
-     * @param \AppBundle\Entity\Desicion $decision
+     * @param \AppBundle\Entity\Decision $decision
      *
      * @return Report
      */
-    public function addDecision(\AppBundle\Entity\Desicion $decision)
+    public function addDecision(\AppBundle\Entity\Decision $decision)
     {
         $this->decisions[] = $decision;
+        $decision->setReport($this);
 
         return $this;
     }
@@ -478,9 +486,9 @@ class Report
     /**
      * Remove decision
      *
-     * @param \AppBundle\Entity\Desicion $decision
+     * @param \AppBundle\Entity\Decision $decision
      */
-    public function removeDecision(\AppBundle\Entity\Desicion $decision)
+    public function removeDecision(\AppBundle\Entity\Decision $decision)
     {
         $this->decisions->removeElement($decision);
     }
@@ -493,5 +501,13 @@ class Report
     public function getDecisions()
     {
         return $this->decisions;
+    }
+
+    /**
+     * @return Decision
+     */
+    public function getLastDecision()
+    {
+        return $this->decisions->last();
     }
 }
