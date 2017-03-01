@@ -30,13 +30,13 @@
         "incenteev/composer-parameter-handler": "^2.0",
         "twig/twig": "^1.0||^2.0",
         "friendsofsymfony/user-bundle": "~2.0@dev",
+        "doctrine/doctrine-fixtures-bundle": "^2.3",
         "fzaninotto/faker": "^1.6"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",
         "symfony/phpunit-bridge": "^3.0",
-        "phpunit/phpunit": "^4.8 || ^5.0",
-        "doctrine/doctrine-fixtures-bundle": "^2.3"
+        "phpunit/phpunit": "^4.8 || ^5.0"
     },
     "scripts": {
         "symfony-scripts": [
