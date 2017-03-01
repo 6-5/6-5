@@ -15,7 +15,7 @@
                 <target>appuntato</target>
             </trans-unit>
             <trans-unit id="private_first_class">
-                <source>private first class</source>
+                <source>private_first_class</source>
                 <target>appuntato capo</target>
             </trans-unit>
             <trans-unit id="corporal">
@@ -27,43 +27,43 @@
                 <target>sergente</target>
             </trans-unit>
             <trans-unit id="chief_sergeant">
-                <source>chief sergeant</source>
+                <source>chief_sergeant</source>
                 <target>sergente capo</target>
             </trans-unit>
             <trans-unit id="master_sergeant">
-                <source>master sergeant</source>
+                <source>master_sergeant</source>
                 <target>sergent maggiore</target>
             </trans-unit>
             <trans-unit id="quartermaster_sergeant">
-                <source>quartermaster sergeant</source>
+                <source>quartermaster_sergeant</source>
                 <target>furiere</target>
             </trans-unit>
             <trans-unit id="first_sergeant">
-                <source>first sergeant</source>
+                <source>first_sergeant</source>
                 <target>sergente maggiore capo</target>
             </trans-unit>
             <trans-unit id="warrant_officer_class_4">
-                <source>warrant officer class 4</source>
+                <source>warrant_officer_class_4</source>
                 <target>aiutante sottufficiale</target>
             </trans-unit>
             <trans-unit id="warrant_officer_class_3">
-                <source>warrant officer class 3</source>
+                <source>warrant_officer_class_3</source>
                 <target>aiutante di stato maggiore</target>
             </trans-unit>
             <trans-unit id="warrant_officer_class_2">
-                <source>warrant officer class 2</source>
+                <source>warrant_officer_class_2</source>
                 <target>aiutante maggiore</target>
             </trans-unit>
             <trans-unit id="warrant_officer_class_1">
-                <source>warrant officer class 1</source>
+                <source>warrant_officer_class_1</source>
                 <target>aiutante capo</target>
             </trans-unit>
             <trans-unit id="second_lieutenant">
-                <source>second lieutenant</source>
+                <source>second_lieutenant</source>
                 <target>tenente</target>
             </trans-unit>
             <trans-unit id="first_lieutenant">
-                <source>first lieutenant</source>
+                <source>first_lieutenant</source>
                 <target>primo tenente</target>
             </trans-unit>
             <trans-unit id="captain">
@@ -75,7 +75,7 @@
                 <target>maggiore</target>
             </trans-unit>
             <trans-unit id="lieutenant_colonel">
-                <source>lieutenant colonel</source>
+                <source>lieutenant_colonel</source>
                 <target>tenente colonnello</target>
             </trans-unit>
             <trans-unit id="colonel">
@@ -83,25 +83,26 @@
                 <target>colonnello</target>
             </trans-unit>
             <trans-unit id="specialist_officer">
-                <source>specialist officer</source>
+                <source>specialist_officer</source>
                 <target>ufficiale specialista</target>
             </trans-unit>
             <trans-unit id="brigadier_general">
-                <source>brigadier general</source>
+                <source>brigadier_general</source>
                 <target>brigadiere</target>
             </trans-unit>
             <trans-unit id="major_general">
-                <source>major general</source>
+                <source>major_general</source>
                 <target>divisionario</target>
             </trans-unit>
             <trans-unit id="lieutenant_general">
-                <source>lieutenant general</source>
+                <source>lieutenant_general</source>
                 <target>commandante di corpo</target>
             </trans-unit>
             <trans-unit id="general">
                 <source>general</source>
                 <target>generale</target>
             </trans-unit>
+
         </body>
     </file>
 </xliff>
