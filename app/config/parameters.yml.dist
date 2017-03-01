@@ -6,4 +6,5 @@ parameters:
     mailer_user:       user
     mailer_password:   password
 
-    secret:            ThisTokenIsNotSoSecretChangeIt
+    env(SYMFONY_SECRET): ThisTokenIsNotSoSecretChangeIt
+    env(SYMFONY_LOG):    '%kernel.logs_dir%/%kernel.environment%.log'
