@@ -35,8 +35,8 @@ class LoadData implements FixtureInterface, ContainerAwareInterface
         $this->faker = \Faker\Factory::create();
         $userManager = $this->container->get('fos_user.user_manager');
         $this->reportManager = $this->container->get('app.report_manager');
-        $ranks = [User::RANK_COLONEL, User::RANK_CAPTAIN, User::RANK_LIEUTENANT, User::RANK_PRIVATE] ;
-        $users = [User::RANK_COLONEL => [], User::RANK_CAPTAIN => [], User::RANK_LIEUTENANT => [],  User::RANK_PRIVATE => []];
+        $ranks = [User::RANK_COLONEL, User::RANK_CAPTAIN, User::RANK_SECOND_LIEUTENANT, User::RANK_PRIVATE] ;
+        $users = [User::RANK_COLONEL => [], User::RANK_CAPTAIN => [], User::RANK_SECOND_LIEUTENANT => [],  User::RANK_PRIVATE => []];
 
         // User
         foreach ($ranks as $k => $rank) {
