@@ -5,7 +5,7 @@
   },
   "env": {
     "SYMFONY_ENV": {
-        "value": "prod",
+        "value": "preview",
         "required": true
     },
     "SYMFONY_LOG": {
