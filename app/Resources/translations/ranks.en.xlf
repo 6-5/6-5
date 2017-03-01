@@ -1,81 +1,106 @@
 <?xml version="1.0"?>
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
-    <file source-language="en" datatype="plaintext" original="file.ext">
+    <file source-language="en" target-language="en" datatype="plaintext" original="file.ext">
         <body>
             <trans-unit id="recruit">
                 <source>recruit</source>
+                <target>recruit</target>
             </trans-unit>
             <trans-unit id="private">
                 <source>private</source>
+                <target>private</target>
             </trans-unit>
             <trans-unit id="appointee">
                 <source>appointee</source>
+                <target>appointee</target>
             </trans-unit>
             <trans-unit id="private_first_class">
-                <source>private first class</source>
+                <source>private_first_class</source>
+                <target>private first class</target>
             </trans-unit>
             <trans-unit id="corporal">
                 <source>corporal</source>
+                <target>corporal</target>
             </trans-unit>
             <trans-unit id="sergeant">
                 <source>sergeant</source>
+                <target>sergeant</target>
             </trans-unit>
             <trans-unit id="chief_sergeant">
-                <source>chief sergeant</source>
+                <source>chief_sergeant</source>
+                <target>chief sergeant</target>
             </trans-unit>
             <trans-unit id="master_sergeant">
-                <source>master sergeant</source>
+                <source>master_sergeant</source>
+                <target>master sergeant</target>
             </trans-unit>
             <trans-unit id="quartermaster_sergeant">
-                <source>quartermaster sergeant</source>
+                <source>quartermaster_sergeant</source>
+                <target>quartermaster sergeant</target>
             </trans-unit>
             <trans-unit id="first_sergeant">
-                <source>first sergeant</source>
+                <source>first_sergeant</source>
+                <target>first sergeant</target>
             </trans-unit>
             <trans-unit id="warrant_officer_class_4">
-                <source>warrant officer class 4</source>
+                <source>warrant_officer_class_4</source>
+                <target>warrant officer class 4</target>
             </trans-unit>
             <trans-unit id="warrant_officer_class_3">
-                <source>warrant officer class 3</source>
+                <source>warrant_officer_class_3</source>
+                <target>warrant officer class 3</target>
             </trans-unit>
             <trans-unit id="warrant_officer_class_2">
-                <source>warrant officer class 2</source>
+                <source>warrant_officer_class_2</source>
+                <target>warrant officer class 2</target>
             </trans-unit>
             <trans-unit id="warrant_officer_class_1">
-                <source>warrant officer class 1</source>
+                <source>warrant_officer_class_1</source>
+                <target>warrant officer class_1</target>
             </trans-unit>
             <trans-unit id="second_lieutenant">
-                <source>second lieutenant</source>
+                <source>second_lieutenant</source>
+                <target>second lieutenant</target>
             </trans-unit>
             <trans-unit id="first_lieutenant">
-                <source>first lieutenant</source>
+                <source>first_lieutenant</source>
+                <target>first lieutenant</target>
             </trans-unit>
             <trans-unit id="captain">
                 <source>captain</source>
+                <target>captain</target>
             </trans-unit>
             <trans-unit id="major">
                 <source>major</source>
+                <target>major</target>
             </trans-unit>
             <trans-unit id="lieutenant_colonel">
-                <source>lieutenant colonel</source>
+                <source>lieutenant_colonel</source>
+                <target>lieutenant colonel</target>
             </trans-unit>
             <trans-unit id="colonel">
                 <source>colonel</source>
+                <target>colonel</target>
             </trans-unit>
             <trans-unit id="specialist_officer">
-                <source>specialist officer</source>
+                <source>specialist_officer</source>
+                <target>specialist officer</target>
             </trans-unit>
             <trans-unit id="brigadier_general">
-                <source>brigadier general</source>
+                <source>brigadier_general</source>
+                <target>brigadier general</target>
             </trans-unit>
             <trans-unit id="major_general">
-                <source>major general</source>
+                <source>major_general</source>
+                <target>major general</target>
             </trans-unit>
             <trans-unit id="lieutenant_general">
-                <source>lieutenant general</source>
+                <source>lieutenant_general</source>
+                <target>lieutenant general</target>
             </trans-unit>
             <trans-unit id="general">
                 <source>general</source>
+                <target>general</target>
             </trans-unit>
         </body>
     </file>
