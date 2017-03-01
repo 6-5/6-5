@@ -1,14 +1,19 @@
 {
   "name": "6-5",
   "scripts": {
+    "postdeploy": "php bin/console doctrine:schema:create && php bin/console doctrine:fixtures:load -n"
   },
   "env": {
-    "SYMFONY_ENV": "prod"
+    "SYMFONY_ENV": "prod",
+    "SYMFONY_LOG": "php://stderr",
+    "SYMFONY_SECRET": {
+      "generator": "secret"
+    }
   },
   "formation": {
   },
   "addons": [
-
+    "heroku-postgresql"
   ],
   "buildpacks": [
     {

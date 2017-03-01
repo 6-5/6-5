@@ -1,14 +1,10 @@
 parameters:
-    database_host:     127.0.0.1
-    database_port:     ~
-    database_name:     65
-    database_user:     root
-    database_password: ~
-
+    env(DATABASE_URL): 'mysql://root:pass@127.0.0.1:3306/65'
 
     mailer_transport:  smtp
     mailer_host:       127.0.0.1
     mailer_user:       user
     mailer_password:   password
 
-    secret:            ThisTokenIsNotSoSecretChangeIt
+    env(SYMFONY_SECRET): ThisTokenIsNotSoSecretChangeIt
+    env(SYMFONY_LOG):    '%kernel.logs_dir%/%kernel.environment%.log'
