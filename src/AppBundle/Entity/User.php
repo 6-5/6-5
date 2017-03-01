@@ -54,7 +54,7 @@ class User extends BaseUser
     /**
      * @ORM\Column(type="string", length=31)
      */
-    protected $rank;
+    protected $grade;
 
     /**
      * @ORM\Column(type="string", length=31)
