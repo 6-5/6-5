@@ -1,0 +1,18 @@
+{
+  "name": "6-5",
+  "homepage": "https://github.com/6-5/6-5",
+  "description": "",
+  "main": "",
+  "license": "copyright",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "web/assets/vendor/",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "adminbsb-materialdesign": "^1.0.4"
+  }
+}
