@@ -1,106 +1,106 @@
 <?xml version="1.0"?>
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
-    <file source-language="en" target-language="fr" datatype="plaintext" original="file.ext">
+    <file source-language="en" target-language="it" datatype="plaintext" original="file.ext">
         <body>
             <trans-unit id="recruit">
                 <source>recruit</source>
-                <target>recrue</target>
+                <target>recluta</target>
             </trans-unit>
             <trans-unit id="private">
                 <source>private</source>
-                <target>soldat</target>
+                <target>soldato</target>
             </trans-unit>
             <trans-unit id="appointee">
                 <source>appointee</source>
-                <target>appointé</target>
+                <target>appuntato</target>
             </trans-unit>
             <trans-unit id="private_first_class">
                 <source>private first class</source>
-                <target>appointé-chef</target>
+                <target>appuntato capo</target>
             </trans-unit>
             <trans-unit id="corporal">
                 <source>corporal</source>
-                <target>caporal</target>
+                <target>corporale</target>
             </trans-unit>
             <trans-unit id="sergeant">
                 <source>sergeant</source>
-                <target>sergent</target>
+                <target>sergente</target>
             </trans-unit>
             <trans-unit id="chief_sergeant">
                 <source>chief sergeant</source>
-                <target>sergent-chef</target>
+                <target>sergente capo</target>
             </trans-unit>
             <trans-unit id="master_sergeant">
                 <source>master sergeant</source>
-                <target>sergent-major</target>
+                <target>sergent maggiore</target>
             </trans-unit>
             <trans-unit id="quartermaster_sergeant">
                 <source>quartermaster sergeant</source>
-                <target>fourrier</target>
+                <target>furiere</target>
             </trans-unit>
             <trans-unit id="first_sergeant">
                 <source>first sergeant</source>
-                <target>sergent-major chef</target>
+                <target>sergente maggiore capo</target>
             </trans-unit>
             <trans-unit id="warrant_officer_class_4">
                 <source>warrant officer class 4</source>
-                <target>adjudant sous-officier</target>
+                <target>aiutante sottufficiale</target>
             </trans-unit>
             <trans-unit id="warrant_officer_class_3">
                 <source>warrant officer class 3</source>
-                <target>adjudant d'état-major</target>
+                <target>aiutante di stato maggiore</target>
             </trans-unit>
             <trans-unit id="warrant_officer_class_2">
                 <source>warrant officer class 2</source>
-                <target>adjudant-major</target>
+                <target>aiutante maggiore</target>
             </trans-unit>
             <trans-unit id="warrant_officer_class_1">
                 <source>warrant officer class 1</source>
-                <target>adjudant-chef</target>
+                <target>aiutante capo</target>
             </trans-unit>
             <trans-unit id="second_lieutenant">
                 <source>second lieutenant</source>
-                <target>lieutenant</target>
+                <target>tenente</target>
             </trans-unit>
             <trans-unit id="first_lieutenant">
                 <source>first lieutenant</source>
-                <target>premier lieutenant</target>
+                <target>primo tenente</target>
             </trans-unit>
             <trans-unit id="captain">
                 <source>captain</source>
-                <target>capitaine</target>
+                <target>capitano</target>
             </trans-unit>
             <trans-unit id="major">
                 <source>major</source>
-                <target>major</target>
+                <target>maggiore</target>
             </trans-unit>
             <trans-unit id="lieutenant_colonel">
                 <source>lieutenant colonel</source>
-                <target>lieutenant colonel</target>
+                <target>tenente colonnello</target>
             </trans-unit>
             <trans-unit id="colonel">
                 <source>colonel</source>
-                <target>colonel</target>
+                <target>colonnello</target>
             </trans-unit>
             <trans-unit id="specialist_officer">
                 <source>specialist officer</source>
-                <target>officier spécialiste</target>
+                <target>ufficiale specialista</target>
             </trans-unit>
             <trans-unit id="brigadier_general">
                 <source>brigadier general</source>
-                <target>brigadier</target>
+                <target>brigadiere</target>
             </trans-unit>
             <trans-unit id="major_general">
                 <source>major general</source>
-                <target>divisionnaire</target>
+                <target>divisionario</target>
             </trans-unit>
             <trans-unit id="lieutenant_general">
                 <source>lieutenant general</source>
-                <target>commandant de corps</target>
+                <target>commandante di corpo</target>
             </trans-unit>
             <trans-unit id="general">
                 <source>general</source>
-                <target>général</target>
+                <target>generale</target>
             </trans-unit>
         </body>
     </file>
