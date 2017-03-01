@@ -1,9 +1,0 @@
-imports:
-    - { resource: config_prod.yml }
-
-security:
-    encoders:
-        FOS\UserBundle\Model\UserInterface: plaintext
-
-swiftmailer:
-    disable_delivery: true
