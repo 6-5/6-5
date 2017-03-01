@@ -4,8 +4,14 @@
     "postdeploy": "php bin/console doctrine:schema:create && php bin/console doctrine:fixtures:load -n"
   },
   "env": {
-    "SYMFONY_ENV": "prod",
-    "SYMFONY_LOG": "php://stderr",
+    "SYMFONY_ENV": {
+        "value": "prod",
+        "required": true
+    },
+    "SYMFONY_LOG": {
+      "value": "php://stderr",
+      "required": true
+    },
     "SYMFONY_SECRET": {
       "generator": "secret"
     }

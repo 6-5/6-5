@@ -17,5 +17,4 @@ swiftmailer:
 
 doctrine:
     dbal:
-        url: 'sqlite:///%kernel.root_dir%/../var/data/data.sqlite'
         path: "%kernel.root_dir%/../var/data/data.sqlite"
