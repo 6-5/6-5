@@ -11,11 +11,38 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class User extends BaseUser
 {
+    /**
+     * English names based upon (consulted on 2017-03-01):
+     * https://en.wikipedia.org/wiki/Military_ranks_of_the_Swiss_Armed_Forces
+     *
+     * Nonexistant equivalent or multiple equivalents have been adapted to avoid collisions
+     */
+
     const GRADE_RECRUIT = 'recruit';
-    const GRADE_SOLDIER = 'soldier';
-    const GRADE_LIEUTENANT = 'lieutenant';
+    const GRADE_PRIVATE = 'private';
+    const GRADE_APPOINTEE = 'appointee';
+    const GRADE_PRIVATE_FIRST_CLASS = 'private first class';
+    const GRADE_CORPORAL = 'corporal';
+    const GRADE_SERGEANT = 'sergeant';
+    const GRADE_CHIEF_SERGEANT = 'chief sergeant';
+    const GRADE_MASTER_SERGEANT = 'master sergeant';
+    const GRADE_QUARTERMASTER_SERGEANT = 'quartermaster sergeant';
+    const GRADE_FIRST_SERGEANT = 'first sergeant';
+    const GRADE_WARRANT_OFFICER_CLASS_4 = 'warrant officer class 4';
+    const GRADE_WARRANT_OFFICER_CLASS_3 = 'warrant officer class 3';
+    const GRADE_WARRANT_OFFICER_CLASS_2 = 'warrant officer class 2';
+    const GRADE_WARRANT_OFFICER_CLASS_1 = 'warrant officer class 1';
+    const GRADE_SECOND_LIEUTENANT = 'second lieutenant';
+    const GRADE_FIRST_LIEUTENANT = 'first lieutenant';
     const GRADE_CAPTAIN = 'captain';
+    const GRADE_MAJOR = 'major';
+    const GRADE_LIEUTENANT_COLONEL = 'lieutenant colonel';
     const GRADE_COLONEL = 'colonel';
+    const GRADE_KSPECIALIST_OFFICER = 'specialist officer';
+    const GRADE_BRIGADIER_GENERAL = 'brigadier general';
+    const GRADE_MAJOR_GENERAL = 'major general';
+    const GRADE_LIEUTENANT_GENERAL = 'lieutenant general';
+    const GRADE_GENERAL = 'general';
 
     /**
      * @ORM\Id
