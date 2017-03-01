@@ -18,31 +18,31 @@ class User extends BaseUser
      * Nonexistant equivalent or multiple equivalents have been adapted to avoid collisions
      */
 
-    const GRADE_RECRUIT = 'recruit';
-    const GRADE_PRIVATE = 'private';
-    const GRADE_APPOINTEE = 'appointee';
-    const GRADE_PRIVATE_FIRST_CLASS = 'private first class';
-    const GRADE_CORPORAL = 'corporal';
-    const GRADE_SERGEANT = 'sergeant';
-    const GRADE_CHIEF_SERGEANT = 'chief sergeant';
-    const GRADE_MASTER_SERGEANT = 'master sergeant';
-    const GRADE_QUARTERMASTER_SERGEANT = 'quartermaster sergeant';
-    const GRADE_FIRST_SERGEANT = 'first sergeant';
-    const GRADE_WARRANT_OFFICER_CLASS_4 = 'warrant officer class 4';
-    const GRADE_WARRANT_OFFICER_CLASS_3 = 'warrant officer class 3';
-    const GRADE_WARRANT_OFFICER_CLASS_2 = 'warrant officer class 2';
-    const GRADE_WARRANT_OFFICER_CLASS_1 = 'warrant officer class 1';
-    const GRADE_SECOND_LIEUTENANT = 'second lieutenant';
-    const GRADE_FIRST_LIEUTENANT = 'first lieutenant';
-    const GRADE_CAPTAIN = 'captain';
-    const GRADE_MAJOR = 'major';
-    const GRADE_LIEUTENANT_COLONEL = 'lieutenant colonel';
-    const GRADE_COLONEL = 'colonel';
-    const GRADE_KSPECIALIST_OFFICER = 'specialist officer';
-    const GRADE_BRIGADIER_GENERAL = 'brigadier general';
-    const GRADE_MAJOR_GENERAL = 'major general';
-    const GRADE_LIEUTENANT_GENERAL = 'lieutenant general';
-    const GRADE_GENERAL = 'general';
+    const RANK_RECRUIT = 'recruit';
+    const RANK_PRIVATE = 'private';
+    const RANK_APPOINTEE = 'appointee';
+    const RANK_PRIVATE_FIRST_CLASS = 'private first class';
+    const RANK_CORPORAL = 'corporal';
+    const RANK_SERGEANT = 'sergeant';
+    const RANK_CHIEF_SERGEANT = 'chief sergeant';
+    const RANK_MASTER_SERGEANT = 'master sergeant';
+    const RANK_QUARTERMASTER_SERGEANT = 'quartermaster sergeant';
+    const RANK_FIRST_SERGEANT = 'first sergeant';
+    const RANK_WARRANT_OFFICER_CLASS_4 = 'warrant officer class 4';
+    const RANK_WARRANT_OFFICER_CLASS_3 = 'warrant officer class 3';
+    const RANK_WARRANT_OFFICER_CLASS_2 = 'warrant officer class 2';
+    const RANK_WARRANT_OFFICER_CLASS_1 = 'warrant officer class 1';
+    const RANK_SECOND_LIEUTENANT = 'second lieutenant';
+    const RANK_FIRST_LIEUTENANT = 'first lieutenant';
+    const RANK_CAPTAIN = 'captain';
+    const RANK_MAJOR = 'major';
+    const RANK_LIEUTENANT_COLONEL = 'lieutenant colonel';
+    const RANK_COLONEL = 'colonel';
+    const RANK_KSPECIALIST_OFFICER = 'specialist officer';
+    const RANK_BRIGADIER_GENERAL = 'brigadier general';
+    const RANK_MAJOR_GENERAL = 'major general';
+    const RANK_LIEUTENANT_GENERAL = 'lieutenant general';
+    const RANK_GENERAL = 'general';
 
     /**
      * @ORM\Id
@@ -54,7 +54,7 @@ class User extends BaseUser
     /**
      * @ORM\Column(type="string", length=31)
      */
-    protected $grade;
+    protected $rank;
 
     /**
      * @ORM\Column(type="string", length=31)
@@ -93,27 +93,27 @@ class User extends BaseUser
     private $decisions;
 
     /**
-     * Set grade
+     * Set rank
      *
-     * @param string $grade
+     * @param string $rank
      *
      * @return User
      */
-    public function setGrade($grade)
+    public function setRank($rank)
     {
-        $this->grade = $grade;
+        $this->rank = $rank;
 
         return $this;
     }
 
     /**
-     * Get grade
+     * Get rank
      *
      * @return string
      */
-    public function getGrade()
+    public function getRank()
     {
-        return $this->grade;
+        return $this->rank;
     }
 
     /**
