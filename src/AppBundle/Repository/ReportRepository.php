@@ -18,4 +18,28 @@ class ReportRepository extends \Doctrine\ORM\EntityRepository
             ->getOneOrNullResult()
         ;
     }
+
+    public function getQueryForPagination($firstResult = 0, $maxResults = 10)
+    {
+        return $this->createQueryBuilder('r')
+            ->addSelect('uc')
+            ->addSelect('ua')
+            ->addSelect('d')
+            ->join('r.createdBy', 'uc')
+            ->join('r.addressedTo', 'ua')
+            ->join('r.decisions', 'd')
+            ->setFirstResult($firstResult)
+            ->setMaxResults($maxResults)
+            ->getQuery()
+        ;
+    }
+
+    public function count()
+    {
+        return $this->createQueryBuilder('r')
+            ->select('count(r.id)')
+            ->getQuery()
+            ->getSingleScalarResult()
+        ;
+    }
 }
