@@ -26,13 +26,22 @@ class UserManager
         if ($abbreviated) {
             foreach ($constants as $key => $value) {
                 if (preg_match('[^RANK_.*$]', $key)) {
-                    $ranks[$key] = $this->translator->trans($constants[$key] . '.abbr', [], 'ranks', $locale);
+                    $ranks[$key] = $this->translator->trans(
+                        $constants[$key] . '.abbr',
+                        [],
+                        'ranks',
+                        $locale ? $locale : $this->requestStack->getCurrentRequest()->getLocale()
+                    );
                 }
             }
         } else {
             foreach ($constants as $key => $value) {
                 if (preg_match('[^RANK_.*$]', $key)) {
-                    $ranks[$key] = $this->translator->trans($constants[$key], [], 'ranks', $locale);
+                    $ranks[$key] = $this->translator->trans(
+                        $constants[$key],
+                        [],
+                        'ranks',
+                        $locale ? $locale : $this->requestStack->getCurrentRequest()->getLocale());
                 }
             }
         }
@@ -40,8 +49,21 @@ class UserManager
         return $ranks;
     }
 
-    public function getFullName(User $user, $abbreviate = false, $locale = null)
+    public function getFullName(User $user, $abbreviated = false, $locale = null)
     {
-        return;
+
+        if ($abbreviated) {
+            return $this->translator->trans(
+                $user->getRank() . '.abbr',
+                [],
+                'ranks',
+                $locale) . ' ' . strtoupper($user->getLastname()) . ' ' . ucfirst($user->getFirstname());
+        } else {
+            return ucfirst($this->translator->trans(
+                $user->getRank(),
+                [],
+                'ranks',
+                $locale)) . ' ' . strtoupper($user->getLastname()) . ' ' . ucfirst($user->getFirstname());;
+        }
     }
 }
