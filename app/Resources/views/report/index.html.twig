@@ -1,57 +1,65 @@
 {% extends 'base.html.twig' %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('assets/vendor/adminbsb-materialdesign/plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.css') }}">
+{% endblock %}
+
 {% block content %}
-    <h1>Reports list</h1>
+    <div class="container-fluid">
+        <div class="row clearfix">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="card">
+                    <div class="header">
+                        <h2>{{ 'reports.sent'|trans }}</h2>
+                    </div>
+                    <div class="body">
+                        <a href="{{ path('report_new') }}" class="btn btn-default btn-lg font-bold">Create a new report</a>
+                        <table id="table-report" class="table table-bordered table-striped table-hover table-responsive">
+                            <thead>
+                                <tr>
+                                    <th>N°</th>
+                                    <th>Object</th>
+                                    <th>Date</th>
+                                    <th>Address</th>
+                                    <th>Urgence</th>
+                                    <th>Classification</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+{% endblock %}
 
-    <table>
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Reference</th>
-                <th>Ishierarchical</th>
-                <th>Object</th>
-                <th>Message</th>
-                <th>Startedat</th>
-                <th>Place</th>
-                <th>Urgency</th>
-                <th>Classification</th>
-                <th>Isdraft</th>
-                <th>Createdat</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for report in reports %}
-            <tr>
-                <td><a href="{{ path('report_show', { 'id': report.id }) }}">{{ report.id }}</a></td>
-                <td>{{ report.reference }}</td>
-                <td>{% if report.isHierarchical %}Yes{% else %}No{% endif %}</td>
-                <td>{{ report.object }}</td>
-                <td>{{ report.message }}</td>
-                <td>{% if report.startedAt %}{{ report.startedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{{ report.place }}</td>
-                <td>{{ report.urgency }}</td>
-                <td>{{ report.classification }}</td>
-                <td>{% if report.isDraft %}Yes{% else %}No{% endif %}</td>
-                <td>{% if report.createdAt %}{{ report.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('report_show', { 'id': report.id }) }}">show</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('report_edit', { 'id': report.id }) }}">edit</a>
-                        </li>
-                    </ul>
-                </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-    <ul>
-        <li>
-            <a href="{{ path('report_new') }}">Create a new report</a>
-        </li>
-    </ul>
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('assets/vendor/adminbsb-materialdesign/plugins/jquery-datatable/jquery.dataTables.js') }}"></script>
+    <script src="{{ asset('assets/vendor/adminbsb-materialdesign/plugins/jquery-datatable/skin/bootstrap/js/dataTables.bootstrap.js') }}"></script>
+    <script src="{{ asset('assets/vendor/adminbsb-materialdesign/plugins/jquery-datatable/extensions/export/dataTables.buttons.min.js') }}"></script>
+    <script>
+        $(document).ready(function(){
+            var table = $('#table-report').DataTable({
+                processing: true,
+                serverSide: true,
+                ajax: {
+                    url: '{{ path('report_index_data') }}',
+                    type: 'POST'
+                },
+                columns: [
+                    { data: "reference" },
+                    { data: "object" },
+                    { data: "startedAt" },
+                    { data: "addressedTo" },
+                    { data: "urgency" },
+                    { data: "classification" }
+                ],
+                'searching': false,
+                'ordering': false,
+                'lengthChange': false
+            });
+        });
+    </script>
 {% endblock %}

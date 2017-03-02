@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * Report
@@ -33,11 +34,13 @@ class Report
 
     /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User", inversedBy="createdReports")
+     * @Groups({"report_index_sent"})
      */
     private $createdBy;
 
     /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User", inversedBy="addressedReports")
+     * @Groups({"report_index_sent"})
      */
     private $addressedTo;
 
@@ -45,6 +48,7 @@ class Report
      * @var string
      *
      * @ORM\Column(name="reference", type="string", length=6, unique=true)
+     * @Groups({"report_index_sent"})
      */
     private $reference;
 
@@ -59,6 +63,7 @@ class Report
      * @var string
      *
      * @ORM\Column(name="object", type="string", length=255)
+     * @Groups({"report_index_sent"})
      */
     private $object;
 
@@ -73,6 +78,7 @@ class Report
      * @var \DateTime
      *
      * @ORM\Column(name="startedAt", type="datetime", nullable=true)
+     * @Groups({"report_index_sent"})
      */
     private $startedAt;
 
@@ -87,6 +93,7 @@ class Report
      * @var string
      *
      * @ORM\Column(name="urgency", type="string", length=15)
+     * @Groups({"report_index_sent"})
      */
     private $urgency;
 
@@ -94,6 +101,7 @@ class Report
      * @var string
      *
      * @ORM\Column(name="classification", type="string", length=15)
+     * @Groups({"report_index_sent"})
      */
     private $classification;
 

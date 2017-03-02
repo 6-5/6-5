@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Report;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -23,13 +24,22 @@ class ReportController extends Controller
      */
     public function indexAction()
     {
-        $em = $this->getDoctrine()->getManager();
+        return $this->render('report/index.html.twig');
+    }
 
-        $reports = $em->getRepository('AppBundle:Report')->findAll();
+    /**
+     * @Route("/data", name="report_index_data")
+     * @Method("POST")
+     */
+    public function indexDataAction(Request $request)
+    {
+        $firstResult = $request->request->get('start');
+        $repo = $this->getDoctrine()->getRepository('AppBundle:Report');
+        $query = $repo->getQueryForPagination($firstResult);
+        $reports = new Paginator($query, $fetchJoinCollection = true);
+        $data = ['recordsTotal' => $repo->count(), 'recordsFiltered' => $reports->count(), 'data' => $reports];
 
-        return $this->render('report/index.html.twig', array(
-            'reports' => $reports,
-        ));
+        return $this->json($data, 200, [], ['groups' => ['report_index_sent']]);
     }
 
     /**
