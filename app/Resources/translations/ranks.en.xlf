@@ -24,7 +24,7 @@
             </trans-unit>
             <trans-unit id="appointee.abbr">
                 <source>appointee.abbr</source>
-                <target>apt</target>
+                <target>app</target>
             </trans-unit>
             <trans-unit id="private_first_class">
                 <source>private_first_class</source>

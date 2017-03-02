@@ -6,101 +6,201 @@
                 <source>recruit</source>
                 <target>recrue</target>
             </trans-unit>
+            <trans-unit id="recruit.abbr">
+                <source>recruit.abbr</source>
+                <target>recr</target>
+            </trans-unit>
             <trans-unit id="private">
                 <source>private</source>
                 <target>soldat</target>
+            </trans-unit>
+            <trans-unit id="private.abbr">
+                <source>private.abbr</source>
+                <target>sdt</target>
             </trans-unit>
             <trans-unit id="appointee">
                 <source>appointee</source>
                 <target>appointé</target>
             </trans-unit>
+			<trans-unit id="appointee.abbr">
+                <source>appointee.abbr</source>
+                <target>app</target>
+            </trans-unit>
             <trans-unit id="private_first_class">
                 <source>private_first_class</source>
                 <target>appointé-chef</target>
+            </trans-unit>
+			<trans-unit id="private_first_class.abbr">
+                <source>private_first_class.abbr</source>
+                <target>app chef</target>
             </trans-unit>
             <trans-unit id="corporal">
                 <source>corporal</source>
                 <target>caporal</target>
             </trans-unit>
+			<trans-unit id="corporal.abbr">
+                <source>corporal.abbr</source>
+                <target>cpl</target>
+            </trans-unit>
             <trans-unit id="sergeant">
                 <source>sergeant</source>
                 <target>sergent</target>
+            </trans-unit>
+			<trans-unit id="sergeant.abbr">
+                <source>sergeant.abbr</source>
+                <target>sgt</target>
             </trans-unit>
             <trans-unit id="chief_sergeant">
                 <source>chief_sergeant</source>
                 <target>sergent-chef</target>
             </trans-unit>
+			<trans-unit id="chief_sergeant.abbr">
+                <source>chief_sergeant.abbr</source>
+                <target>sgt chef</target>
+            </trans-unit>
             <trans-unit id="master_sergeant">
                 <source>master_sergeant</source>
                 <target>sergent-major</target>
+            </trans-unit>
+			<trans-unit id="master_sergeant.abbr">
+                <source>master_sergeant.abbr</source>
+                <target>sgtm</target>
             </trans-unit>
             <trans-unit id="quartermaster_sergeant">
                 <source>quartermaster_sergeant</source>
                 <target>fourrier</target>
             </trans-unit>
+			<trans-unit id="quartermaster_sergeant.abbr">
+                <source>quartermaster_sergeant.abbr</source>
+                <target>four</target>
+            </trans-unit>
             <trans-unit id="first_sergeant">
                 <source>first_sergeant</source>
                 <target>sergent-major chef</target>
+            </trans-unit>
+			<trans-unit id="first_sergeant.abbr">
+                <source>first_sergeant.abbr</source>
+                <target>sgtm chef</target>
             </trans-unit>
             <trans-unit id="warrant_officer_class_4">
                 <source>warrant_officer_class_4</source>
                 <target>adjudant sous-officier</target>
             </trans-unit>
+			<trans-unit id="warrant_officer_class_4.abbr">
+                <source>warrant_officer_class_4.abbr</source>
+                <target>adj</target>
+            </trans-unit>
             <trans-unit id="warrant_officer_class_3">
                 <source>warrant_officer_class_3</source>
                 <target>adjudant d'état-major</target>
+            </trans-unit>
+			<trans-unit id="warrant_officer_class_3.abbr">
+                <source>warrant_officer_class_3.abbr</source>
+                <target>adj em</target>
             </trans-unit>
             <trans-unit id="warrant_officer_class_2">
                 <source>warrant_officer_class_2</source>
                 <target>adjudant-major</target>
             </trans-unit>
+			<trans-unit id="warrant_officer_class_2.abbr">
+                <source>warrant_officer_class_2.abbr</source>
+                <target>adj maj</target>
+            </trans-unit>
             <trans-unit id="warrant_officer_class_1">
                 <source>warrant_officer_class_1</source>
                 <target>adjudant-chef</target>
+            </trans-unit>
+			<trans-unit id="warrant_officer_class_1.abbr">
+                <source>warrant_officer_class_1.abbr</source>
+                <target>adj chef</target>
             </trans-unit>
             <trans-unit id="second_lieutenant">
                 <source>second_lieutenant</source>
                 <target>lieutenant</target>
             </trans-unit>
+			<trans-unit id="second_lieutenant.abbr">
+                <source>second_lieutenant.abbr</source>
+                <target>lt</target>
+            </trans-unit>
             <trans-unit id="first_lieutenant">
                 <source>first_lieutenant</source>
                 <target>premier lieutenant</target>
+            </trans-unit>
+			<trans-unit id="first_lieutenant.abbr">
+                <source>first_lieutenant.abbr</source>
+                <target>plt</target>
             </trans-unit>
             <trans-unit id="captain">
                 <source>captain</source>
                 <target>capitaine</target>
             </trans-unit>
+			<trans-unit id="captain.abbr">
+                <source>captain.abbr</source>
+                <target>cap</target>
+            </trans-unit>
             <trans-unit id="major">
                 <source>major</source>
                 <target>major</target>
+            </trans-unit>
+			<trans-unit id="major.abbr">
+                <source>major.abbr</source>
+                <target>maj</target>
             </trans-unit>
             <trans-unit id="lieutenant_colonel">
                 <source>lieutenant_colonel</source>
                 <target>lieutenant colonel</target>
             </trans-unit>
+			<trans-unit id="lieutenant_colonel.abbr">
+                <source>lieutenant_colonel.abbr</source>
+                <target>lt col</target>
+            </trans-unit>
             <trans-unit id="colonel">
                 <source>colonel</source>
                 <target>colonel</target>
+            </trans-unit>
+			<trans-unit id="colonel.abbr">
+                <source>colonel.abbr</source>
+                <target>col</target>
             </trans-unit>
             <trans-unit id="specialist_officer">
                 <source>specialist_officer</source>
                 <target>officier spécialiste</target>
             </trans-unit>
+			<trans-unit id="specialist_officer.abbr">
+                <source>specialist_officer.abbr</source>
+                <target>of spéc</target>
+            </trans-unit>
             <trans-unit id="brigadier_general">
                 <source>brigadier_general</source>
                 <target>brigadier</target>
+            </trans-unit>
+			<trans-unit id="brigadier_general.abbr">
+                <source>brigadier_general.abbr</source>
+                <target>br</target>
             </trans-unit>
             <trans-unit id="major_general">
                 <source>major_general</source>
                 <target>divisionnaire</target>
             </trans-unit>
+			<trans-unit id="major_general.abbr">
+                <source>major_general.abbr</source>
+                <target>div</target>
+            </trans-unit>
             <trans-unit id="lieutenant_general">
                 <source>lieutenant_general</source>
                 <target>commandant de corps</target>
             </trans-unit>
+			<trans-unit id="lieutenant_general.abbr">
+                <source>lieutenant_general.abbr</source>
+                <target>cdt c</target>
+            </trans-unit>
             <trans-unit id="general">
                 <source>general</source>
                 <target>général</target>
+            </trans-unit>
+			<trans-unit id="general.abbr">
+                <source>general.abbr</source>
+                <target>gen</target>
             </trans-unit>
         </body>
     </file>
