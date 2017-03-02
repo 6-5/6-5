@@ -4,7 +4,11 @@
         <body>
             <trans-unit id="recruit">
                 <source>recruit</source>
-                <target>rekrut</target>
+                <target>rekr</target>
+            </trans-unit>
+			<trans-unit id="recruit.abbr">
+                <source>recruit.abbr</source>
+                <target>recr</target>
             </trans-unit>
             <trans-unit id="recruit.abbr">
                 <source>recruit.abbr</source>
