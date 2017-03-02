@@ -6,7 +6,7 @@
                 <source>recruit</source>
                 <target>rekr</target>
             </trans-unit>
-			<trans-unit id="recruit.abbr">
+            <trans-unit id="recruit.abbr">
                 <source>recruit.abbr</source>
                 <target>recr</target>
             </trans-unit>
@@ -14,7 +14,7 @@
                 <source>private</source>
                 <target>soldat</target>
             </trans-unit>
-			<trans-unit id="private.abbr">
+            <trans-unit id="private.abbr">
                 <source>private.abbr</source>
                 <target>sdt</target>
             </trans-unit>
@@ -22,7 +22,7 @@
                 <source>appointee</source>
                 <target>gefreiter</target>
             </trans-unit>
-			<trans-unit id="appointee.abbr">
+            <trans-unit id="appointee.abbr">
                 <source>appointee.abbr</source>
                 <target>gfr</target>
             </trans-unit>
@@ -30,7 +30,7 @@
                 <source>private_first_class</source>
                 <target>obergefreiter</target>
             </trans-unit>
-			<trans-unit id="private_first_class.abbr">
+            <trans-unit id="private_first_class.abbr">
                 <source>private_first_class.abbr</source>
                 <target>obgfr</target>
             </trans-unit>
@@ -38,7 +38,7 @@
                 <source>corporal</source>
                 <target>korporal</target>
             </trans-unit>
-			<trans-unit id="corporal.abbr">
+            <trans-unit id="corporal.abbr">
                 <source>corporal.abbr</source>
                 <target>kpl</target>
             </trans-unit>
@@ -46,7 +46,7 @@
                 <source>sergeant</source>
                 <target>wachtmeister</target>
             </trans-unit>
-			<trans-unit id="sergeant.abbr">
+            <trans-unit id="sergeant.abbr">
                 <source>sergeant.abbr</source>
                 <target>wm</target>
             </trans-unit>
@@ -54,7 +54,7 @@
                 <source>chief_sergeant</source>
                 <target>oberwachtmeister</target>
             </trans-unit>
-			<trans-unit id="chief_sergeant.abbr">
+            <trans-unit id="chief_sergeant.abbr">
                 <source>chief_sergeant.abbr</source>
                 <target>obwm</target>
             </trans-unit>
@@ -62,7 +62,7 @@
                 <source>master_sergeant</source>
                 <target>feldweibel</target>
             </trans-unit>
-			<trans-unit id="master_sergeant.abbr">
+            <trans-unit id="master_sergeant.abbr">
                 <source>master_sergeant.abbr</source>
                 <target>fw</target>
             </trans-unit>
@@ -70,7 +70,7 @@
                 <source>quartermaster_sergeant</source>
                 <target>fourier</target>
             </trans-unit>
-			<trans-unit id="quartermaster_sergeant.abbr">
+            <trans-unit id="quartermaster_sergeant.abbr">
                 <source>quartermaster_sergeant.abbr</source>
                 <target>four</target>
             </trans-unit>
@@ -78,7 +78,7 @@
                 <source>first_sergeant</source>
                 <target>hauptfeldweibel</target>
             </trans-unit>
-			<trans-unit id="first_sergeant.abbr">
+            <trans-unit id="first_sergeant.abbr">
                 <source>first_sergeant.abbr</source>
                 <target>hptfw</target>
             </trans-unit>
@@ -86,7 +86,7 @@
                 <source>warrant_officer_class_4</source>
                 <target>adjutant unteroffizier</target>
             </trans-unit>
-			<trans-unit id="warrant_officer_class_4.abbr">
+            <trans-unit id="warrant_officer_class_4.abbr">
                 <source>warrant_officer_class_4.abbr</source>
                 <target>adj uof</target>
             </trans-unit>
@@ -94,7 +94,7 @@
                 <source>warrant_officer_class_3</source>
                 <target>stabsadjutant</target>
             </trans-unit>
-			<trans-unit id="warrant_officer_class_3.abbr">
+            <trans-unit id="warrant_officer_class_3.abbr">
                 <source>warrant_officer_class_3.abbr</source>
                 <target>stabsadj</target>
             </trans-unit>
@@ -102,7 +102,7 @@
                 <source>warrant_officer_class_2</source>
                 <target>hauptadjutant</target>
             </trans-unit>
-			<trans-unit id="warrant_officer_class_2.abbr">
+            <trans-unit id="warrant_officer_class_2.abbr">
                 <source>warrant_officer_class_2.abbr</source>
                 <target>hptadj</target>
             </trans-unit>
@@ -110,7 +110,7 @@
                 <source>warrant_officer_class_1</source>
                 <target>chefadjutant</target>
             </trans-unit>
-			<trans-unit id="warrant_officer_class_1.abbr">
+            <trans-unit id="warrant_officer_class_1.abbr">
                 <source>warrant_officer_class_1.abbr</source>
                 <target>chefadj</target>
             </trans-unit>
@@ -118,7 +118,7 @@
                 <source>second_lieutenant</source>
                 <target>leutnant</target>
             </trans-unit>
-			<trans-unit id="second_lieutenant.abbr">
+            <trans-unit id="second_lieutenant.abbr">
                 <source>second_lieutenant.abbr</source>
                 <target>lt</target>
             </trans-unit>
@@ -126,7 +126,7 @@
                 <source>first_lieutenant</source>
                 <target>oberleutnant</target>
             </trans-unit>
-			<trans-unit id="first_lieutenant.abbr">
+            <trans-unit id="first_lieutenant.abbr">
                 <source>first_lieutenant.abbr</source>
                 <target>oblt</target>
             </trans-unit>
@@ -134,7 +134,7 @@
                 <source>captain</source>
                 <target>hauptmann</target>
             </trans-unit>
-			<trans-unit id="captain.abbr">
+            <trans-unit id="captain.abbr">
                 <source>captain.abbr</source>
                 <target>hptm</target>
             </trans-unit>
@@ -142,7 +142,7 @@
                 <source>major</source>
                 <target>major</target>
             </trans-unit>
-			<trans-unit id="major.abbr">
+            <trans-unit id="major.abbr">
                 <source>major.abbr</source>
                 <target>maj</target>
             </trans-unit>
@@ -150,7 +150,7 @@
                 <source>lieutenant_colonel</source>
                 <target>oberstleutnant</target>
             </trans-unit>
-			<trans-unit id="lieutenant_colonel.abbr">
+            <trans-unit id="lieutenant_colonel.abbr">
                 <source>lieutenant_colonel.abbr</source>
                 <target>oberstlt</target>
             </trans-unit>
@@ -158,7 +158,7 @@
                 <source>colonel</source>
                 <target>oberst</target>
             </trans-unit>
-			<trans-unit id="colonel.abbr">
+            <trans-unit id="colonel.abbr">
                 <source>colonel.abbr</source>
                 <target>oberst</target>
             </trans-unit>
@@ -166,7 +166,7 @@
                 <source>specialist_officer</source>
                 <target>fachoffizier</target>
             </trans-unit>
-			<trans-unit id="specialist_officer.abbr">
+            <trans-unit id="specialist_officer.abbr">
                 <source>specialist_officer.abbr</source>
                 <target>fachof</target>
             </trans-unit>
@@ -174,7 +174,7 @@
                 <source>brigadier_general</source>
                 <target>brigadier</target>
             </trans-unit>
-			<trans-unit id="brigadier_general.abbr">
+            <trans-unit id="brigadier_general.abbr">
                 <source>brigadier_general.abbr</source>
                 <target>br</target>
             </trans-unit>
@@ -182,7 +182,7 @@
                 <source>major_general</source>
                 <target>divisionnär</target>
             </trans-unit>
-			<trans-unit id="major_general.abbr">
+            <trans-unit id="major_general.abbr">
                 <source>major_general.abbr</source>
                 <target>div</target>
             </trans-unit>
@@ -190,7 +190,7 @@
                 <source>lieutenant_general</source>
                 <target>korpskommandant</target>
             </trans-unit>
-			<trans-unit id="lieutenant_general.abbr">
+            <trans-unit id="lieutenant_general.abbr">
                 <source>lieutenant_general.abbr</source>
                 <target>kkdt</target>
             </trans-unit>
@@ -198,7 +198,7 @@
                 <source>general</source>
                 <target>general</target>
             </trans-unit>
-			<trans-unit id="general.abbr">
+            <trans-unit id="general.abbr">
                 <source>general.abbr</source>
                 <target>gen</target>
             </trans-unit>
