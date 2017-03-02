@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+    <h1>Reports list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Reference</th>
+                <th>Ishierarchical</th>
+                <th>Object</th>
+                <th>Message</th>
+                <th>Startedat</th>
+                <th>Place</th>
+                <th>Urgency</th>
+                <th>Classification</th>
+                <th>Isdraft</th>
+                <th>Createdat</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for report in reports %}
+            <tr>
+                <td><a href="{{ path('report_show', { 'id': report.id }) }}">{{ report.id }}</a></td>
+                <td>{{ report.reference }}</td>
+                <td>{% if report.isHierarchical %}Yes{% else %}No{% endif %}</td>
+                <td>{{ report.object }}</td>
+                <td>{{ report.message }}</td>
+                <td>{% if report.startedAt %}{{ report.startedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ report.place }}</td>
+                <td>{{ report.urgency }}</td>
+                <td>{{ report.classification }}</td>
+                <td>{% if report.isDraft %}Yes{% else %}No{% endif %}</td>
+                <td>{% if report.createdAt %}{{ report.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('report_show', { 'id': report.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('report_edit', { 'id': report.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('report_new') }}">Create a new report</a>
+        </li>
+    </ul>
+{% endblock %}

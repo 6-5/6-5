@@ -1,0 +1,68 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+    <h1>Report</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ report.id }}</td>
+            </tr>
+            <tr>
+                <th>Reference</th>
+                <td>{{ report.reference }}</td>
+            </tr>
+            <tr>
+                <th>Ishierarchical</th>
+                <td>{% if report.isHierarchical %}Yes{% else %}No{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Object</th>
+                <td>{{ report.object }}</td>
+            </tr>
+            <tr>
+                <th>Message</th>
+                <td>{{ report.message }}</td>
+            </tr>
+            <tr>
+                <th>Startedat</th>
+                <td>{% if report.startedAt %}{{ report.startedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Place</th>
+                <td>{{ report.place }}</td>
+            </tr>
+            <tr>
+                <th>Urgency</th>
+                <td>{{ report.urgency }}</td>
+            </tr>
+            <tr>
+                <th>Classification</th>
+                <td>{{ report.classification }}</td>
+            </tr>
+            <tr>
+                <th>Isdraft</th>
+                <td>{% if report.isDraft %}Yes{% else %}No{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Createdat</th>
+                <td>{% if report.createdAt %}{{ report.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('report_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('report_edit', { 'id': report.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}
