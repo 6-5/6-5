@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="en" target-language="fr" datatype="plaintext" original="file.ext">
+    <header>
+      <tool tool-id="symfony" tool-name="Symfony"/>
+    </header>
+    <body>
+      <trans-unit id="49256b9819abacbb8e6e031a03abe81b" resname="wait">
+        <source>wait</source>
+        <target>Merci de patienter...</target>
+      </trans-unit>
+      <trans-unit id="7d97481b1fe66f4b51db90da7e794d9f" resname="profile">
+        <source>profile</source>
+        <target>Profil</target>
+      </trans-unit>
+      <trans-unit id="a8445719836f2d5e8b51986410e14728" resname="reports">
+        <source>reports</source>
+        <target>Rapports</target>
+      </trans-unit>
+      <trans-unit id="deddd88ef8a1b5709309ea069036adec" resname="reports.sent">
+        <source>reports.sent</source>
+        <target>Rapports envoyés</target>
+      </trans-unit>
+      <trans-unit id="c517644ab32d7eae187ca65fd26d1d24" resname="reports.received">
+        <source>reports.received</source>
+        <target>Rapports reçus</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
