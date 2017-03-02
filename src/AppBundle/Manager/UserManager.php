@@ -19,11 +19,25 @@ class UserManager
 
     public function getRanks($abbreviated = false, $locale = null)
     {
-        //$userReflection = new \ReflectionClass(User::class);
-        //$constants = $userReflection->getConstants();
-        //return $constants;
+        $ranks = [];
+        $userReflection = new \ReflectionClass(User::class);
+        $constants = $userReflection->getConstants();
 
-        return;
+        if ($abbreviated) {
+            foreach ($constants as $key => $value) {
+                if (preg_match('[^RANK_.*$]', $key)) {
+                    $ranks[$key] = $this->translator->trans($constants[$key] . '.abbr', [], 'ranks', $locale);
+                }
+            }
+        } else {
+            foreach ($constants as $key => $value) {
+                if (preg_match('[^RANK_.*$]', $key)) {
+                    $ranks[$key] = $this->translator->trans($constants[$key], [], 'ranks', $locale);
+                }
+            }
+        }
+
+        return $ranks;
     }
 
     public function getFullName(User $user, $abbreviate = false, $locale = null)
