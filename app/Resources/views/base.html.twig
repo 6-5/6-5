@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8" />
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-        <title>{% block title %}6-5{% endblock %}</title>
+        <title>{% block title %}6.5{% endblock %}</title>
         {% block stylesheets %}
             <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet" type="text/css">
             <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">
@@ -29,7 +29,7 @@
                             </div>
                         </div>
                     </div>
-                    <p>Please wait...</p>
+                    <p>{{ 'wait'|trans }}</p>
                 </div>
             </div>
             <div class="overlay"></div>
@@ -37,7 +37,6 @@
                 <div class="search-icon">
                     <i class="material-icons">search</i>
                 </div>
-                <input type="text" placeholder="START TYPING...">
                 <div class="close-search">
                     <i class="material-icons">close</i>
                 </div>
@@ -47,7 +46,7 @@
                     <div class="navbar-header">
                         <a href="javascript:void(0);" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false"></a>
                         <a href="javascript:void(0);" class="bars"></a>
-                        <a class="navbar-brand" href="{{ path('homepage') }}">6-5</a>
+                        <a class="navbar-brand" href="{{ path('homepage') }}">6.5</a>
                     </div>
             </nav>
             <section>
@@ -59,7 +58,7 @@
                             <div class="btn-group user-helper-dropdown">
                                 <i class="material-icons" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">keyboard_arrow_down</i>
                                 <ul class="dropdown-menu pull-right">
-                                    <li><a href="{{ path('fos_user_profile_edit') }}"><i class="material-icons">person</i>Profile</a></li>
+                                    <li><a href="{{ path('fos_user_profile_edit') }}"><i class="material-icons">person</i>{{ 'profile'|trans }}</a></li>
                                     <li>
                                         <a href="{{ path('fos_user_security_logout') }}"><i class="material-icons">input</i>{{ 'layout.logout'|trans({}, 'FOSUserBundle') }}</a>
                                     </li>
@@ -69,17 +68,17 @@
                     </div>
                     <div class="menu">
                         <ul class="list">
-                            <li class="header">Report</li>
+                            <li class="header">{{ 'reports'|trans }}</li>
                             <li>
                                 <a href="">
                                     <i class="material-icons">mail</i>
-                                    <span>Rapports envoyés</span>
+                                    <span>{{ 'reports.sent'|trans }}</span>
                                 </a>
                             </li>
                             <li>
                                 <a href="">
                                     <i class="material-icons">inbox</i>
-                                    <span>Rapports reçus</span>
+                                    <span>{{ 'reports.received'|trans }}</span>
                                 </a>
                             </li>
                         </ul>
@@ -89,12 +88,11 @@
                     </div>
                 </aside>
             </section>
-
             <section class="content">
                 {% block content %}
                 <div class="container-fluid">
                     <div class="block-header">
-                        <h2>BLANK PAGE</h2>
+                        <h2>Title</h2>
                     </div>
                 </div>
                 {% endblock%}
@@ -108,7 +106,6 @@
             <script src="{{ asset('assets/vendor/adminbsb-materialdesign/plugins/node-waves/waves.min.js') }}"></script>
             <script src="{{ asset('assets/vendor/adminbsb-materialdesign/plugins/jquery-validation/jquery.validate.js') }}"></script>
             <script src="{{ asset('assets/vendor/adminbsb-materialdesign/js/admin.js') }}"></script>
-            <script src="{{ asset('assets/vendor/adminbsb-materialdesign/js/demo.js') }}"></script>
         {% endblock %}
     </body>
 </html>
