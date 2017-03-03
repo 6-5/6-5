@@ -107,6 +107,9 @@ class LoadData implements FixtureInterface, ContainerAwareInterface
             ->setCreatedBy($createdBy)
             ->setCreatedAt($createdAt = $this->faker->dateTimeBetween('-14 days', '-7 days'))
             ->setObject(ucfirst($this->faker->words(3, true)))
+            ->setMessage($this->faker->paragraph())
+            ->setStartedAt($this->faker->dateTimeBetween('+ 1 day', '+ 14 days'))
+            ->setPlace($this->faker->city)
         ;
 
         $file = new File();

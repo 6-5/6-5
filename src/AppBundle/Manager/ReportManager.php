@@ -34,6 +34,7 @@ class ReportManager
 
         $report
             ->setIsDraft(false)
+            ->setAddressedTo($user)
             ->addDecision($decision)
         ;
 
