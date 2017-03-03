@@ -19,31 +19,14 @@ class UserManager
 
     public function getRanks($abbreviated = false, $locale = null)
     {
-        $ranks = [];
-        $userReflection = new \ReflectionClass(User::class);
-        $constants = $userReflection->getConstants();
+        $locale = $locale ?: $this->requestStack->getCurrentRequest()->getLocale();
+        $r = new \ReflectionClass(User::class);
+        $filter = function ($constant) { return false !== strpos($constant, 'RANK_'); };
+        $constants = array_filter($r->getConstants(), $filter, ARRAY_FILTER_USE_KEY);
 
-        if ($abbreviated) {
-            foreach ($constants as $key => $value) {
-                if (preg_match('[^RANK_.*$]', $key)) {
-                    $ranks[$key] = $this->translator->trans(
-                        $constants[$key] . '.abbr',
-                        [],
-                        'ranks',
-                        $locale ? $locale : $this->requestStack->getCurrentRequest()->getLocale()
-                    );
-                }
-            }
-        } else {
-            foreach ($constants as $key => $value) {
-                if (preg_match('[^RANK_.*$]', $key)) {
-                    $ranks[$key] = $this->translator->trans(
-                        $constants[$key],
-                        [],
-                        'ranks',
-                        $locale ? $locale : $this->requestStack->getCurrentRequest()->getLocale());
-                }
-            }
+        $ranks = [];
+        foreach ($constants as $id) {
+            $ranks[$id] = $this->translator->trans($abbreviated ? $id.'.abbr' : $id, [], 'ranks', $locale);
         }
 
         return $ranks;
