@@ -35,9 +35,9 @@ class ReportController extends Controller
     {
         $firstResult = $request->request->get('start');
         $repo = $this->getDoctrine()->getRepository('AppBundle:Report');
-        $query = $repo->getQueryForPagination($firstResult);
+        $query = $repo->getQueryForPagination($user = $this->getUser(), $firstResult);
         $reports = new Paginator($query, $fetchJoinCollection = true);
-        $data = ['recordsTotal' => $repo->count(), 'recordsFiltered' => $reports->count(), 'data' => $reports];
+        $data = ['recordsTotal' => $repo->count($user), 'recordsFiltered' => $reports->count(), 'data' => $reports];
 
         return $this->json($data, 200, [], ['groups' => ['report_index_sent']]);
     }
