@@ -1,16 +1,24 @@
 {% extends 'base.html.twig' %}
 
 {% block content %}
-    <h1>Report creation</h1>
+    <div class="container-fluid">
+        <div class="row clearfix">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="card">
+                    <div class="header">
+                        <h2>{{ 'reports.creation'|trans }}</h2>
+                    </div>
+                    <div class="body">
 
-    {{ form_start(form) }}
-        {{ form_widget(form) }}
-        <input type="submit" value="Create" />
-    {{ form_end(form) }}
+                        {{ form_start(form) }}
+                            {{ form_widget(form) }}
+                            <input type="submit" value="Create" />
+                        {{ form_end(form) }}
 
-    <ul>
-        <li>
-            <a href="{{ path('report_index') }}">Back to the list</a>
-        </li>
-    </ul>
+                        <a href="{{ path('report_index') }}">Back to the list</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}

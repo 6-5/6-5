@@ -14,16 +14,16 @@
                         <h2>{{ 'reports.sent'|trans }}</h2>
                     </div>
                     <div class="body">
-                        <a href="{{ path('report_new') }}" class="btn btn-default btn-lg font-bold">Create a new report</a>
+                        <a href="{{ path('report_new') }}" class="btn btn-default btn-lg font-bold">{{ 'reports.new'|trans }}</a>
                         <table id="table-report" class="table table-bordered table-striped table-hover table-responsive">
                             <thead>
                                 <tr>
-                                    <th>N°</th>
-                                    <th>Object</th>
-                                    <th>Date</th>
-                                    <th>Address</th>
-                                    <th>Urgence</th>
-                                    <th>Classification</th>
+                                    <th>#</th>
+                                    <th>{{ 'reports.object'|trans }}</th>
+                                    <th>{{ 'reports.startedAt'|trans }}</th>
+                                    <th>{{ 'reports.addressedTo'|trans }}</th>
+                                    <th>{{ 'reports.urgency'|trans }}</th>
+                                    <th>{{ 'reports.classification'|trans }}</th>
                                 </tr>
                             </thead>
                             <tbody></tbody>
