@@ -2,7 +2,13 @@
 
 namespace AppBundle\Form;
 
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -13,7 +19,40 @@ class ReportType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('reference')->add('isHierarchical')->add('object')->add('message')->add('startedAt')->add('place')->add('urgency')->add('classification')->add('isDraft')->add('createdAt')->add('createdBy')->add('addressedTo')        ;
+        $builder
+            ->add('object', TextType::class, [
+                'label' => 'report.object',
+            ])
+            ->add('message', TextareaType::class, [
+                'label' => 'report.message',
+            ])
+            ->add('startedAt', DateTimeType::class, [
+                'html5' => false,
+                'date_widget' => 'single_text',
+                'time_widget' => 'single_text'
+            ])
+            ->add('place', TextType::class, [
+                'label' => 'report.place',
+            ])
+            ->add('urgency', null, [
+                'label' => 'report.urgency',
+            ])
+            ->add('classification', null, [
+                'label' => 'report.urgency',
+            ])
+            ->add('addressedTo', EntityType::class, [
+                'class' => 'AppBundle\Entity\User',
+                'choice_label' => 'username',
+                'label' => 'report.addressedTo',
+            ])
+            ->add('isHierarchical', CheckboxType::class, [
+                'label' => 'report.isHierarchical',
+            ])
+            ->add('files', CollectionType::class, [
+                'entry_type' => FileType::class,
+                'label' => 'report.files',
+            ])
+        ;
     }
     
     /**
