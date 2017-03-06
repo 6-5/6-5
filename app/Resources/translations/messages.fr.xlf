@@ -15,7 +15,7 @@
       </trans-unit>
       <trans-unit id="a8445719836f2d5e8b51986410e14728" resname="reports">
         <source>reports</source>
-        <target>Rapports</target>
+        <target>Rapports-télégramme</target>
       </trans-unit>
       <trans-unit id="deddd88ef8a1b5709309ea069036adec" resname="reports.sent">
         <source>reports.sent</source>
@@ -88,6 +88,10 @@
       <trans-unit id="099af53f601532dbd31e0ea99ffdeb64" resname="delete">
         <source>delete</source>
         <target>Supprimer</target>
+      </trans-unit>
+      <trans-unit id="e98d2f001da5678b39482efbdf5770dc" resname="report">
+        <source>report</source>
+        <target>Rapport-télégramme</target>
       </trans-unit>
     </body>
   </file>

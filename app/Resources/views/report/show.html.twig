@@ -1,55 +1,60 @@
 {% extends 'base.html.twig' %}
 
-{% block content %}
-    <h1>Report</h1>
+{% block title %}{{ parent() }} - {{ 'report'|trans }} {{ report.reference }} - {{ report.object }}{% endblock %}
 
-    <table>
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ report.id }}</td>
-            </tr>
-            <tr>
-                <th>Reference</th>
-                <td>{{ report.reference }}</td>
-            </tr>
-            <tr>
-                <th>Ishierarchical</th>
-                <td>{% if report.isHierarchical %}Yes{% else %}No{% endif %}</td>
-            </tr>
-            <tr>
-                <th>Object</th>
-                <td>{{ report.object }}</td>
-            </tr>
-            <tr>
-                <th>Message</th>
-                <td>{{ report.message }}</td>
-            </tr>
-            <tr>
-                <th>Startedat</th>
-                <td>{% if report.startedAt %}{{ report.startedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
-            </tr>
-            <tr>
-                <th>Place</th>
-                <td>{{ report.place }}</td>
-            </tr>
-            <tr>
-                <th>Urgency</th>
-                <td>{{ report.urgency }}</td>
-            </tr>
-            <tr>
-                <th>Classification</th>
-                <td>{{ report.classification }}</td>
-            </tr>
-            <tr>
-                <th>Isdraft</th>
-                <td>{% if report.isDraft %}Yes{% else %}No{% endif %}</td>
-            </tr>
-            <tr>
-                <th>Createdat</th>
-                <td>{% if report.createdAt %}{{ report.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
-            </tr>
-        </tbody>
-    </table>
-    <a href="{{ path('report_index') }}">Back to the list</a>
+{% block content %}
+    <div class="container-fluid">
+        <div class="row clearfix">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="card">
+                    <div class="header">
+                        <h1>{{ 'report'|trans }} <span class="label label-default">{{ report.reference }}</h1>
+                    </div>
+                    <div class="body">
+                        <div class="row">
+                            <div class="col-sm-8">
+                                <p class="lead">{{ report.object }}</p>
+                                <blockquote>
+                                    <p>{{ report.message }}</p>
+                                    <footer>{{ report.createdBy.username }}</footer>
+                                </blockquote>
+                            </div>
+                            <div class="col-sm-4">
+                                <table class="table table-striped">
+                                    <tbody>
+                                    <tr>
+                                        <th>{{ 'report.isHierarchical'|trans }}</th>
+                                        <td>
+                                            {% if report.isHierarchical %}
+                                                <i class="material-icons">done</i>
+                                            {% else %}
+                                                <i class="material-icons">remove</i>
+                                            {% endif %}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>{{ 'report.startedAt'|trans }}</th>
+                                        <td>{% if report.startedAt %}{{ report.startedAt|date('Y-m-d H:i') }}{% endif %}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>{{ 'report.place'|trans }}</th>
+                                        <td>{{ report.place }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>{{ 'report.urgency'|trans }}</th>
+                                        <td>{{ report.urgency }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>{{ 'report.classification'|trans }}</th>
+                                        <td>{{ report.classification }}</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
