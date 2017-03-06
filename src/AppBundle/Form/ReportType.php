@@ -38,7 +38,7 @@ class ReportType extends AbstractType
                 'label' => 'report.urgency',
             ])
             ->add('classification', null, [
-                'label' => 'report.urgency',
+                'label' => 'report.classification',
             ])
             ->add('addressedTo', EntityType::class, [
                 'class' => 'AppBundle\Entity\User',

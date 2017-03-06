@@ -47,7 +47,7 @@
       </trans-unit>
       <trans-unit id="9f2f5d7044af53aae72303bcb7978f09" resname="report.startedAt">
         <source>report.startedAt</source>
-        <target>Lien de départ</target>
+        <target>Date et heure</target>
       </trans-unit>
       <trans-unit id="043e88e64e8a7a42b62d44b88c7529fc" resname="report.addressedTo">
         <source>report.addressedTo</source>
