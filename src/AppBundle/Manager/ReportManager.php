@@ -16,12 +16,13 @@ class ReportManager
         $this->em = $em;
     }
 
-    public function createReport()
+    public function createReport(User $createdBy = null)
     {
         $repo = $this->em->getRepository('AppBundle:Report');
         while ($repo->findOneByReference($reference = strtoupper(bin2hex(random_bytes(3))))) { };
 
         return (new Report())
+            ->setCreatedBy($createdBy)
             ->setReference($reference)
         ;
     }

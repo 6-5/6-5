@@ -4,6 +4,7 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Report
@@ -35,12 +36,14 @@ class Report
     /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User", inversedBy="createdReports")
      * @Groups({"report_index_sent"})
+     * @Assert\NotBlank()
      */
     private $createdBy;
 
     /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User", inversedBy="addressedReports")
      * @Groups({"report_index_sent"})
+     * @Assert\NotBlank()
      */
     private $addressedTo;
 
@@ -49,6 +52,7 @@ class Report
      *
      * @ORM\Column(name="reference", type="string", length=6, unique=true)
      * @Groups({"report_index_sent"})
+     * @Assert\NotBlank()
      */
     private $reference;
 
@@ -64,6 +68,8 @@ class Report
      *
      * @ORM\Column(name="object", type="string", length=255)
      * @Groups({"report_index_sent"})
+     * @Assert\NotBlank()
+     * @Assert\Length(max="255")
      */
     private $object;
 
@@ -71,6 +77,7 @@ class Report
      * @var string
      *
      * @ORM\Column(name="message", type="text", nullable=true)
+     * @Assert\NotBlank()
      */
     private $message;
 
@@ -79,6 +86,7 @@ class Report
      *
      * @ORM\Column(name="startedAt", type="datetime", nullable=true)
      * @Groups({"report_index_sent"})
+     * @Assert\NotBlank()
      */
     private $startedAt;
 
@@ -86,6 +94,7 @@ class Report
      * @var string
      *
      * @ORM\Column(name="place", type="string", length=255, nullable=true)
+     * @Assert\NotBlank()
      */
     private $place;
 
@@ -94,6 +103,7 @@ class Report
      *
      * @ORM\Column(name="urgency", type="string", length=15)
      * @Groups({"report_index_sent"})
+     * @Assert\NotBlank()
      */
     private $urgency;
 
@@ -102,6 +112,7 @@ class Report
      *
      * @ORM\Column(name="classification", type="string", length=15)
      * @Groups({"report_index_sent"})
+     * @Assert\NotBlank()
      */
     private $classification;
 
@@ -116,6 +127,7 @@ class Report
      * @var \DateTime
      *
      * @ORM\Column(name="createdAt", type="datetime")
+     * @Assert\NotBlank()
      */
     private $createdAt;
 

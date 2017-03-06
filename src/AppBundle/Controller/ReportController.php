@@ -50,7 +50,7 @@ class ReportController extends Controller
      */
     public function newAction(Request $request)
     {
-        $report = new Report();
+        $report = $this->get('app.report_manager')->createReport($this->getUser());
         $form = $this->createForm('AppBundle\Form\ReportType', $report);
         $form->handleRequest($request);
 
