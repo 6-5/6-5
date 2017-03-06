@@ -4,3 +4,9 @@ services:
     app.report_manager:
         class: AppBundle\Manager\ReportManager
         arguments: ["@doctrine.orm.entity_manager"]
+
+    app.report_serializer:
+        class: AppBundle\Serializer\ReportNormalizer
+        arguments: ["@router", "@app.report_manager"]
+        tags:
+            - { name: serializer.normalizer }

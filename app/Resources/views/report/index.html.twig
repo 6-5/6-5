@@ -49,16 +49,21 @@
                     type: 'POST'
                 },
                 columns: [
-                    { data: "reference" },
+                    {
+                        data: "reference",
+                        render: function ( data, type, row, meta ) {
+                            return '<a href="'+row.pathEdit+'"><span class="label label-default">' + data + '</span></a>';
+                        }
+                    },
                     { data: "object" },
-                    { data: "startedAt" },
-                    { data: "addressedTo" },
+                    { data: "started_at" },
+                    { data: "addressed_to" },
                     { data: "urgency" },
                     { data: "classification" }
                 ],
-                'searching': false,
-                'ordering': false,
-                'lengthChange': false
+                searching: false,
+                ordering: false,
+                lengthChange: false
             });
         });
     </script>
