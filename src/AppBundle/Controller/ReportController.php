@@ -60,7 +60,7 @@ class ReportController extends Controller
             $em->persist($report);
             $em->flush($report);
 
-            return $this->redirectToRoute('report_show', array('id' => $report->getId()));
+            return $this->redirectToRoute('report_show', array('reference' => $report->getReference()));
         }
 
         return $this->render('report/new.html.twig', array(
@@ -72,17 +72,12 @@ class ReportController extends Controller
     /**
      * Finds and displays a report entity.
      *
-     * @Route("/{id}", name="report_show")
+     * @Route("/{reference}", name="report_show")
      * @Method("GET")
      */
     public function showAction(Report $report)
     {
-        $deleteForm = $this->createDeleteForm($report);
-
-        return $this->render('report/show.html.twig', array(
-            'report' => $report,
-            'delete_form' => $deleteForm->createView(),
-        ));
+        return $this->render('report/show.html.twig', array('report' => $report));
     }
 
     /**
@@ -100,7 +95,7 @@ class ReportController extends Controller
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('report_edit', array('id' => $report->getId()));
+            return $this->redirectToRoute('report_edit', array('reference' => $report->getReference()));
         }
 
         return $this->render('report/edit.html.twig', array(
@@ -113,7 +108,7 @@ class ReportController extends Controller
     /**
      * Deletes a report entity.
      *
-     * @Route("/{id}", name="report_delete")
+     * @Route("/{reference}", name="report_delete")
      * @Method("DELETE")
      */
     public function deleteAction(Request $request, Report $report)
@@ -140,7 +135,7 @@ class ReportController extends Controller
     private function createDeleteForm(Report $report)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('report_delete', array('id' => $report->getId())))
+            ->setAction($this->generateUrl('report_delete', array('reference' => $report->getReference())))
             ->setMethod('DELETE')
             ->getForm()
         ;
