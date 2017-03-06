@@ -31,6 +31,7 @@ class ReportManager
     {
         $decision = (new Decision())
             ->setUser($user)
+            ->setStatus(Report::STATUS_ADDRESSED)
         ;
 
         $report
@@ -46,27 +47,31 @@ class ReportManager
     {
         /** @var Decision $decision */
         $decision = $report->getDecisions()->last();
-        $decision->setReadedAt($readedAt ?: new \DateTime());
+        $decision
+            ->setReadedAt($readedAt ?: new \DateTime())
+            ->setStatus(Report::STATUS_READED)
+        ;
 
         return $report;
     }
 
     public function decideToAccept(Report $report, $comment, $decidedAt = null)
     {
-        return $this->decideTo($report, Decision::STATE_ACCEPTED, $comment, $decidedAt);
+        return $this->decideTo($report, Report::STATUS_ACCEPTED, $comment, $decidedAt);
     }
 
     public function decideToRefuse(Report $report, $comment, $decidedAt = null)
     {
-        return $this->decideTo($report, Decision::STATE_REFUSED, $comment, $decidedAt);
+        return $this->decideTo($report, Report::STATUS_REFUSED, $comment, $decidedAt);
     }
 
     public function decideToTransfer(Report $report, $newUser, $comment, $decidedAt = null)
     {
-        $report = $this->decideTo($report, Decision::STATE_TRANSFERRED, $comment, $decidedAt);
+        $report = $this->decideTo($report, Report::STATUS_TRANSFERRED, $comment, $decidedAt);
 
         $decision = (new Decision())
             ->setUser($newUser)
+            ->setStatus(Report::STATUS_ADDRESSED)
         ;
 
         $report->addDecision($decision);
@@ -74,13 +79,13 @@ class ReportManager
         return $report;
     }
 
-    private function decideTo(Report $report, $state, $comment, $decidedAt = null)
+    private function decideTo(Report $report, $status, $comment, $decidedAt = null)
     {
         /** @var Decision $decision */
         $decision = $report->getDecisions()->last();
         $decision
             ->setDecidedAt($decidedAt ?: new \DateTime())
-            ->setState($state)
+            ->setStatus($status)
             ->setComment($comment)
         ;
 

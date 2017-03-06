@@ -36,7 +36,9 @@ class ReportNormalizer implements NormalizerInterface, SerializerAwareInterface
             'started_at' => ($d = $object->getStartedAt()) ? $d->format('d.m.Y H:i') : '',
             'urgency' => $object->getUrgency(),
             'classification' => $object->getClassification(),
-            'path_edit' => $this->router->generate('report_edit', ['reference' => $object->getReference()])
+            'status' => $object->getStatus(),
+            'show_edit' => $this->router->generate('report_show', ['reference' => $object->getReference()]),
+            'path_edit' => $this->router->generate('report_edit', ['reference' => $object->getReference()]),
         ];
     }
 

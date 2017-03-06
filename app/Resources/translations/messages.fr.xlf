@@ -93,6 +93,18 @@
         <source>report</source>
         <target>Rapport-télégramme</target>
       </trans-unit>
+      <trans-unit id="d47e3575b9794406a4ab0510aa9fa6d6" resname="infos">
+        <source>infos</source>
+        <target>Informations</target>
+      </trans-unit>
+      <trans-unit id="bd16e3a10ec7e45a7d1dd93637aeea4a" resname="reports.draft">
+        <source>reports.draft</source>
+        <target>Brouillons</target>
+      </trans-unit>
+      <trans-unit id="13c2eb995df80cfc1b727cbeb6830a4d" resname="report.status">
+        <source>report.status</source>
+        <target>Statut</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

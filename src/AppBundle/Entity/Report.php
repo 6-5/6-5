@@ -3,7 +3,6 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -23,6 +22,13 @@ class Report
     const CLASSIFICATION_INTERN = 'intern';
     const CLASSIFICATION_CONFIDENTIAL = 'confidential';
     const CLASSIFICATION_SECRET = 'secret';
+
+    const STATUS_DRAFT = 'draft';
+    const STATUS_ADDRESSED = 'addressed';
+    const STATUS_READED = 'readed';
+    const STATUS_TRANSFERRED = 'transferred';
+    const STATUS_ACCEPTED = 'accepted';
+    const STATUS_REFUSED = 'refused';
 
     /**
      * @var int
@@ -369,7 +375,7 @@ class Report
      *
      * @return bool
      */
-    public function getIsDraft()
+    public function isDraft()
     {
         return $this->isDraft;
     }
@@ -522,5 +528,14 @@ class Report
     public function getLastDecision()
     {
         return $this->decisions->last();
+    }
+
+    public function getStatus()
+    {
+        if ($this->isDraft()) {
+            return Report::STATUS_DRAFT;
+        }
+
+        return $this->getLastDecision()->getStatus();
     }
 }

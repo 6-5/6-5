@@ -21,7 +21,7 @@ class ReportRepository extends \Doctrine\ORM\EntityRepository
         ;
     }
 
-    public function getQueryForPagination(User $createdBy = null, $firstResult = 0, $maxResults = 10)
+    public function getQueryForPagination(User $createdBy = null, $isDraft = null, $firstResult = 0, $maxResults = 10)
     {
         $qb = $this->createQueryBuilder('r')
             ->addSelect('uc')
@@ -38,15 +38,23 @@ class ReportRepository extends \Doctrine\ORM\EntityRepository
             $qb->where('r.createdBy = :createdBy')->setParameter('createdBy', $createdBy);
         }
 
+        if (null !== $isDraft) {
+            $qb->andWhere('r.isDraft = :isDraft')->setParameter('isDraft', $isDraft);
+        }
+
         return $qb->getQuery();
     }
 
-    public function count(User $createdBy = null)
+    public function count(User $createdBy = null, $isDraft = null)
     {
         $qb = $this->createQueryBuilder('r')->select('count(r.id)');
 
         if ($createdBy) {
             $qb->where('r.createdBy = :createdBy')->setParameter('createdBy', $createdBy);
+        }
+
+        if (null !== $isDraft) {
+            $qb->andWhere('r.isDraft = :isDraft')->setParameter('isDraft', $isDraft);
         }
 
         return $qb->getQuery()->getSingleScalarResult();

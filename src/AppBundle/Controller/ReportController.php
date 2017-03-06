@@ -34,13 +34,15 @@ class ReportController extends Controller
      */
     public function indexDataAction(Request $request)
     {
-        $firstResult = $request->request->get('start');
+        $firstResult = $request->get('start');
+        $isDraft = $request->query->has('is_draft');
         $repo = $this->getDoctrine()->getRepository('AppBundle:Report');
-        $query = $repo->getQueryForPagination($user = $this->getUser(), $firstResult);
-        $reports = new Paginator($query, $fetchJoinCollection = true);
-        $data = ['recordsTotal' => $repo->count($user), 'recordsFiltered' => $reports->count(), 'data' => $reports];
 
-        return $this->json($data, 200, [], ['groups' => ['report_index_sent']]);
+        $query = $repo->getQueryForPagination($user = $this->getUser(), $isDraft, $firstResult);
+        $reports = new Paginator($query, $fetchJoinCollection = true);
+        $data = ['recordsTotal' => $repo->count($user, $isDraft), 'recordsFiltered' => $reports->count(), 'data' => $reports];
+
+        return $this->json($data);
     }
 
     /**
