@@ -77,6 +77,18 @@
         <source>report.files</source>
         <target>Pièces jointes</target>
       </trans-unit>
+      <trans-unit id="a35a53338984ca2e65c98c56c061077b" resname="report.edition">
+        <source>report.edition</source>
+        <target>Edition du rapport-transmission</target>
+      </trans-unit>
+      <trans-unit id="de95b43bceeb4b998aed4aed5cef1ae7" resname="edit">
+        <source>edit</source>
+        <target>Editer</target>
+      </trans-unit>
+      <trans-unit id="099af53f601532dbd31e0ea99ffdeb64" resname="delete">
+        <source>delete</source>
+        <target>Supprimer</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

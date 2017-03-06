@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Report;
+use AppBundle\Form\ReportType;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -87,13 +88,13 @@ class ReportController extends Controller
     /**
      * Displays a form to edit an existing report entity.
      *
-     * @Route("/{id}/edit", name="report_edit")
+     * @Route("/{reference}/edit", name="report_edit")
      * @Method({"GET", "POST"})
      */
     public function editAction(Request $request, Report $report)
     {
         $deleteForm = $this->createDeleteForm($report);
-        $editForm = $this->createForm('AppBundle\Form\ReportType', $report);
+        $editForm = $this->createForm(ReportType::class, $report);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
