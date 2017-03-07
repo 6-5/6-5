@@ -2,6 +2,7 @@
 
 namespace AppBundle\Repository;
 
+use AppBundle\Entity\Report;
 use AppBundle\Entity\User;
 
 /**
@@ -70,5 +71,43 @@ class ReportRepository extends \Doctrine\ORM\EntityRepository
         }
 
         return $qb->getQuery()->getSingleScalarResult();
+    }
+
+    public function findByInProcess(User $createdBy)
+    {
+        return $this->createQueryBuilder('r')
+            ->addSelect('d')
+            ->join('r.decisions', 'd')
+            ->where('r.createdBy = :createdBy')->setParameter('createdBy', $createdBy)
+            ->andWhere(sprintf('d in (%s)', $this->_em->createQueryBuilder()
+                ->from('AppBundle:Decision', 'd2')
+                ->select('max(d2)')
+                ->where('d2.report = r')
+                ->andWhere('d2.status not in (:status)')
+                ->getDQL()
+            ))
+            ->setParameter('status', [Report::STATUS_ACCEPTED, Report::STATUS_REFUSED])
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    public function findByUnread(User $addressedTo)
+    {
+        return $this->createQueryBuilder('r')
+            ->addSelect('d')
+            ->join('r.decisions', 'd')
+            ->where('r.addressedTo = :addressedTo')->setParameter('addressedTo', $addressedTo)
+            ->andWhere(sprintf('d in (%s)', $this->_em->createQueryBuilder()
+                ->from('AppBundle:Decision', 'd2')
+                ->select('max(d2)')
+                ->where('d2.report = r')
+                ->andWhere('d2.status = :status')
+                ->getDQL()
+            ))
+            ->setParameter('status', Report::STATUS_ADDRESSED)
+            ->getQuery()
+            ->getResult()
+        ;
     }
 }

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
-  <file source-language="en" target-language="fr" datatype="plaintext" original="file.ext">
+  <file source-language="fr" target-language="fr" datatype="plaintext" original="file.ext">
     <header>
       <tool tool-id="symfony" tool-name="Symfony"/>
     </header>
@@ -57,9 +57,17 @@
         <source>report.urgency</source>
         <target>Indication d'urgence</target>
       </trans-unit>
+      <trans-unit id="0d882bcab072c34c88870b369bd55c79" resname="report.urgency.abbr">
+        <source>report.urgency.abbr</source>
+        <target>Urgence</target>
+      </trans-unit>
       <trans-unit id="df4f1050c3330e08b8b69cd4056cd0fc" resname="report.classification">
         <source>report.classification</source>
         <target>Indication de classification</target>
+      </trans-unit>
+      <trans-unit id="c1d46f705698469167474675a2dbecd5" resname="report.classification.abbr">
+        <source>report.classification.abbr</source>
+        <target>Classification</target>
       </trans-unit>
       <trans-unit id="8472aa8c81429a460edb5be0b28e5ca1" resname="report.message">
         <source>report.message</source>
@@ -108,6 +116,30 @@
       <trans-unit id="5b7936dfe35887fe5b556780cdc99c6f" resname="report.createdBy">
         <source>report.createdBy</source>
         <target>Expéditeur</target>
+      </trans-unit>
+      <trans-unit id="62aaa8b9d483b5385495c5d6b5509fa0" resname="reports.in_progress">
+        <source>reports.in_progress</source>
+        <target>Rapports-télégramme envoyés et en cours</target>
+      </trans-unit>
+      <trans-unit id="47e3add02c414f481cc15d60261f6bda" resname="reports.unread">
+        <source>reports.unread</source>
+        <target>Rapports-télégramme reçus et non lus</target>
+      </trans-unit>
+      <trans-unit id="75bf831688a9d965c752e0cd72461081" resname="reports.in_progress.0">
+        <source>reports.in_progress.0</source>
+        <target>Tous les rapports-télégramme envoyés ont été traités.</target>
+      </trans-unit>
+      <trans-unit id="7a39ce2b01457385c105d032628e4389" resname="reports.unread.0">
+        <source>reports.unread.0</source>
+        <target>Tous les rapports-télégramme reçus ont été lus.</target>
+      </trans-unit>
+      <trans-unit id="4ecc5a21d4036d5af8e0421d1b963635" resname="report.startedAtDate">
+        <source>report.startedAtDate</source>
+        <target>Date</target>
+      </trans-unit>
+      <trans-unit id="858651a341692dfbaaf0451b02947e7a" resname="report.startedAtTime">
+        <source>report.startedAtTime</source>
+        <target>Heure</target>
       </trans-unit>
     </body>
   </file>
