@@ -105,6 +105,10 @@
         <source>report.status</source>
         <target>Statut</target>
       </trans-unit>
+      <trans-unit id="5b7936dfe35887fe5b556780cdc99c6f" resname="report.createdBy">
+        <source>report.createdBy</source>
+        <target>Expéditeur</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

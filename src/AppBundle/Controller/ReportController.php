@@ -18,14 +18,36 @@ use Symfony\Component\HttpFoundation\Request;
 class ReportController extends Controller
 {
     /**
-     * Lists all report entities.
+     * Lists all sent report entities.
      *
-     * @Route("/", name="report_index")
+     * @Route("/sent", name="report_index_sent")
      * @Method("GET")
      */
-    public function indexAction()
+    public function indexSentAction()
     {
-        return $this->render('report/index.html.twig');
+        return $this->render('report/index_sent.html.twig');
+    }
+
+    /**
+     * Lists all draft report entities.
+     *
+     * @Route("/draft", name="report_index_draft")
+     * @Method("GET")
+     */
+    public function indexDraftAction()
+    {
+        return $this->render('report/index_draft.html.twig');
+    }
+
+    /**
+     * Lists all received report entities.
+     *
+     * @Route("/received", name="report_index_received")
+     * @Method("GET")
+     */
+    public function indexReceivedAction()
+    {
+        return $this->render('report/index_received.html.twig');
     }
 
     /**
@@ -35,12 +57,14 @@ class ReportController extends Controller
     public function indexDataAction(Request $request)
     {
         $firstResult = $request->get('start');
+        $createdBy = $request->query->has('received') ? null : $this->getUser();
+        $addressedTo = $request->query->has('received') ? $this->getUser() : null;
         $isDraft = $request->query->has('is_draft');
         $repo = $this->getDoctrine()->getRepository('AppBundle:Report');
 
-        $query = $repo->getQueryForPagination($user = $this->getUser(), $isDraft, $firstResult);
+        $query = $repo->getQueryForPagination($createdBy, $isDraft, $addressedTo, $firstResult);
         $reports = new Paginator($query, $fetchJoinCollection = true);
-        $data = ['recordsTotal' => $repo->count($user, $isDraft), 'recordsFiltered' => $reports->count(), 'data' => $reports];
+        $data = ['recordsTotal' => $repo->count($createdBy, $isDraft), 'recordsFiltered' => $reports->count(), 'data' => $reports];
 
         return $this->json($data);
     }

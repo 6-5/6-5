@@ -21,7 +21,7 @@ class ReportRepository extends \Doctrine\ORM\EntityRepository
         ;
     }
 
-    public function getQueryForPagination(User $createdBy = null, $isDraft = null, $firstResult = 0, $maxResults = 10)
+    public function getQueryForPagination(User $createdBy = null, $isDraft = null, User $addressedTo = null, $firstResult = 0, $maxResults = 10)
     {
         $qb = $this->createQueryBuilder('r')
             ->addSelect('uc')
@@ -35,11 +35,23 @@ class ReportRepository extends \Doctrine\ORM\EntityRepository
         ;
 
         if ($createdBy) {
-            $qb->where('r.createdBy = :createdBy')->setParameter('createdBy', $createdBy);
+            $qb->andWhere('r.createdBy = :createdBy')->setParameter('createdBy', $createdBy);
         }
 
         if (null !== $isDraft) {
             $qb->andWhere('r.isDraft = :isDraft')->setParameter('isDraft', $isDraft);
+        }
+
+        if ($addressedTo) {
+            $qb
+                ->andWhere('d.user = :addressedTo')->setParameter('addressedTo', $addressedTo)
+                ->andWhere(sprintf('d in (%s)', $this->_em->createQueryBuilder()
+                    ->from('AppBundle:Decision', 'd2')
+                    ->select('max(d2)')
+                    ->where('d2.report = r')
+                    ->getDQL()
+                ))
+            ;
         }
 
         return $qb->getQuery();
