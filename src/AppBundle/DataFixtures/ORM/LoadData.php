@@ -74,10 +74,10 @@ class LoadData implements FixtureInterface, ContainerAwareInterface
             $manager->persist($report);
 
             // report with accepted/refused decision
-            $addressTo = $this->faker->randomElement($this->faker->randomElement($users));
-            $state = $this->faker->boolean() ? Decision::STATE_ACCEPTED : Decision::STATE_REFUSED;
+            $addressTo = $this->faker->randomElement($this->faker->randomElement($users));            
+            $status = $this->faker->boolean() ? Report::STATUS_ACCEPTED : Report::STATUS_REFUSED;
             $report = $this->createReport($private, $addressTo);
-            $report = $this->decide($report, true, $state);
+            $report = $this->decide($report, true, $status);
             $manager->persist($report);
 
             // report with transferred decision
@@ -86,7 +86,7 @@ class LoadData implements FixtureInterface, ContainerAwareInterface
             $transferTo = $addressTo->getSupervisedBy();
             if ($transferTo) {
                 $report = $this->createReport($private, $addressTo);
-                $report = $this->decide($report, true, Decision::STATE_TRANSFERRED, $transferTo);
+                $report = $this->decide($report, true, Report::STATUS_TRANSFERRED, $transferTo);
                 $manager->persist($report);
             }
 
@@ -94,7 +94,7 @@ class LoadData implements FixtureInterface, ContainerAwareInterface
             /** @var User $addressTo */
             $report = $this->createReport($private, $private->getSupervisedBy());
             $report->setIsHierarchical(true);
-            $report = $this->decide($report, true, Decision::STATE_TRANSFERRED, $private->getSupervisedBy()->getSupervisedBy());
+            $report = $this->decide($report, true, Report::STATUS_TRANSFERRED, $private->getSupervisedBy()->getSupervisedBy());
             $manager->persist($report);
         }
 
@@ -103,10 +103,12 @@ class LoadData implements FixtureInterface, ContainerAwareInterface
 
     public function createReport(User $createdBy, User $addressTo = null)
     {
-        $report = ($this->reportManager->createReport())
-            ->setCreatedBy($createdBy)
+        $report = ($this->reportManager->createReport($createdBy))
             ->setCreatedAt($createdAt = $this->faker->dateTimeBetween('-14 days', '-7 days'))
             ->setObject(ucfirst($this->faker->words(3, true)))
+            ->setMessage($this->faker->paragraph())
+            ->setStartedAt($this->faker->dateTimeBetween('+ 1 day', '+ 14 days'))
+            ->setPlace($this->faker->city)
         ;
 
         $file = new File();
@@ -119,7 +121,7 @@ class LoadData implements FixtureInterface, ContainerAwareInterface
         return $report;
     }
 
-    private function decide(Report $report, $readed = false, $state = null, User $newUserIfTransferred = null)
+    private function decide(Report $report, $readed = false, $status = null, User $newUserIfTransferred = null)
     {
         $createdAt = $report->getLastDecision()->getCreatedAt();
         $readedAt = null;
@@ -127,21 +129,21 @@ class LoadData implements FixtureInterface, ContainerAwareInterface
             $this->reportManager->read($report, $readedAt = $this->faker->dateTimeBetween($createdAt, $createdAt->modify('+ 1 days')));
         }
 
-        if ($state) {
+        if ($status) {
             $decidedAt = $this->faker->dateTimeBetween($readedAt, $readedAt->modify('+ 1 days'));
-            switch ($state) {
-                case Decision::STATE_ACCEPTED:
+            switch ($status) {
+                case Report::STATUS_ACCEPTED:
                     $report = $this->reportManager->decideToAccept($report, $this->faker->realText(), $decidedAt);
                     break;
-                case Decision::STATE_REFUSED:
+                case Report::STATUS_REFUSED:
                     $report = $this->reportManager->decideToRefuse($report, $this->faker->realText(), $decidedAt);
                     break;
-                case Decision::STATE_TRANSFERRED:
+                case Report::STATUS_TRANSFERRED:
                     $report = $this->reportManager->decideToTransfer($report, $newUserIfTransferred, $this->faker->realText(), $decidedAt);
                     $report = $this->decide($report, $readed = $this->faker->boolean());
                     if ($readed && $this->faker->boolean()) {
-                        $state = $this->faker->boolean() ? Decision::STATE_ACCEPTED : Decision::STATE_REFUSED;
-                        $report = $this->decide($report, true, $state);
+                        $status = $this->faker->boolean() ? Report::STATUS_ACCEPTED : Report::STATUS_REFUSED;
+                        $report = $this->decide($report, true, $status);
                     }
                     break;
             }

@@ -2,6 +2,8 @@
 
 namespace AppBundle\Repository;
 
+use AppBundle\Entity\User;
+
 /**
  * ReportRepository
  *
@@ -17,5 +19,56 @@ class ReportRepository extends \Doctrine\ORM\EntityRepository
             ->getQuery()
             ->getOneOrNullResult()
         ;
+    }
+
+    public function getQueryForPagination(User $createdBy = null, $isDraft = null, User $addressedTo = null, $firstResult = 0, $maxResults = 10)
+    {
+        $qb = $this->createQueryBuilder('r')
+            ->addSelect('uc')
+            ->addSelect('ua')
+            ->addSelect('d')
+            ->leftJoin('r.createdBy', 'uc')
+            ->leftJoin('r.addressedTo', 'ua')
+            ->leftJoin('r.decisions', 'd')
+            ->setFirstResult($firstResult)
+            ->setMaxResults($maxResults)
+        ;
+
+        if ($createdBy) {
+            $qb->andWhere('r.createdBy = :createdBy')->setParameter('createdBy', $createdBy);
+        }
+
+        if (null !== $isDraft) {
+            $qb->andWhere('r.isDraft = :isDraft')->setParameter('isDraft', $isDraft);
+        }
+
+        if ($addressedTo) {
+            $qb
+                ->andWhere('d.user = :addressedTo')->setParameter('addressedTo', $addressedTo)
+                ->andWhere(sprintf('d in (%s)', $this->_em->createQueryBuilder()
+                    ->from('AppBundle:Decision', 'd2')
+                    ->select('max(d2)')
+                    ->where('d2.report = r')
+                    ->getDQL()
+                ))
+            ;
+        }
+
+        return $qb->getQuery();
+    }
+
+    public function count(User $createdBy = null, $isDraft = null)
+    {
+        $qb = $this->createQueryBuilder('r')->select('count(r.id)');
+
+        if ($createdBy) {
+            $qb->where('r.createdBy = :createdBy')->setParameter('createdBy', $createdBy);
+        }
+
+        if (null !== $isDraft) {
+            $qb->andWhere('r.isDraft = :isDraft')->setParameter('isDraft', $isDraft);
+        }
+
+        return $qb->getQuery()->getSingleScalarResult();
     }
 }

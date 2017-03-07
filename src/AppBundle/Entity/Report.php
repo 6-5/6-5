@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Report
@@ -22,6 +23,13 @@ class Report
     const CLASSIFICATION_CONFIDENTIAL = 'confidential';
     const CLASSIFICATION_SECRET = 'secret';
 
+    const STATUS_DRAFT = 'draft';
+    const STATUS_ADDRESSED = 'addressed';
+    const STATUS_READED = 'readed';
+    const STATUS_TRANSFERRED = 'transferred';
+    const STATUS_ACCEPTED = 'accepted';
+    const STATUS_REFUSED = 'refused';
+
     /**
      * @var int
      *
@@ -33,11 +41,13 @@ class Report
 
     /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User", inversedBy="createdReports")
+     * @Assert\NotBlank()
      */
     private $createdBy;
 
     /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User", inversedBy="addressedReports")
+     * @Assert\NotBlank()
      */
     private $addressedTo;
 
@@ -45,6 +55,7 @@ class Report
      * @var string
      *
      * @ORM\Column(name="reference", type="string", length=6, unique=true)
+     * @Assert\NotBlank()
      */
     private $reference;
 
@@ -59,6 +70,8 @@ class Report
      * @var string
      *
      * @ORM\Column(name="object", type="string", length=255)
+     * @Assert\NotBlank()
+     * @Assert\Length(max="255")
      */
     private $object;
 
@@ -66,6 +79,7 @@ class Report
      * @var string
      *
      * @ORM\Column(name="message", type="text", nullable=true)
+     * @Assert\NotBlank()
      */
     private $message;
 
@@ -73,6 +87,7 @@ class Report
      * @var \DateTime
      *
      * @ORM\Column(name="startedAt", type="datetime", nullable=true)
+     * @Assert\NotBlank()
      */
     private $startedAt;
 
@@ -80,6 +95,7 @@ class Report
      * @var string
      *
      * @ORM\Column(name="place", type="string", length=255, nullable=true)
+     * @Assert\NotBlank()
      */
     private $place;
 
@@ -87,6 +103,7 @@ class Report
      * @var string
      *
      * @ORM\Column(name="urgency", type="string", length=15)
+     * @Assert\NotBlank()
      */
     private $urgency;
 
@@ -94,6 +111,7 @@ class Report
      * @var string
      *
      * @ORM\Column(name="classification", type="string", length=15)
+     * @Assert\NotBlank()
      */
     private $classification;
 
@@ -108,6 +126,7 @@ class Report
      * @var \DateTime
      *
      * @ORM\Column(name="createdAt", type="datetime")
+     * @Assert\NotBlank()
      */
     private $createdAt;
 
@@ -356,7 +375,7 @@ class Report
      *
      * @return bool
      */
-    public function getIsDraft()
+    public function isDraft()
     {
         return $this->isDraft;
     }
@@ -509,5 +528,14 @@ class Report
     public function getLastDecision()
     {
         return $this->decisions->last();
+    }
+
+    public function getStatus()
+    {
+        if ($this->isDraft()) {
+            return Report::STATUS_DRAFT;
+        }
+
+        return $this->getLastDecision()->getStatus();
     }
 }

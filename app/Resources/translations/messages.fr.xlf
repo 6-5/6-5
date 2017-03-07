@@ -15,7 +15,7 @@
       </trans-unit>
       <trans-unit id="a8445719836f2d5e8b51986410e14728" resname="reports">
         <source>reports</source>
-        <target>Rapports</target>
+        <target>Rapports-télégramme</target>
       </trans-unit>
       <trans-unit id="deddd88ef8a1b5709309ea069036adec" resname="reports.sent">
         <source>reports.sent</source>
@@ -24,6 +24,90 @@
       <trans-unit id="c517644ab32d7eae187ca65fd26d1d24" resname="reports.received">
         <source>reports.received</source>
         <target>Rapports reçus</target>
+      </trans-unit>
+      <trans-unit id="048149fac33bc0b5610a30d8fb48bfec" resname="report.creation">
+        <source>report.creation</source>
+        <target>Création d'un nouveau rapport-transmission</target>
+      </trans-unit>
+      <trans-unit id="76ea0bebb3c22822b4f0dd9c9fd021c5" resname="create">
+        <source>create</source>
+        <target>Créer</target>
+      </trans-unit>
+      <trans-unit id="10aec35353f9c4096a71c38654c3d402" resname="cancel">
+        <source>cancel</source>
+        <target>Annuler</target>
+      </trans-unit>
+      <trans-unit id="d4bf680352c671a2a3577d68d8214861" resname="report.new">
+        <source>report.new</source>
+        <target>Créer un rapport-transmission</target>
+      </trans-unit>
+      <trans-unit id="2ffa04647b046721b447fbbf060b6738" resname="report.object">
+        <source>report.object</source>
+        <target>Objet</target>
+      </trans-unit>
+      <trans-unit id="9f2f5d7044af53aae72303bcb7978f09" resname="report.startedAt">
+        <source>report.startedAt</source>
+        <target>Date et heure</target>
+      </trans-unit>
+      <trans-unit id="043e88e64e8a7a42b62d44b88c7529fc" resname="report.addressedTo">
+        <source>report.addressedTo</source>
+        <target>Adresse</target>
+      </trans-unit>
+      <trans-unit id="4935d7bf34fe4bc36e4e2176e1aed61c" resname="report.urgency">
+        <source>report.urgency</source>
+        <target>Indication d'urgence</target>
+      </trans-unit>
+      <trans-unit id="df4f1050c3330e08b8b69cd4056cd0fc" resname="report.classification">
+        <source>report.classification</source>
+        <target>Indication de classification</target>
+      </trans-unit>
+      <trans-unit id="8472aa8c81429a460edb5be0b28e5ca1" resname="report.message">
+        <source>report.message</source>
+        <target>Message</target>
+      </trans-unit>
+      <trans-unit id="8997b571a77fa11e4d26e0cfe1482de0" resname="report.place">
+        <source>report.place</source>
+        <target>Lieu de départ</target>
+      </trans-unit>
+      <trans-unit id="10e4c274fd9c32c65b3bb35d91e385bd" resname="report.isHierarchical">
+        <source>report.isHierarchical</source>
+        <target>Par voie hiérarchique</target>
+      </trans-unit>
+      <trans-unit id="1673de0c77191e3902327bf899dbec4d" resname="report.files">
+        <source>report.files</source>
+        <target>Pièces jointes</target>
+      </trans-unit>
+      <trans-unit id="a35a53338984ca2e65c98c56c061077b" resname="report.edition">
+        <source>report.edition</source>
+        <target>Edition du rapport-transmission</target>
+      </trans-unit>
+      <trans-unit id="de95b43bceeb4b998aed4aed5cef1ae7" resname="edit">
+        <source>edit</source>
+        <target>Editer</target>
+      </trans-unit>
+      <trans-unit id="099af53f601532dbd31e0ea99ffdeb64" resname="delete">
+        <source>delete</source>
+        <target>Supprimer</target>
+      </trans-unit>
+      <trans-unit id="e98d2f001da5678b39482efbdf5770dc" resname="report">
+        <source>report</source>
+        <target>Rapport-télégramme</target>
+      </trans-unit>
+      <trans-unit id="d47e3575b9794406a4ab0510aa9fa6d6" resname="infos">
+        <source>infos</source>
+        <target>Informations</target>
+      </trans-unit>
+      <trans-unit id="bd16e3a10ec7e45a7d1dd93637aeea4a" resname="reports.draft">
+        <source>reports.draft</source>
+        <target>Brouillons</target>
+      </trans-unit>
+      <trans-unit id="13c2eb995df80cfc1b727cbeb6830a4d" resname="report.status">
+        <source>report.status</source>
+        <target>Statut</target>
+      </trans-unit>
+      <trans-unit id="5b7936dfe35887fe5b556780cdc99c6f" resname="report.createdBy">
+        <source>report.createdBy</source>
+        <target>Expéditeur</target>
       </trans-unit>
     </body>
   </file>

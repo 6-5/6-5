@@ -12,10 +12,6 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Decision
 {
-    const STATE_ACCEPTED = 'accepted';
-    const STATE_REFUSED = 'refused';
-    const STATE_TRANSFERRED = 'transferred';
-
     /**
      * @var int
      *
@@ -49,9 +45,9 @@ class Decision
     /**
      * @var string
      *
-     * @ORM\Column(name="state", type="string", length=15, nullable=true)
+     * @ORM\Column(name="status", type="string", length=15, nullable=true)
      */
-    private $state;
+    private $status;
 
     /**
      * @var string
@@ -158,30 +154,6 @@ class Decision
     }
 
     /**
-     * Set state
-     *
-     * @param string $state
-     *
-     * @return Decision
-     */
-    public function setState($state)
-    {
-        $this->state = $state;
-
-        return $this;
-    }
-
-    /**
-     * Get state
-     *
-     * @return string
-     */
-    public function getState()
-    {
-        return $this->state;
-    }
-
-    /**
      * Set comment
      *
      * @param string $comment
@@ -251,5 +223,29 @@ class Decision
     public function getUser()
     {
         return $this->user;
+    }
+
+    /**
+     * Set status
+     *
+     * @param string $status
+     *
+     * @return Decision
+     */
+    public function setStatus($status)
+    {
+        $this->status = $status;
+
+        return $this;
+    }
+
+    /**
+     * Get status
+     *
+     * @return string
+     */
+    public function getStatus()
+    {
+        return $this->status;
     }
 }

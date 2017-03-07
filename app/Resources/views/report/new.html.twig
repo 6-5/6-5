@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="{{ asset('assets/vendor/adminbsb-materialdesign/plugins/bootstrap-select/css/bootstrap-select.min.css') }}" rel="stylesheet" />
+{% endblock %}
+
+{% block content %}
+    <div class="container-fluid">
+        <div class="row clearfix">
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="header bg-red">
+                        <h1>{{ 'report.creation'|trans }}</h1>
+                    </div>
+                    <div class="body">
+                        {{ form_start(form) }}
+                        {{ form_errors(form) }}
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    {{ form_row(form.object) }}
+                                    {{ form_row(form.message, { attr: {rows: 20}}) }}
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="row">
+                                        <div class="col-sm-6">{{ form_row(form.urgency) }}</div>
+                                        <div class="col-sm-6">{{ form_row(form.place) }}</div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-6">{{ form_row(form.classification) }}</div>
+                                        <div class="col-sm-6">{{ form_row(form.startedAt) }}</div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-6">{{ form_row(form.addressedTo) }}</div>
+                                        <div class="col-sm-6">{{ form_row(form.isHierarchical) }}</div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-12">{{ form_row(form.files) }}</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <input type="submit" value="{{ 'create'|trans }}" class="btn btn-default pull-right btn-lg" />
+                        {{ form_end(form) }}
+                        <a href="{{ path('report_index_sent') }}" class="btn btn-default btn-lg">{{ 'cancel'|trans }}</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('assets/vendor/adminbsb-materialdesign/plugins/bootstrap-select/js/bootstrap-select.min.js') }}"></script>
+{% endblock %}

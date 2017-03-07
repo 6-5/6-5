@@ -56,7 +56,7 @@ class UserManagerTest extends \PHPUnit\Framework\TestCase
         $user = (new User())
             ->setRank($rank)
             ->setFirstname($firstname)
-            ->setLastname($lastname)
+            ->setLastname($lastname);
 
         $fullname = $this->userManager->getFullName($user, $abbreviated, $locale);
         $this->assertEquals($expected, $fullname);
