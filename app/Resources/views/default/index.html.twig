@@ -1,1 +1,98 @@
 {% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+        code {
+            position: absolute;
+            top: 0;
+            right: 0;
+            color: #555
+        }
+        .card {
+            height: 400px;
+            overflow: auto;
+            color: #555
+        }
+        .card-sent {
+            height: 250px;
+        }
+        .card:hover {
+            box-shadow: 0 4px 12px rgba(0,0,0,.4);
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+    <div class="container-fluid">
+        <div class="block-header">
+            <h1>{{ 'reports.in_progress'|trans }}</h1>
+            {% if reports_in_progress is empty %}
+                {{ 'reports.in_progress.0'|trans }}
+            {% endif %}
+        </div>
+        <div class="row clearfix">
+            {% for report in reports_in_progress %}
+                <a href="{{ path('report_show', { reference: report.reference }) }}">
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                        <div class="card card-sent">
+                            <div class="header">
+                                <h3>{{ report.object }} <code>{{ report.reference }}</code></h3>
+                                <blockquote>
+                                    {{ report.addressedTo.username }}
+                                </blockquote>
+                            </div>
+                            <div class="body text-center font-bold">{{ report.status }}</div>
+                        </div>
+                    </div>
+                </a>
+            {% endfor %}
+        </div>
+        <div class="block-header">
+            <h1>{{ 'reports.unread'|trans }}</h1>
+            {% if reports_unread is empty %}
+                {{ 'reports.unread.0'|trans }}
+            {% endif %}
+        </div>
+        <div class="row clearfix">
+            {% for report in reports_unread %}
+                <a href="{{ path('report_show', { reference: report.reference }) }}">
+                    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                        <div class="card">
+                            <div class="header">
+                                <h4>{{ report.object }} <code>{{ report.reference }}</code></h4>
+                                <blockquote>
+                                    {{ report.createdBy.username }}
+                                </blockquote>
+                            </div>
+                            <table class="table table-striped">
+                                <tbody>
+                                <tr>
+                                    <th>{{ 'report.startedAtDate'|trans }}</th>
+                                    <td>{{ report.startedAt|localizeddate('full', 'none') }}</td>
+                                </tr>
+                                <tr>
+                                    <th>{{ 'report.startedAtTime'|trans }}</th>
+                                    <td>{{ report.startedAt|localizeddate('none', 'short') }}</td>
+                                </tr>
+                                <tr>
+                                    <th>{{ 'report.place'|trans }}</th>
+                                    <td>{{ report.place }}</td>
+                                </tr>
+                                <tr>
+                                    <th>{{ 'report.urgency.abbr'|trans }}</th>
+                                    <td>{{ report.urgency }}</td>
+                                </tr>
+                                <tr>
+                                    <th>{{ 'report.classification.abbr'|trans }}</th>
+                                    <td>{{ report.classification }}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </a>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

@@ -13,9 +13,13 @@ class DefaultController extends Controller
      */
     public function indexAction(Request $request)
     {
-        // replace this example code with whatever you need
+        $repo = $this->getDoctrine()->getRepository('AppBundle:Report');
+        $reportsInProcess = $repo->findByInProcess($this->getUser());
+        $reportsUnread = $repo->findByUnread($this->getUser());
+
         return $this->render('default/index.html.twig', [
-            'base_dir' => realpath($this->getParameter('kernel.root_dir').'/..').DIRECTORY_SEPARATOR,
+            'reports_in_progress' => $reportsInProcess,
+            'reports_unread' => $reportsUnread,
         ]);
     }
 }
