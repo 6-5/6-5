@@ -53,10 +53,10 @@ class UserManagerTest extends \PHPUnit\Framework\TestCase
             ->method('getLocale')
             ->willReturn('en');
 
-        $user = new User();
-        $user->setRank($rank);
-        $user->setFirstname($firstname);
-        $user->setLastname($lastname);
+        $user = (new User())
+            ->setRank($rank)
+            ->setFirstname($firstname)
+            ->setLastname($lastname)
 
         $fullname = $this->userManager->getFullName($user, $abbreviated, $locale);
         $this->assertEquals($expected, $fullname);
@@ -102,37 +102,37 @@ class UserManagerTest extends \PHPUnit\Framework\TestCase
     public function getRanksProvider()
     {
         return [
-            ['en', true, array(
+            ['en', true, [
                 User::RANK_RECRUIT => 'recr',
                 User::RANK_SERGEANT => 'sgt',
                 User::RANK_FIRST_SERGEANT => 'sfc',
                 User::RANK_MAJOR => 'maj',
                 User::RANK_GENERAL => 'gen',
-            ),
             ],
-            ['fr', true, array(
+            ],
+            ['fr', true, [
                 User::RANK_RECRUIT => 'recr',
                 User::RANK_SERGEANT => 'sgt',
                 User::RANK_FIRST_SERGEANT => 'sgtm chef',
                 User::RANK_MAJOR => 'maj',
                 User::RANK_GENERAL => 'gen',
-            ),
             ],
-            ['de', false, array(
+            ],
+            ['de', false, [
                 User::RANK_RECRUIT => 'rekrut',
                 User::RANK_SERGEANT => 'wachtmeister',
                 User::RANK_FIRST_SERGEANT => 'hauptfeldweibel',
                 User::RANK_MAJOR => 'major',
                 User::RANK_GENERAL => 'general',
-            ),
             ],
-            ['it', false, array(
+            ],
+            ['it', false, [
                 User::RANK_RECRUIT => 'recluta',
                 User::RANK_SERGEANT => 'sergente',
                 User::RANK_FIRST_SERGEANT => 'sergente maggiore capo',
                 User::RANK_MAJOR => 'maggiore',
                 User::RANK_GENERAL => 'generale',
-            ),
+            ],
             ],
         ];
     }

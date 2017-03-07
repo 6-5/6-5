@@ -17,19 +17,21 @@ class UserManager
         $this->requestStack = $requestStack;
     }
 
-
     /**
      * Get a list of the military ranks in the specified locale
      *
-     * @param bool $abbreviated Tells whether the ranks should abbreviated or not
-     * @param null $locale Specifies the locale in which to get the ranks
+     * @param bool      $abbreviated    Tells whether the ranks should abbreviated or not
+     * @param string    $locale         Specifies the locale in which to get the ranks
+     *
      * @return array An associative array with the english rank as key and specified locale rank as value
      */
     public function getRanks($abbreviated = false, $locale = null)
     {
         $locale = $locale ?: $this->requestStack->getCurrentRequest()->getLocale();
         $r = new \ReflectionClass(User::class);
-        $filter = function ($constant) { return false !== strpos($constant, 'RANK_'); };
+        $filter = function ($constant) {
+            return false !== strpos($constant, 'RANK_');
+        };
         $constants = array_filter($r->getConstants(), $filter, ARRAY_FILTER_USE_KEY);
 
         $ranks = [];
@@ -46,9 +48,10 @@ class UserManager
      * The military address can take multiple forms.
      * The most common and most legit being : <rank> <LASTNAME> <Firstname>
      *
-     * @param User $user A User entity
-     * @param bool $abbreviated Tells whether the rank should be abbreviated or not
-     * @param null $locale Specifies the locale in which to get the rank
+     * @param User   $user          A User entity
+     * @param bool   $abbreviated   Tells whether the rank should be abbreviated or not
+     * @param string $locale        Specifies the locale in which to get the rank
+     *
      * @return string A string containing the military address of the given user in the given locale.
      */
     public function getFullName(User $user, $abbreviated = false, $locale = null)
@@ -56,7 +59,11 @@ class UserManager
         $locale = $locale ?: $this->requestStack->getCurrentRequest()->getLocale();
         $rank = $abbreviated ? $user->getRank() . '.abbr' : $user->getRank();
 
-        return $this->translator->trans($rank, [], 'ranks', $locale) .
-            ' ' . strtoupper($user->getLastname()) . ' ' . ucfirst($user->getFirstname());
+        return sprintf(
+            '%s %s %s',
+            $this->translator->trans($rank, [], 'ranks', $locale),
+            strtoupper($user->getLastname()),
+            ucfirst($user->getFirstname())
+        );
     }
 }
