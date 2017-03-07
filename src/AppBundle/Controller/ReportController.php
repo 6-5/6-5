@@ -64,7 +64,7 @@ class ReportController extends Controller
 
         $query = $repo->getQueryForPagination($createdBy, $isDraft, $addressedTo, $firstResult);
         $reports = new Paginator($query, $fetchJoinCollection = true);
-        $data = ['recordsTotal' => $repo->count($createdBy, $isDraft), 'recordsFiltered' => $reports->count(), 'data' => $reports];
+        $data = ['recordsTotal' => $reports->count(), 'recordsFiltered' => $reports->count(), 'data' => $reports];
 
         return $this->json($data);
     }
@@ -148,7 +148,7 @@ class ReportController extends Controller
             $em->flush($report);
         }
 
-        return $this->redirectToRoute('report_index');
+        return $this->redirectToRoute('report_index_draft');
     }
 
     /**
