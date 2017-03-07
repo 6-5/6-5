@@ -14,6 +14,9 @@
             overflow: auto;
             color: #555
         }
+        .card-sent {
+            height: 250px;
+        }
         .card:hover {
             box-shadow: 0 4px 12px rgba(0,0,0,.4);
         }
@@ -32,36 +35,14 @@
             {% for report in reports_in_progress %}
                 <a href="{{ path('report_show', { reference: report.reference }) }}">
                     <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                        <div class="card">
+                        <div class="card card-sent">
                             <div class="header">
                                 <h3>{{ report.object }} <code>{{ report.reference }}</code></h3>
+                                <blockquote>
+                                    {{ report.addressedTo.username }}
+                                </blockquote>
                             </div>
-
-                                <table class="table table-striped">
-                                    <tbody>
-                                    <tr>
-                                        <th>{{ 'report.addressedTo'|trans }}</th>
-                                        <td>{{ report.addressedTo }}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>{{ 'report.startedAt'|trans }}</th>
-                                        <td>{{ report.startedAt|date('Y-m-d H:i') }}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>{{ 'report.place'|trans }}</th>
-                                        <td>{{ report.place }}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>{{ 'report.urgency'|trans }}</th>
-                                        <td>{{ report.urgency }}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>{{ 'report.classification'|trans }}</th>
-                                        <td>{{ report.classification }}</td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            <div class="body">{{ report.status }}</div>
+                            <div class="body text-center font-bold">{{ report.status }}</div>
                         </div>
                     </div>
                 </a>
