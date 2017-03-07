@@ -35,25 +35,25 @@ class LoadData implements FixtureInterface, ContainerAwareInterface
         $this->faker = \Faker\Factory::create();
         $userManager = $this->container->get('fos_user.user_manager');
         $this->reportManager = $this->container->get('app.report_manager');
-        $grades = [User::GRADE_COLONEL, User::GRADE_CAPTAIN, User::GRADE_LIEUTENANT, User::GRADE_SOLDIER] ;
-        $users = [User::GRADE_COLONEL => [], User::GRADE_CAPTAIN => [], User::GRADE_LIEUTENANT => [],  User::GRADE_SOLDIER => []];
+        $ranks = [User::RANK_COLONEL, User::RANK_CAPTAIN, User::RANK_SECOND_LIEUTENANT, User::RANK_PRIVATE] ;
+        $users = [User::RANK_COLONEL => [], User::RANK_CAPTAIN => [], User::RANK_SECOND_LIEUTENANT => [],  User::RANK_PRIVATE => []];
 
         // User
-        foreach ($grades as $k => $grade) {
+        foreach ($ranks as $k => $rank) {
             for ($i = 0; $i < pow(3, $k); $i++) {
-                $users[$grade][] = $user = $userManager->createUser();
+                $users[$rank][] = $user = $userManager->createUser();
                 $user->setFirstname($this->faker->firstName);
                 $user->setLastname($this->faker->lastName);
-                $user->setGrade($grade);
+                $user->setRank($rank);
 
-                $user->setUsername($grade.$i);
-                $user->setPlainPassword($grade.$i);
-                $user->setEmail($grade.$i.'@6-5.ch');
+                $user->setUsername($rank.$i);
+                $user->setPlainPassword($rank.$i);
+                $user->setEmail($rank.$i.'@6-5.ch');
                 $user->addRole('ROLE_USER');
                 $user->setEnabled(true);
 
                 if ($k > 0) {
-                    $user->setSupervisedBy($this->faker->randomElement($users[$grades[$k - 1]]));
+                    $user->setSupervisedBy($this->faker->randomElement($users[$ranks[$k - 1]]));
                 }
 
                 $userManager->updateUser($user, true);
@@ -61,22 +61,22 @@ class LoadData implements FixtureInterface, ContainerAwareInterface
         }
 
         // Report
-        /** @var User $soldier */
-        foreach ($users[User::GRADE_SOLDIER] as $soldier) {
+        /** @var User $private */
+        foreach ($users[User::RANK_PRIVATE] as $private) {
             // draft
-            $report = $this->createReport($soldier);
+            $report = $this->createReport($private);
             $manager->persist($report);
 
             // report without decision but 50% readed
             $addressTo = $this->faker->randomElement($this->faker->randomElement($users));
-            $report = $this->createReport($soldier, $addressTo);
+            $report = $this->createReport($private, $addressTo);
             $report = $this->decide($report, $this->faker->boolean());
             $manager->persist($report);
 
             // report with accepted/refused decision
-            $addressTo = $this->faker->randomElement($this->faker->randomElement($users));
+            $addressTo = $this->faker->randomElement($this->faker->randomElement($users));            
             $status = $this->faker->boolean() ? Report::STATUS_ACCEPTED : Report::STATUS_REFUSED;
-            $report = $this->createReport($soldier, $addressTo);
+            $report = $this->createReport($private, $addressTo);
             $report = $this->decide($report, true, $status);
             $manager->persist($report);
 
@@ -85,16 +85,16 @@ class LoadData implements FixtureInterface, ContainerAwareInterface
             $addressTo = $this->faker->randomElement($this->faker->randomElement($users));
             $transferTo = $addressTo->getSupervisedBy();
             if ($transferTo) {
-                $report = $this->createReport($soldier, $addressTo);
+                $report = $this->createReport($private, $addressTo);
                 $report = $this->decide($report, true, Report::STATUS_TRANSFERRED, $transferTo);
                 $manager->persist($report);
             }
 
             // report with hierarchical transferred decision
             /** @var User $addressTo */
-            $report = $this->createReport($soldier, $soldier->getSupervisedBy());
+            $report = $this->createReport($private, $private->getSupervisedBy());
             $report->setIsHierarchical(true);
-            $report = $this->decide($report, true, Report::STATUS_TRANSFERRED, $soldier->getSupervisedBy()->getSupervisedBy());
+            $report = $this->decide($report, true, Report::STATUS_TRANSFERRED, $private->getSupervisedBy()->getSupervisedBy());
             $manager->persist($report);
         }
 

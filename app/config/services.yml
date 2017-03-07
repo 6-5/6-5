@@ -5,6 +5,10 @@ services:
         class: AppBundle\Manager\ReportManager
         arguments: ["@doctrine.orm.entity_manager"]
 
+    app.user_manager:
+        class: AppBundle\Manager\UserManager
+        arguments: ["@translator", "@request_stack"]
+        
     app.report_serializer:
         class: AppBundle\Serializer\ReportNormalizer
         arguments: ["@router", "@app.report_manager"]

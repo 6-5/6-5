@@ -11,11 +11,38 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class User extends BaseUser
 {
-    const GRADE_RECRUIT = 'recruit';
-    const GRADE_SOLDIER = 'soldier';
-    const GRADE_LIEUTENANT = 'lieutenant';
-    const GRADE_CAPTAIN = 'captain';
-    const GRADE_COLONEL = 'colonel';
+    /**
+     * English names based upon (consulted on 2017-03-01):
+     * https://en.wikipedia.org/wiki/Military_ranks_of_the_Swiss_Armed_Forces
+     *
+     * Nonexistant equivalent or multiple equivalents have been adapted to avoid collisions
+     */
+
+    const RANK_RECRUIT = 'recruit';
+    const RANK_PRIVATE = 'private';
+    const RANK_APPOINTEE = 'appointee';
+    const RANK_PRIVATE_FIRST_CLASS = 'private_first_class';
+    const RANK_CORPORAL = 'corporal';
+    const RANK_SERGEANT = 'sergeant';
+    const RANK_CHIEF_SERGEANT = 'chief_sergeant';
+    const RANK_MASTER_SERGEANT = 'master_sergeant';
+    const RANK_QUARTERMASTER_SERGEANT = 'quartermaster_sergeant';
+    const RANK_FIRST_SERGEANT = 'first_sergeant';
+    const RANK_WARRANT_OFFICER_CLASS_4 = 'warrant_officer_class_4';
+    const RANK_WARRANT_OFFICER_CLASS_3 = 'warrant_officer_class_3';
+    const RANK_WARRANT_OFFICER_CLASS_2 = 'warrant_officer_class_2';
+    const RANK_WARRANT_OFFICER_CLASS_1 = 'warrant_officer_class_1';
+    const RANK_SECOND_LIEUTENANT = 'second_lieutenant';
+    const RANK_FIRST_LIEUTENANT = 'first_lieutenant';
+    const RANK_CAPTAIN = 'captain';
+    const RANK_MAJOR = 'major';
+    const RANK_LIEUTENANT_COLONEL = 'lieutenant_colonel';
+    const RANK_COLONEL = 'colonel';
+    const RANK_SPECIALIST_OFFICER = 'specialist_officer';
+    const RANK_BRIGADIER_GENERAL = 'brigadier_general';
+    const RANK_MAJOR_GENERAL = 'major_general';
+    const RANK_LIEUTENANT_GENERAL = 'lieutenant_general';
+    const RANK_GENERAL = 'general';
 
     /**
      * @ORM\Id
@@ -27,7 +54,7 @@ class User extends BaseUser
     /**
      * @ORM\Column(type="string", length=31)
      */
-    protected $grade;
+    protected $rank;
 
     /**
      * @ORM\Column(type="string", length=31)
@@ -66,27 +93,27 @@ class User extends BaseUser
     private $decisions;
 
     /**
-     * Set grade
+     * Set rank
      *
-     * @param string $grade
+     * @param string $rank
      *
      * @return User
      */
-    public function setGrade($grade)
+    public function setRank($rank)
     {
-        $this->grade = $grade;
+        $this->rank = $rank;
 
         return $this;
     }
 
     /**
-     * Get grade
+     * Get rank
      *
      * @return string
      */
-    public function getGrade()
+    public function getRank()
     {
-        return $this->grade;
+        return $this->rank;
     }
 
     /**
