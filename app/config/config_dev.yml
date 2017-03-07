@@ -36,3 +36,7 @@ monolog:
 security:
     encoders:
         FOS\UserBundle\Model\UserInterface: plaintext
+    firewalls:
+        main:
+            http_basic:
+                provider: fos_userbundle

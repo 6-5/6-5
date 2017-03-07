@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+    <div class="container-fluid">
+        <div class="row clearfix">
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="header bg-red">
+                        <h1>{{ 'report.edition'|trans }}</h1>
+                    </div>
+                    <div class="body">
+                        {{ form_start(edit_form) }}
+                        {{ form_errors(edit_form) }}
+                        <div class="row">
+                            <div class="col-sm-6">
+                                {{ form_row(edit_form.object) }}
+                                {{ form_row(edit_form.message, { attr: {rows: 20}}) }}
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="row">
+                                    <div class="col-sm-6">{{ form_row(edit_form.urgency) }}</div>
+                                    <div class="col-sm-6">{{ form_row(edit_form.place) }}</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6">{{ form_row(edit_form.classification) }}</div>
+                                    <div class="col-sm-6">{{ form_row(edit_form.startedAt) }}</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6">{{ form_row(edit_form.addressedTo) }}</div>
+                                    <div class="col-sm-6">{{ form_row(edit_form.isHierarchical) }}</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12">{{ form_row(edit_form.files) }}</div>
+                                </div>
+                            </div>
+                        </div>
+                        <input type="submit" value="{{ 'edit'|trans }}" class="btn btn-default pull-right btn-lg" />
+                        {{ form_end(edit_form) }}
+
+                        <a href="{{ path('report_index_draft') }}" class="btn btn-default btn-lg">{{ 'cancel'|trans }}</a>
+
+                        {{ form_start(delete_form, { attr: { style: "display: inline;" } } ) }}
+                             <input type="submit" value="{{ 'delete'|trans }}" class="btn btn-danger btn-lg">
+                        {{ form_end(delete_form) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

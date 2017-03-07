@@ -1,0 +1,71 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('assets/vendor/adminbsb-materialdesign/plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.css') }}">
+{% endblock %}
+
+{% block content %}
+    <div class="container-fluid">
+        <div class="row clearfix">
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="header bg-red">
+                        <h1>{{ 'reports.draft'|trans }}</h1>
+                    </div>
+                    <div class="body">
+                        <a href="{{ path('report_new') }}" class="btn btn-default btn-lg font-bold">{{ 'report.new'|trans }}</a>
+                        <table id="table-report" class="table table-bordered table-striped table-hover table-responsive">
+                            <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>{{ 'report.object'|trans }}</th>
+                                <th>{{ 'report.startedAt'|trans }}</th>
+                                <th>{{ 'report.addressedTo'|trans }}</th>
+                                <th>{{ 'report.urgency'|trans }}</th>
+                                <th>{{ 'report.classification'|trans }}</th>
+                            </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('assets/vendor/adminbsb-materialdesign/plugins/jquery-datatable/jquery.dataTables.js') }}"></script>
+    <script src="{{ asset('assets/vendor/adminbsb-materialdesign/plugins/jquery-datatable/skin/bootstrap/js/dataTables.bootstrap.js') }}"></script>
+    <script src="{{ asset('assets/vendor/adminbsb-materialdesign/plugins/jquery-datatable/extensions/export/dataTables.buttons.min.js') }}"></script>
+    <script>
+        $(document).ready(function(){
+            var table = $('#table-report').DataTable({
+                processing: true,
+                serverSide: true,
+                ajax: {
+                    url: '{{ path('report_index_data', {is_draft: true}) }}',
+                    type: 'POST'
+                },
+                columns: [
+                    {
+                        data: "reference",
+                        render: function ( data, type, row, meta ) {
+                            return '<a href="' + row.path_edit + '"><span class="label label-default">' + data + '</span></a>';
+                        }
+                    },
+                    { data: "object" },
+                    { data: "started_at" },
+                    { data: "addressed_to" },
+                    { data: "urgency" },
+                    { data: "classification" }
+                ],
+                searching: false,
+                ordering: false,
+                lengthChange: false
+            });
+        });
+    </script>
+{% endblock %}
