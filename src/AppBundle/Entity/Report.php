@@ -20,7 +20,7 @@ class Report
     const URGENCY_HIGH = 'high';
     const URGENCY_CRITICAL = 'critical';
 
-    const CLASSIFICATION_PUBLIC = 'public';
+    const CLASSIFICATION_UNCLASSIFIED = 'unclassified';
     const CLASSIFICATION_INTERN = 'intern';
     const CLASSIFICATION_CONFIDENTIAL = 'confidential';
     const CLASSIFICATION_SECRET = 'secret';
