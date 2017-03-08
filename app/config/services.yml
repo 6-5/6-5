@@ -3,7 +3,7 @@ parameters:
 services:
     app.report_manager:
         class: AppBundle\Manager\ReportManager
-        arguments: ["@doctrine.orm.entity_manager", "@workflow.report", "@security.token_storage", "@event_dispatcher"]
+        arguments: ["@doctrine.orm.entity_manager", "@translator", "@request_stack", "@workflow.report", "@security.token_storage", "@event_dispatcher"]
 
     app.user_manager:
         class: AppBundle\Manager\UserManager

@@ -7,6 +7,8 @@ use AppBundle\Entity\Report;
 use AppBundle\Entity\User;
 use AppBundle\Event\ReportEvent;
 use Doctrine\ORM\EntityManager;
+use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\Translation\TranslatorInterface;
 use Symfony\Component\Console\ReportEvents;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
@@ -15,27 +17,32 @@ use Symfony\Component\Workflow\Workflow;
 class ReportManager
 {
     private $em;
+    private $translator;
+    private $requestStack;
     private $workflow;
     private $tokenStorage;
     private $dispatcher;
 
-    public function __construct(EntityManager $em, Workflow $workflow, TokenStorage $tokenStorage, EventDispatcherInterface $dispatcher)
+    public function __construct(EntityManager $em, TranslatorInterface $translator, RequestStack $requestStack,
+                                Workflow $workflow, TokenStorage $tokenStorage, EventDispatcherInterface $dispatcher)
     {
         $this->em = $em;
+        $this->translator = $translator;
+        $this->requestStack = $requestStack;
         $this->workflow = $workflow;
         $this->tokenStorage = $tokenStorage;
         $this->dispatcher = $dispatcher;
     }
 
-    public function createReport(User $createdBy = null)
+    public function createReport(User $createdBy = null, $classification = Report::CLASSIFICATION_UNCLASSIFIED)
     {
         $repo = $this->em->getRepository('AppBundle:Report');
-        while ($repo->findOneByReference($reference = strtoupper(bin2hex(random_bytes(3))))) { };
+        while ($repo->findOneByReference($reference = strtoupper(bin2hex(random_bytes(3))))) {
+        };
 
-        return (new Report())
+        return (new Report($classification))
             ->setCreatedBy($createdBy)
-            ->setReference($reference)
-        ;
+            ->setReference($reference);
     }
 
     public function saveAsDraft(Report $report)
@@ -53,14 +60,12 @@ class ReportManager
 
         $decision = (new Decision())
             ->setUser($user)
-            ->setStatus(Report::STATUS_ADDRESSED)
-        ;
+            ->setStatus(Report::STATUS_ADDRESSED);
 
         $report
             ->setIsDraft(false)
             ->setAddressedTo($user)
-            ->addDecision($decision)
-        ;
+            ->addDecision($decision);
 
         $event = new ReportEvent($report);
         $this->dispatcher->dispatch(ReportEvent::ADDRESSED, $event);
@@ -81,8 +86,7 @@ class ReportManager
         $decision = $report->getDecisions()->last();
         $decision
             ->setReadedAt($readedAt ?: new \DateTime())
-            ->setStatus(Report::STATUS_READED)
-        ;
+            ->setStatus(Report::STATUS_READED);
 
         $event = new ReportEvent($report);
         $this->dispatcher->dispatch(ReportEvent::READED, $event);
@@ -122,8 +126,7 @@ class ReportManager
 
         $decision = (new Decision())
             ->setUser($newUser)
-            ->setStatus(Report::STATUS_ADDRESSED)
-        ;
+            ->setStatus(Report::STATUS_ADDRESSED);
 
         $report->addDecision($decision);
 
@@ -141,10 +144,26 @@ class ReportManager
         $decision
             ->setDecidedAt($decidedAt ?: new \DateTime())
             ->setStatus($status)
-            ->setComment($comment)
-        ;
+            ->setComment($comment);
 
         return $report;
+    }
+
+    public function getClassifications($locale = null)
+    {
+        $locale = $locale ?: $this->requestStack->getCurrentRequest()->getLocale();
+        $reflection = new \ReflectionClass(Report::class);
+        $filter = function ($value) {
+            return false !== strpos($value, 'CLASSIFICATION_');
+        };
+        $constants = array_filter($reflection->getConstants(), $filter, ARRAY_FILTER_USE_KEY);
+
+        $classifications = [];
+        foreach ($constants as $id) {
+            $classifications[$id] = $this->translator->trans($id, [], 'classification', $locale);
+        }
+
+        return $classifications;
     }
 
     /**

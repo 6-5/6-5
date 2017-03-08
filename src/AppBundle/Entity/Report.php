@@ -147,12 +147,12 @@ class Report
     /**
      * Constructor
      */
-    public function __construct()
+    public function __construct($classification)
     {
         $this->files = new \Doctrine\Common\Collections\ArrayCollection();
         $this->decisions = new \Doctrine\Common\Collections\ArrayCollection();
         $this->urgency = self::URGENCY_NORMAL;
-        $this->classification = self::CLASSIFICATION_INTERN;
+        $this->classification = $classification;
         $this->createdAt = new \DateTime();
         $this->isDraft = true;
         $this->isHierarchical = false;
