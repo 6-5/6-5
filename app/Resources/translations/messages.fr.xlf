@@ -157,6 +157,18 @@
         <source>decision.refuse</source>
         <target>Refuser</target>
       </trans-unit>
+      <trans-unit id="b7001e6c094f0f1f0499ba0573903323" resname="decision.comment">
+        <source>decision.comment</source>
+        <target>Commentaire de décision</target>
+      </trans-unit>
+      <trans-unit id="aaa059fd382866f1a2b71a597ef82799" resname="decision.createdAt">
+        <source>decision.createdAt</source>
+        <target>Notifié à</target>
+      </trans-unit>
+      <trans-unit id="9821d589313b9ea12492dfa9a8e7efcd" resname="decision.readedAt">
+        <source>decision.readedAt</source>
+        <target>Lu à</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

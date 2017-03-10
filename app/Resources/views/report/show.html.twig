@@ -5,7 +5,7 @@
 {% block content %}
     <div class="container-fluid">
         <div class="row clearfix">
-            <div class="col-sm-8">
+            <div class="col-sm-6">
                 <div class="card">
                     <div class="header bg-red">
                         <h1>{{ 'report'|trans }} <code>{{ report.reference }}</code></h1>
@@ -19,13 +19,12 @@
                     </div>
                 </div>
             </div>
-
-            <div class="col-sm-4">
+            <div class="col-sm-6">
                 <div class="card">
-                    <div class="header">
+                    <div class="header bg-red">
                         <h2>{{ 'infos'|trans }}</h2>
                     </div>
-                    <div class="">
+                    <div>
                         <table class="table table-striped">
                             <tbody>
                             <tr>
@@ -60,16 +59,41 @@
                 </div>
             </div>
         </div>
-        <div class="row clearfix">
-            <div class="col-sm-6 col-sm-push-3">
-                <div class="card">
-                    <div class="header bg-red">
-                        <h2>{{ 'decision'|trans }}</h2>
+            <div class="row clearfix">
+                <div class="col-sm-6">
+                    <div class="card">
+                        <div class="header bg-red">
+                            <h2>{{ 'report.status'|trans }}</h2>
+                        </div>
+                        <div class="body">
+                            {% for decision in report.decisions %}
+                                <p>
+                                    {{ decision.user }} - {{ decision.status }} - {{ decision.decidedAt|localizeddate('short', 'short') }}
+                                    <i
+                                        class="material-icons"
+                                        data-trigger="hover"
+                                        data-container="body"
+                                        data-toggle="popover"
+                                        data-placement="top"
+                                        data-content="<table class='table'>
+                                            <tr><td>{{ 'decision.createdAt'|trans }}</td><td>{{ decision.createdAt|localizeddate('short', 'short') }}</td></tr>
+                                            <tr><td>{{ 'decision.readedAt'|trans }}</td><td>{{ decision.readedAt|localizeddate('short', 'short') }}</td></tr>
+                                        </table>"
+                                    >{% if decision.readedAt is defined %}done_all{% else %}done{% endif %}</i>
+                                </p>
+                            {% endfor %}
+                        </div>
                     </div>
-                    <div class="body">
-                        {{ form_start(decision_form) }}
+                </div>
+                <div class="col-sm-6">
+                    <div class="card">
+                        <div class="header bg-red">
+                            <h2>{{ 'decision'|trans }}</h2>
+                        </div>
+                        <div class="body">
+                            {{ form_start(decision_form) }}
                             {{ form_errors(decision_form) }}
-                            {{ form_row(decision_form.comment) }}
+                            {{ form_row(decision_form.comment, { attr: { rows: 5 } }) }}
                             <div class="text-center">
                                 <input type="submit" value="{{ 'decision.accept'|trans }}" name="accept" class="btn btn-success waves-effect btn-lg" />
                                 <a class="btn btn-warning waves-effect btn-lg" data-toggle="modal" data-target="#modal-decision">{{ 'decision.transfert'|trans }}</a>
@@ -86,15 +110,25 @@
                                         </div>
                                         <div class="modal-footer">
                                             <input type="submit" value="{{ 'decision.transfert'|trans }}" name="transfert" class="btn btn-link waves-effect" />
-                                            <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">CLOSE</button>
+                                            <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">{{ 'cancel'|trans }}</button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        {{ form_end(decision_form) }}
+                            {{ form_end(decision_form) }}
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        $(function () {
+            $('[data-toggle="popover"]').popover({html: true});
+        })
+    </script>
 {% endblock %}
