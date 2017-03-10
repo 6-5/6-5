@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Report;
+use AppBundle\Form\DecisionType;
 use AppBundle\Form\ReportType;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -99,11 +100,44 @@ class ReportController extends Controller
      * Finds and displays a report entity.
      *
      * @Route("/{reference}", name="report_show")
-     * @Method("GET")
+     * @Route("/{reference}/decide", name="report_decide")
+     * @Method({"GET", "POST"})
      */
-    public function showAction(Report $report)
+    public function showAction(Request $request, Report $report)
     {
-        return $this->render('report/show.html.twig', array('report' => $report));
+        $form = $this->createForm(DecisionType::class, $decision = $report->getLastDecision(), [
+            'action' => $this->generateUrl('report_decide', ['reference' => $report->getReference()]),
+        ]);
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $rm = $this->get('app.report_manager');
+            switch (true) {
+                case $request->request->has('accept'):
+                    $report = $rm->decideToAccept($report, $decision->getComment());
+                    break;
+                case $request->request->has('refuse'):
+                    $report = $rm->decideToRefuse($report, $decision->getComment());
+                    break;
+                case $request->request->has('transfert'):
+                    $transfertTo = $form->get('transfertTo')->getData();
+                    $report = $rm->decideToTransfer($report, $transfertTo, $decision->getComment());
+                    break;
+                default:
+                    throw new \Exception('Bad action.');
+            }
+
+            $em = $this->get('doctrine')->getManager();
+            $em->persist($report);
+            $em->flush();
+
+            return $this->redirectToRoute('report_index_received');
+        }
+
+        return $this->render('report/show.html.twig', array(
+            'report' => $report,
+            'decision_form' => $form->createView(),
+        ));
     }
 
     /**

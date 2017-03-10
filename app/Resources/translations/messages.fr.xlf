@@ -141,6 +141,22 @@
         <source>report.startedAtTime</source>
         <target>Heure</target>
       </trans-unit>
+      <trans-unit id="b9b9e36c1a5d1be22158df398f2e29b8" resname="decision">
+        <source>decision</source>
+        <target>Décision</target>
+      </trans-unit>
+      <trans-unit id="431d839c3ec9c64e535baa628647ec4d" resname="decision.accept">
+        <source>decision.accept</source>
+        <target>Accepter</target>
+      </trans-unit>
+      <trans-unit id="42e4d496cd7d22620e37cbb5778cd1e5" resname="decision.transfert">
+        <source>decision.transfert</source>
+        <target>Transférer</target>
+      </trans-unit>
+      <trans-unit id="c46106cc3cf76060f48e687df231eeff" resname="decision.refuse">
+        <source>decision.refuse</source>
+        <target>Refuser</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

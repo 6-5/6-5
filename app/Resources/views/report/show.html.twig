@@ -8,7 +8,7 @@
             <div class="col-sm-8">
                 <div class="card">
                     <div class="header bg-red">
-                        <h1>{{ 'report'|trans }} <code>{{ report.reference }}</code></span></h1>
+                        <h1>{{ 'report'|trans }} <code>{{ report.reference }}</code></h1>
                     </div>
                     <div class="body">
                         <p class="lead">{{ report.object }}</p>
@@ -56,6 +56,42 @@
                             </tr>
                             </tbody>
                         </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row clearfix">
+            <div class="col-sm-6 col-sm-push-3">
+                <div class="card">
+                    <div class="header bg-red">
+                        <h2>{{ 'decision'|trans }}</h2>
+                    </div>
+                    <div class="body">
+                        {{ form_start(decision_form) }}
+                            {{ form_errors(decision_form) }}
+                            {{ form_row(decision_form.comment) }}
+                            <div class="text-center">
+                                <input type="submit" value="{{ 'decision.accept'|trans }}" name="accept" class="btn btn-success waves-effect btn-lg" />
+                                <a class="btn btn-warning waves-effect btn-lg" data-toggle="modal" data-target="#modal-decision">{{ 'decision.transfert'|trans }}</a>
+                                <input type="submit" value="{{ 'decision.refuse'|trans }}" name="refuse" class="btn btn-danger waves-effect btn-lg" />
+                            </div>
+                            <div class="modal fade" id="modal-decision" tabindex="-1" role="dialog">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h4 class="modal-title" id="defaultModalLabel">{{ 'decision.transfert'|trans }}</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            {{ form_row(decision_form.transfertTo) }}
+                                        </div>
+                                        <div class="modal-footer">
+                                            <input type="submit" value="{{ 'decision.transfert'|trans }}" name="transfert" class="btn btn-link waves-effect" />
+                                            <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">CLOSE</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {{ form_end(decision_form) }}
                     </div>
                 </div>
             </div>
