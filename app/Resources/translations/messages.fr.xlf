@@ -119,11 +119,11 @@
       </trans-unit>
       <trans-unit id="62aaa8b9d483b5385495c5d6b5509fa0" resname="reports.in_progress">
         <source>reports.in_progress</source>
-        <target>Rapports-télégramme envoyés et en cours</target>
+        <target>Mes rapports-télégramme en cours</target>
       </trans-unit>
       <trans-unit id="47e3add02c414f481cc15d60261f6bda" resname="reports.unread">
         <source>reports.unread</source>
-        <target>Rapports-télégramme reçus et non lus</target>
+        <target>Mes nouveaux rapports-télégramme reçus</target>
       </trans-unit>
       <trans-unit id="75bf831688a9d965c752e0cd72461081" resname="reports.in_progress.0">
         <source>reports.in_progress.0</source>
