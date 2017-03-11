@@ -169,6 +169,10 @@
         <source>decision.readedAt</source>
         <target>Lu à</target>
       </trans-unit>
+      <trans-unit id="85c6381ed85f6dd456c0d897a8b649dc" resname="decision.decidedAt">
+        <source>decision.decidedAt</source>
+        <target>Décidé à</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

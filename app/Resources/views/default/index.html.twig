@@ -46,7 +46,7 @@
                                     </blockquote>
                                 </div>
                                 <div class="body">
-                                    {{ include('report/_status.html.twig', { decision: report.getLastDecision }) }}
+                                    {{ include('report/_status.html.twig', { decision: report.lastDecision, show_comment: 'n' }) }}
                                 </div>
                             </div>
                         </div>
