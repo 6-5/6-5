@@ -2,20 +2,6 @@
 
 {% block title %}{{ parent() }} - {{ 'report'|trans }} {{ report.reference }} - {{ report.object }}{% endblock %}
 
-{% block stylesheets %}
-    {{ parent() }}
-    <style>
-        .info-box-2 {
-            margin-bottom: 10px;
-        }
-        .info-box-2 i.acknowledgment {
-            position: absolute;
-            bottom: 1px;
-            right: 5px;
-        }
-    </style>
-{% endblock %}
-
 {% block content %}
     <div class="container-fluid">
         <div class="row clearfix">
@@ -106,35 +92,7 @@
                     <div class="card">
                         <div class="body">
                             {% for decision in report.decisions|reverse %}
-                                <div class="info-box-2 {{ decision.status|status_to_bg }}">
-                                    <div class="icon">
-                                        <i class="material-icons col-black">{{ decision.status|status_to_icon }}</i>
-                                    </div>
-                                    <div class="content">
-                                        <div class="text">
-                                            <span>{{ decision.user }}</span>
-                                        </div>
-                                        <div class="number">
-                                            {{ decision.status|trans }}
-                                        </div>
-                                    </div>
-                                    <i
-                                        class="material-icons acknowledgment"
-                                        data-toggle="tooltip"
-                                        data-original-title="
-                                            {% if decision.createdAt is not empty %}
-                                                {{ 'decision.createdAt'|trans }} {{ decision.createdAt|localizeddate('short', 'short') }} <br>
-                                            {% endif %}
-                                            {% if decision.readedAt is not empty %}
-                                                {{ 'decision.readedAt'|trans }} {{ decision.readedAt|localizeddate('short', 'short') }}
-                                            {% endif %}
-                                        "
-                                    >{% if decision.readedAt is empty %}done{% else %}done_all{% endif %}</i>
-                                </div>
-                                {% if decision.comment is not empty %}
-                                    <div class="well">{{ decision.comment }}</div>
-                                {% endif %}
-                                {% dump(decision.readedAt) %}
+                                {{ include('report/_status.html.twig') }}
                                 {% if not loop.last %}
                                     <div class="text-center">
                                         <i class="material-icons">arrow_upward</i>
@@ -147,13 +105,4 @@
             </div>
         </div>
     </div>
-{% endblock %}
-
-{% block javascripts %}
-    {{ parent() }}
-    <script>
-        $(function () {
-            $('[data-toggle="tooltip"]').tooltip({container: 'body', html: true});
-        })
-    </script>
 {% endblock %}

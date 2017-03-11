@@ -16,7 +16,7 @@
             color: #555
         }
         .card-sent {
-            height: 300px;
+            height: 400px;
             overflow: auto;
         }
         .card:hover {
@@ -45,7 +45,9 @@
                                         {{ report.addressedTo.username }}
                                     </blockquote>
                                 </div>
-                                <div class="body text-center font-bold body">{{ report.status }}</div>
+                                <div class="body">
+                                    {{ include('report/_status.html.twig', { decision: report.getLastDecision }) }}
+                                </div>
                             </div>
                         </div>
                     </div>
