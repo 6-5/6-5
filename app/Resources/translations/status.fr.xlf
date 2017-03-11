@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="fr" target-language="fr" datatype="plaintext" original="file.ext">
+    <header>
+      <tool tool-id="symfony" tool-name="Symfony"/>
+    </header>
+    <body>
+      <trans-unit id="7b47d421c4e95bd70aa33c212c6e354b" resname="addressed">
+        <source>addressed</source>
+        <target>En cours</target>
+      </trans-unit>
+      <trans-unit id="f4aea2ef06eadd2023751cd1c042c2e0" resname="readed">
+        <source>readed</source>
+        <target>En cours</target>
+      </trans-unit>
+      <trans-unit id="29e1c671e459bad68902ee6c4104162e" resname="transferred">
+        <source>transferred</source>
+        <target>Transféré</target>
+      </trans-unit>
+      <trans-unit id="3e4d891a5df3d6d0d7dd9432a1bc6470" resname="accepted">
+        <source>accepted</source>
+        <target>Accepté</target>
+      </trans-unit>
+      <trans-unit id="723634aa8cde73188d4661bb3fe81ce4" resname="refused">
+        <source>refused</source>
+        <target>Refusé</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

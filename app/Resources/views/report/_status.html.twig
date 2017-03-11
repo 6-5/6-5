@@ -4,7 +4,7 @@
     </div>
     <div class="content">
         <div class="text">{{ decision.user }}</div>
-        <div class="number">{{ decision.status|trans }}</div>
+        <div class="number text-uppercase font-bold">{{ decision.status|trans({}, 'status') }}</div>
     </div>
     <i
         class="material-icons acknowledgment"
