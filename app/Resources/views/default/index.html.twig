@@ -39,15 +39,13 @@
                     <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
                         <div class="card-sent">
                             <div class="card">
-                                <div class="header bg-blue-grey">
+                                <div class="header">
                                     <h4>{{ report.object }} <code>{{ report.reference }}</code></h4>
                                     <blockquote>
                                         {{ report.addressedTo.username }}
                                     </blockquote>
                                 </div>
-                                <div class="body">
-                                    {{ include('report/_status.html.twig', { decision: report.lastDecision, show_comment: 'n' }) }}
-                                </div>
+                                {{ include('report/_status.html.twig', { decision: report.lastDecision, show_comment: 'n' }) }}
                             </div>
                         </div>
                     </div>
