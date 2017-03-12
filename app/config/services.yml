@@ -11,7 +11,7 @@ services:
         
     app.report_serializer:
         class: AppBundle\Serializer\ReportNormalizer
-        arguments: ["@router", "@app.report_manager"]
+        arguments: ["@router", "@app.report_manager", "@templating"]
         tags:
             - { name: serializer.normalizer }
 
