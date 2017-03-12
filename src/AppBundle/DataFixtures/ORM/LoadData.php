@@ -126,7 +126,7 @@ class LoadData implements FixtureInterface, ContainerAwareInterface
         $createdAt = $report->getLastDecision()->getCreatedAt();
         $readedAt = null;
         if ($readed) {
-            $this->reportManager->read($report, $readedAt = $this->faker->dateTimeBetween($createdAt, $createdAt->modify('+ 1 days')));
+            $report = $this->reportManager->read($report, $readedAt = $this->faker->dateTimeBetween($createdAt, $createdAt->modify('+ 1 days')));
         }
 
         if ($status) {

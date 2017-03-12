@@ -1,0 +1,27 @@
+<div class="info-box-2 {{ decision.status|status_to_bg }} info-box-status">
+    <div class="icon">
+        <i class="material-icons col-black">{{ decision.status|status_to_icon }}</i>
+    </div>
+    <div class="content">
+        <div class="text">{{ decision.user }}</div>
+        <div class="number text-uppercase font-bold">{{ decision.status|trans({}, 'status') }}</div>
+    </div>
+    <i
+        class="material-icons acknowledgment"
+        data-toggle="tooltip"
+        data-original-title="
+            {% if decision.createdAt is not empty %}
+                {{ 'decision.createdAt'|trans }} {{ decision.createdAt|localizeddate('short', 'short') }} <br>
+            {% endif %}
+            {% if decision.readedAt is not empty %}
+                {{ 'decision.readedAt'|trans }} {{ decision.readedAt|localizeddate('short', 'short') }} <br>
+            {% endif %}
+            {% if decision.decidedAt is not empty %}
+                {{ 'decision.decidedAt'|trans }} {{ decision.decidedAt|localizeddate('short', 'short') }}
+            {% endif %}
+        "
+    >{% if decision.readedAt is empty %}done{% else %}done_all{% endif %}</i>
+</div>
+{% if decision.comment is not empty and show_comment|default('y') == 'y' %}
+    <div class="well">{{ decision.comment }}</div>
+{% endif %}

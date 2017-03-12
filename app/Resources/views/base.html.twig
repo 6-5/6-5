@@ -12,6 +12,24 @@
             <link href="{{ asset('assets/vendor/adminbsb-materialdesign/plugins/animate-css/animate.min.css') }}" rel="stylesheet" />
             <link href="{{ asset('assets/vendor/adminbsb-materialdesign/css/style.min.css') }}" rel="stylesheet">
             <link href="{{ asset('assets/vendor/adminbsb-materialdesign/css/themes/theme-red.min.css') }}" rel="stylesheet" />
+            <style>
+                .info-box-status {
+                    margin-bottom: 10px;
+                }
+                .info-box-status i.acknowledgment {
+                    position: absolute;
+                    bottom: 1px;
+                    right: 5px;
+                }
+                .label-status {
+                    width: 100%;
+                    display: inline-block;
+                    padding: 5px;
+                }
+                .label-status i {
+                    vertical-align: middle;
+                }
+            </style>
         {% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
@@ -124,6 +142,11 @@
             <script src="{{ asset('assets/vendor/adminbsb-materialdesign/plugins/node-waves/waves.min.js') }}"></script>
             <script src="{{ asset('assets/vendor/adminbsb-materialdesign/plugins/jquery-validation/jquery.validate.js') }}"></script>
             <script src="{{ asset('assets/vendor/adminbsb-materialdesign/js/admin.js') }}"></script>
+            <script>
+                $(function () {
+                    $('[data-toggle="tooltip"]').tooltip({container: 'body', html: true});
+                })
+            </script>
         {% endblock %}
     </body>
 </html>

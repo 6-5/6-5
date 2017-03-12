@@ -1,0 +1,4 @@
+<span class="label-status text-uppercase font-bold {{ decision.status|status_to_bg }}">
+    <i class="material-icons">{{ decision.status|status_to_icon }}</i>
+    {{ decision.status|trans({}, 'status') }}
+</span>

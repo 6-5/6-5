@@ -11,11 +11,17 @@ services:
         
     app.report_serializer:
         class: AppBundle\Serializer\ReportNormalizer
-        arguments: ["@router", "@app.report_manager"]
+        arguments: ["@router", "@app.report_manager", "@templating"]
         tags:
             - { name: serializer.normalizer }
 
     twig.extension.intl:
         class: Twig_Extensions_Extension_Intl
+        tags:
+            - { name: twig.extension }
+
+    app.twig_extension:
+        class: AppBundle\Twig\AppExtension
+        public: false
         tags:
             - { name: twig.extension }
