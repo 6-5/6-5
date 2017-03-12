@@ -41,7 +41,7 @@ class Report
 
     /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User", inversedBy="createdReports")
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(groups={"Default", "Draft"})
      */
     private $createdBy;
 
@@ -55,7 +55,7 @@ class Report
      * @var string
      *
      * @ORM\Column(name="reference", type="string", length=6, unique=true)
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(groups={"Default", "Draft"})
      */
     private $reference;
 
@@ -70,8 +70,8 @@ class Report
      * @var string
      *
      * @ORM\Column(name="object", type="string", length=255)
-     * @Assert\NotBlank()
-     * @Assert\Length(max="255")
+     * @Assert\NotBlank(groups={"Default", "Draft"})
+     * @Assert\Length(max="255", groups={"Default", "Draft"})
      */
     private $object;
 
@@ -103,7 +103,7 @@ class Report
      * @var string
      *
      * @ORM\Column(name="urgency", type="string", length=15)
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(groups={"Default", "Draft"})
      */
     private $urgency;
 
@@ -111,7 +111,7 @@ class Report
      * @var string
      *
      * @ORM\Column(name="classification", type="string", length=15)
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(groups={"Default", "Draft"})
      */
     private $classification;
 
@@ -126,7 +126,7 @@ class Report
      * @var \DateTime
      *
      * @ORM\Column(name="createdAt", type="datetime")
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(groups={"Default", "Draft"})
      */
     private $createdAt;
 
@@ -152,6 +152,7 @@ class Report
         $this->createdAt = new \DateTime();
         $this->isDraft = true;
         $this->isHierarchical = false;
+        $this->startedAt = new \DateTime();
     }
 
     /**

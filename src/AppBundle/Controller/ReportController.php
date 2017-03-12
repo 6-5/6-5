@@ -78,16 +78,23 @@ class ReportController extends Controller
      */
     public function newAction(Request $request)
     {
+        $isDraft = $request->request->has('save_as_draft');
         $report = $this->get('app.report_manager')->createReport($this->getUser());
-        $form = $this->createForm('AppBundle\Form\ReportType', $report);
+        $form = $this->createForm(ReportType::class, $report, ['validation_groups' => $isDraft ? 'Draft' : 'Default']);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $route = 'report_edit';
+            if (!$isDraft) {
+                $report = $this->get('app.report_manager')->addressTo($report, $report->getAddressedTo());
+                $route = 'report_show';
+            }
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($report);
             $em->flush($report);
 
-            return $this->redirectToRoute('report_show', array('reference' => $report->getReference()));
+            return $this->redirectToRoute($route, ['reference' => $report->getReference()]);
         }
 
         return $this->render('report/new.html.twig', array(
@@ -148,14 +155,23 @@ class ReportController extends Controller
      */
     public function editAction(Request $request, Report $report)
     {
+        $isDraft = $request->request->has('save_as_draft');
         $deleteForm = $this->createDeleteForm($report);
-        $editForm = $this->createForm(ReportType::class, $report);
+        $editForm = $this->createForm(ReportType::class, $report, ['validation_groups' => $isDraft ? 'Draft' : 'Default']);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
+            $route = 'report_edit';
+            if (!$isDraft) {
+                $report = $this->get('app.report_manager')->addressTo($report, $report->getAddressedTo());
+                $route = 'report_show';
+            }
 
-            return $this->redirectToRoute('report_edit', array('reference' => $report->getReference()));
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($report);
+            $em->flush($report);
+
+            return $this->redirectToRoute($route, ['reference' => $report->getReference()]);
         }
 
         return $this->render('report/edit.html.twig', array(
