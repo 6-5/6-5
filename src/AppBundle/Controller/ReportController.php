@@ -85,14 +85,18 @@ class ReportController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $route = 'report_edit';
+            $message = 'report.save_as_draft_ok';
             if (!$isDraft) {
                 $report = $this->get('app.report_manager')->addressTo($report, $report->getAddressedTo());
                 $route = 'report_show';
+                $message = 'report.send_ok';
             }
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($report);
             $em->flush($report);
+
+            $this->addFlash('default', $message);
 
             return $this->redirectToRoute($route, ['reference' => $report->getReference()]);
         }
@@ -162,14 +166,18 @@ class ReportController extends Controller
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $route = 'report_edit';
+            $message = 'report.save_as_draft_ok';
             if (!$isDraft) {
                 $report = $this->get('app.report_manager')->addressTo($report, $report->getAddressedTo());
                 $route = 'report_show';
+                $message = 'report.send_ok';
             }
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($report);
             $em->flush($report);
+
+            $this->addFlash('default', $message);
 
             return $this->redirectToRoute($route, ['reference' => $report->getReference()]);
         }
@@ -196,6 +204,7 @@ class ReportController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->remove($report);
             $em->flush($report);
+            $this->addFlash('default', 'report.delete_ok');
         }
 
         return $this->redirectToRoute('report_index_draft');

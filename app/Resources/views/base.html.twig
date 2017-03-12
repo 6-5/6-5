@@ -34,6 +34,13 @@
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body class="{% block body_class %}theme-red{% endblock %}">
+        <div class="hidden" id="notification">
+            {% for type, messages in app.session.flashbag.all() %}
+                {% for message in messages %}
+                    <p class="{{ type }}">{{ message|trans|raw }}</p>
+                {% endfor %}
+            {% endfor %}
+        </div>
         {% block body %}
             <div class="page-loader-wrapper">
                 <div class="loader">
@@ -139,13 +146,46 @@
             <script src="{{ asset('assets/vendor/adminbsb-materialdesign/plugins/bootstrap/js/bootstrap.min.js') }}"></script>
             <script src="{{ asset('assets/vendor/adminbsb-materialdesign/plugins/bootstrap-select/js/bootstrap-select.min.js') }}"></script>
             <script src="{{ asset('assets/vendor/adminbsb-materialdesign/plugins/jquery-slimscroll/jquery.slimscroll.min.js') }}"></script>
+            <script src="{{ asset('assets/vendor/adminbsb-materialdesign/plugins/bootstrap-notify/bootstrap-notify.min.js') }}"></script>
             <script src="{{ asset('assets/vendor/adminbsb-materialdesign/plugins/node-waves/waves.min.js') }}"></script>
             <script src="{{ asset('assets/vendor/adminbsb-materialdesign/plugins/jquery-validation/jquery.validate.js') }}"></script>
             <script src="{{ asset('assets/vendor/adminbsb-materialdesign/js/admin.js') }}"></script>
             <script>
                 $(function () {
                     $('[data-toggle="tooltip"]').tooltip({container: 'body', html: true});
-                })
+
+                    $('#notification p').each(function() {
+                        $.notify({
+                                message: $(this).html()
+                            },
+                            {
+                                type: 'bg-black',
+                                allow_dismiss: true,
+                                newest_on_top: true,
+                                timer: 1000,
+                                placement: {
+                                    from: 'top',
+                                    align: 'center'
+                                },
+                                animate: {
+                                    enter: 'animated bounceIn',
+                                    exit: 'animated bounceOut'
+                                },
+                                template: '<div data-notify="container" class="bootstrap-notify-container alert alert-dismissible {0} p-r-35" role="alert">' +
+                                '<button type="button" aria-hidden="true" class="close" data-notify="dismiss">×</button>' +
+                                '<span data-notify="icon"></span> ' +
+                                '<span data-notify="title">{1}</span> ' +
+                                '<span data-notify="message">{2}</span>' +
+                                '<div class="progress" data-notify="progressbar">' +
+                                '<div class="progress-bar progress-bar-{0}" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"></div>' +
+                                '</div>' +
+                                '<a href="{3}" target="{4}" data-notify="url"></a>' +
+                                '</div>'
+                            })
+                        ;
+
+                    });
+                });
             </script>
         {% endblock %}
     </body>
