@@ -173,6 +173,26 @@
         <source>decision.decidedAt</source>
         <target>Décidé à</target>
       </trans-unit>
+      <trans-unit id="2d631b6db9352c4327838874945fd0fb" resname="save_as_draft">
+        <source>save_as_draft</source>
+        <target>Enregistrer en tant que brouillon</target>
+      </trans-unit>
+      <trans-unit id="2541d938b0a58946090d7abdde0d3890" resname="send">
+        <source>send</source>
+        <target>Envoyer</target>
+      </trans-unit>
+      <trans-unit id="ed11a31c20fee1a139a9fe09f06afea7" resname="report.save_as_draft_ok">
+        <source>report.save_as_draft_ok</source>
+        <target>Le rapport a été correctement enregistré en tant que brouillon.</target>
+      </trans-unit>
+      <trans-unit id="18bdc21887e9f60dc5fdada0f80d5f46" resname="report.send_ok">
+        <source>report.send_ok</source>
+        <target>Le rapport a été correctement envoyé.</target>
+      </trans-unit>
+      <trans-unit id="ce26ec4826a555ba265ed65e976c5f47" resname="report.delete_ok">
+        <source>report.delete_ok</source>
+        <target>Le rapport a été correctement supprimé.</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
