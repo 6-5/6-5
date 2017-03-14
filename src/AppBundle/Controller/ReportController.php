@@ -117,7 +117,7 @@ class ReportController extends Controller
         $em = $this->get('doctrine')->getManager();
         $rm = $this->get('app.report_manager');
 
-        if (!$report->getLastDecision()->getReadedAt()) {
+        if ($rm->isCurrentDecider($report)) {
             $report = $rm->read($report);
             $em->persist($report);
             $em->flush();
