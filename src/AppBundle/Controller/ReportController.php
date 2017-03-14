@@ -164,6 +164,12 @@ class ReportController extends Controller
      */
     public function editAction(Request $request, Report $report)
     {
+        if (!$this->get('workflow.report')->can($report, 'draft')) {
+            $this->addFlash('default', 'report.read_only');
+
+            return $this->redirectToRoute('report_show', ['reference' => $report->getReference()]);
+        }
+
         $isDraft = $request->request->has('save_as_draft');
         $deleteForm = $this->createDeleteForm($report);
         $editForm = $this->createForm(ReportType::class, $report, ['validation_groups' => $isDraft ? 'Draft' : 'Default']);

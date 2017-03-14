@@ -193,6 +193,10 @@
         <source>report.delete_ok</source>
         <target>Le rapport a été correctement supprimé.</target>
       </trans-unit>
+      <trans-unit id="6954dfcfe8a1be8c8818566215a4f1c2" resname="report.read_only">
+        <source>report.read_only</source>
+        <target>Le rapport n'est plus modifiable une fois envoyé.</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
