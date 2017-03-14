@@ -84,13 +84,11 @@ class ReportController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $route = 'report_edit';
-            $message = 'report.save_as_draft_ok';
-            if (!$isDraft) {
-                $report = $this->get('app.report_manager')->addressTo($report, $report->getAddressedTo());
-                $route = 'report_show';
-                $message = 'report.send_ok';
-            }
+            $rm = $this->get('app.report_manager');
+            $rm->saveAsDraft($report);
+            $report = $isDraft ? $report : $rm->addressTo($report, $report->getAddressedTo());
+            $route = $isDraft ? 'report_edit' : 'report_show';
+            $message = $isDraft ? 'report.save_as_draft_ok' : 'report.send_ok';
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($report);
@@ -116,13 +114,21 @@ class ReportController extends Controller
      */
     public function showAction(Request $request, Report $report)
     {
+        $em = $this->get('doctrine')->getManager();
+        $rm = $this->get('app.report_manager');
+
+        if (!$report->getLastDecision()->getReadedAt()) {
+            $report = $rm->read($report);
+            $em->persist($report);
+            $em->flush();
+        }
+
         $form = $this->createForm(DecisionType::class, $decision = $report->getLastDecision(), [
             'action' => $this->generateUrl('report_decide', ['reference' => $report->getReference()]),
         ]);
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $rm = $this->get('app.report_manager');
             switch (true) {
                 case $request->request->has('accept'):
                     $report = $rm->decideToAccept($report, $decision->getComment());
@@ -138,7 +144,6 @@ class ReportController extends Controller
                     throw new \Exception('Bad action.');
             }
 
-            $em = $this->get('doctrine')->getManager();
             $em->persist($report);
             $em->flush();
 
@@ -165,13 +170,11 @@ class ReportController extends Controller
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
-            $route = 'report_edit';
-            $message = 'report.save_as_draft_ok';
-            if (!$isDraft) {
-                $report = $this->get('app.report_manager')->addressTo($report, $report->getAddressedTo());
-                $route = 'report_show';
-                $message = 'report.send_ok';
-            }
+            $rm = $this->get('app.report_manager');
+            $rm->saveAsDraft($report);
+            $report = $isDraft ? $report : $rm->addressTo($report, $report->getAddressedTo());
+            $route = $isDraft ? 'report_edit' : 'report_show';
+            $message = $isDraft ? 'report.save_as_draft_ok' : 'report.send_ok';
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($report);

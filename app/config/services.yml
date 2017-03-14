@@ -3,7 +3,7 @@ parameters:
 services:
     app.report_manager:
         class: AppBundle\Manager\ReportManager
-        arguments: ["@doctrine.orm.entity_manager"]
+        arguments: ["@doctrine.orm.entity_manager", "@workflow.report"]
 
     app.user_manager:
         class: AppBundle\Manager\UserManager
