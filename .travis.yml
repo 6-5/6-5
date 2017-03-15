@@ -20,8 +20,8 @@ before_install:
 install:
   - composer install
   - ./bin/console doctrine:database:create
+  - ./bin/console server:start --force -n
   - curl -OLsS http://get.blackfire.io/blackfire-player.phar
-  - php app/console server:start --force -n
 
 script:
   - ./vendor/bin/phpunit
