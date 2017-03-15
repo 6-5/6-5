@@ -4,12 +4,14 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Workflow\Marking;
 
 /**
  * Report
  *
  * @ORM\Table(name="report")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\ReportRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Report
 {
@@ -140,6 +142,8 @@ class Report
      */
     private $decisions;
 
+    public $marking;
+
     /**
      * Constructor
      */
@@ -153,6 +157,14 @@ class Report
         $this->isDraft = true;
         $this->isHierarchical = false;
         $this->startedAt = new \DateTime();
+    }
+
+    /**
+     * @ORM\PostLoad()
+     */
+    public function getMarking()
+    {
+        return $this->marking = (new Marking([$this->getStatus() => 1]))->getPlaces();
     }
 
     /**

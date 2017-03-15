@@ -6,6 +6,7 @@ use AppBundle\Entity\Report;
 use AppBundle\Form\DecisionType;
 use AppBundle\Form\ReportType;
 use Doctrine\ORM\Tools\Pagination\Paginator;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -84,13 +85,11 @@ class ReportController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $route = 'report_edit';
-            $message = 'report.save_as_draft_ok';
-            if (!$isDraft) {
-                $report = $this->get('app.report_manager')->addressTo($report, $report->getAddressedTo());
-                $route = 'report_show';
-                $message = 'report.send_ok';
-            }
+            $rm = $this->get('app.report_manager');
+            $rm->saveAsDraft($report);
+            $report = $isDraft ? $report : $rm->addressTo($report, $report->getAddressedTo());
+            $route = $isDraft ? 'report_edit' : 'report_show';
+            $message = $isDraft ? 'report.save_as_draft_ok' : 'report.send_ok';
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($report);
@@ -113,16 +112,25 @@ class ReportController extends Controller
      * @Route("/{reference}", name="report_show")
      * @Route("/{reference}/decide", name="report_decide")
      * @Method({"GET", "POST"})
+     * @Security("report.getCreatedBy() == user or report.getLastDecision().getUser() == user")
      */
     public function showAction(Request $request, Report $report)
     {
+        $em = $this->get('doctrine')->getManager();
+        $rm = $this->get('app.report_manager');
+
+        if ($rm->isCurrentDecider($report)) {
+            $report = $rm->read($report);
+            $em->persist($report);
+            $em->flush();
+        }
+
         $form = $this->createForm(DecisionType::class, $decision = $report->getLastDecision(), [
             'action' => $this->generateUrl('report_decide', ['reference' => $report->getReference()]),
         ]);
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $rm = $this->get('app.report_manager');
             switch (true) {
                 case $request->request->has('accept'):
                     $report = $rm->decideToAccept($report, $decision->getComment());
@@ -138,7 +146,6 @@ class ReportController extends Controller
                     throw new \Exception('Bad action.');
             }
 
-            $em = $this->get('doctrine')->getManager();
             $em->persist($report);
             $em->flush();
 
@@ -156,22 +163,27 @@ class ReportController extends Controller
      *
      * @Route("/{reference}/edit", name="report_edit")
      * @Method({"GET", "POST"})
+     * @Security("report.getCreatedBy() == user")
      */
     public function editAction(Request $request, Report $report)
     {
+        if (!$this->get('workflow.report')->can($report, 'draft')) {
+            $this->addFlash('default', 'report.read_only');
+
+            return $this->redirectToRoute('report_show', ['reference' => $report->getReference()]);
+        }
+
         $isDraft = $request->request->has('save_as_draft');
         $deleteForm = $this->createDeleteForm($report);
         $editForm = $this->createForm(ReportType::class, $report, ['validation_groups' => $isDraft ? 'Draft' : 'Default']);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
-            $route = 'report_edit';
-            $message = 'report.save_as_draft_ok';
-            if (!$isDraft) {
-                $report = $this->get('app.report_manager')->addressTo($report, $report->getAddressedTo());
-                $route = 'report_show';
-                $message = 'report.send_ok';
-            }
+            $rm = $this->get('app.report_manager');
+            $rm->saveAsDraft($report);
+            $report = $isDraft ? $report : $rm->addressTo($report, $report->getAddressedTo());
+            $route = $isDraft ? 'report_edit' : 'report_show';
+            $message = $isDraft ? 'report.save_as_draft_ok' : 'report.send_ok';
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($report);
@@ -194,9 +206,16 @@ class ReportController extends Controller
      *
      * @Route("/{reference}", name="report_delete")
      * @Method("DELETE")
+     * @Security("report.getCreatedBy() == user")
      */
     public function deleteAction(Request $request, Report $report)
     {
+        if (!$this->get('workflow.report')->can($report, 'draft')) {
+            $this->addFlash('default', 'report.read_only');
+
+            return $this->redirectToRoute('report_show', ['reference' => $report->getReference()]);
+        }
+
         $form = $this->createDeleteForm($report);
         $form->handleRequest($request);
 

@@ -4,3 +4,7 @@
 ## Diagram classes
 
 ![Diagram Classes](app/Resources/doc/img/diagram_classes.png)
+
+## Report workflow
+
+![Report Workflow](app/Resources/doc/img/workflow_report.png)

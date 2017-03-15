@@ -1,0 +1,30 @@
+framework:
+    workflows:
+        report:
+            supports:
+                - AppBundle\Entity\Report
+            places:
+                - draft
+                - addressed
+                - readed
+                - accepted
+                - refused
+            transitions:
+                draft:
+                    from: draft
+                    to:   draft
+                address:
+                    from: draft
+                    to:   addressed
+                read:
+                    from: addressed
+                    to:   readed
+                accept:
+                    from: readed
+                    to:   accepted
+                refuse:
+                    from: readed
+                    to:   refused
+                transfer:
+                    from: readed
+                    to:   addressed

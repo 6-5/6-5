@@ -3,7 +3,7 @@ parameters:
 services:
     app.report_manager:
         class: AppBundle\Manager\ReportManager
-        arguments: ["@doctrine.orm.entity_manager"]
+        arguments: ["@doctrine.orm.entity_manager", "@workflow.report", "@security.token_storage"]
 
     app.user_manager:
         class: AppBundle\Manager\UserManager
@@ -22,6 +22,7 @@ services:
 
     app.twig_extension:
         class: AppBundle\Twig\AppExtension
+        arguments: ["@app.report_manager"]
         public: false
         tags:
             - { name: twig.extension }

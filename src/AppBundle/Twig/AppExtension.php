@@ -3,14 +3,29 @@
 namespace AppBundle\Twig;
 
 use AppBundle\Entity\Report;
+use AppBundle\Manager\ReportManager;
 
 class AppExtension extends \Twig_Extension
 {
+    private $rm;
+
+    public function __construct(ReportManager $rm)
+    {
+        $this->rm = $rm;
+    }
+
     public function getFilters()
     {
         return array(
             new \Twig_SimpleFilter('status_to_icon', array($this, 'statusToIcon')),
             new \Twig_SimpleFilter('status_to_bg', array($this, 'statusToBg')),
+        );
+    }
+
+    public function getFunctions()
+    {
+        return array(
+            new \Twig_SimpleFunction('is_current_decider', array($this, 'isCurrentDecider')),
         );
     }
 
@@ -36,5 +51,13 @@ class AppExtension extends \Twig_Extension
             Report::STATUS_ACCEPTED => 'bg-green',
             Report::STATUS_REFUSED => 'bg-red',
         ][$status];
+    }
+
+    /**
+     * @see ReportManager::isCurrentDecider()
+     */
+    public function isCurrentDecider(Report $report)
+    {
+        return $this->rm->isCurrentDecider($report);
     }
 }
