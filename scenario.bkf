@@ -1,0 +1,37 @@
+scenario
+    name "Sent report"
+    endpoint "http://127.0.0.1:8000/"
+    follow_redirects true
+
+    visit url('/')
+        name 'homepage'
+        expect status_code() == 302
+
+    submit button('Connexion')
+        name 'login with private0'
+        param _username 'private0'
+        param _password 'private0'
+        expect status_code() == 302
+
+    visit url('/report/new')
+        name 'new report'
+        expect status_code() == 200
+
+    submit button("Enregistrer en tant que brouillon")
+        name 'save a draft'
+        param appbundle_report[object] 'Draft 1 report'
+        expect status_code() == 302
+
+    submit button("Enregistrer en tant que brouillon")
+        name 'resave a draft'
+        param appbundle_report[object] 'Draft 2 report'
+        expect status_code() == 302
+
+    submit button("Envoyer")
+        name 'sent report'
+        param appbundle_report[object] 'Sent report'
+        param appbundle_report[message] fake('sentence', 5)
+        param appbundle_report[place] fake('city')
+        expect status_code() == 302
+
+
