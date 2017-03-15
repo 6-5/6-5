@@ -21,7 +21,7 @@ install:
   - composer install
   - ./bin/console doctrine:database:create
   - ./bin/console server:start --force -n
-  - curl -OLsS http://get.blackfire.io/blackfire-player.phar
+  - curl -OLsS http://get.blackfire.io/blackfire-player.phar && chmod +x blackfire-player.phar
 
 script:
   - ./vendor/bin/phpunit
