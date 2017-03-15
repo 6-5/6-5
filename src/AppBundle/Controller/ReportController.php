@@ -6,6 +6,7 @@ use AppBundle\Entity\Report;
 use AppBundle\Form\DecisionType;
 use AppBundle\Form\ReportType;
 use Doctrine\ORM\Tools\Pagination\Paginator;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -111,6 +112,7 @@ class ReportController extends Controller
      * @Route("/{reference}", name="report_show")
      * @Route("/{reference}/decide", name="report_decide")
      * @Method({"GET", "POST"})
+     * @Security("report.getCreatedBy() == user or report.getLastDecision().getUser() == user")
      */
     public function showAction(Request $request, Report $report)
     {
@@ -161,6 +163,7 @@ class ReportController extends Controller
      *
      * @Route("/{reference}/edit", name="report_edit")
      * @Method({"GET", "POST"})
+     * @Security("report.getCreatedBy() == user")
      */
     public function editAction(Request $request, Report $report)
     {
@@ -203,9 +206,16 @@ class ReportController extends Controller
      *
      * @Route("/{reference}", name="report_delete")
      * @Method("DELETE")
+     * @Security("report.getCreatedBy() == user")
      */
     public function deleteAction(Request $request, Report $report)
     {
+        if (!$this->get('workflow.report')->can($report, 'draft')) {
+            $this->addFlash('default', 'report.read_only');
+
+            return $this->redirectToRoute('report_show', ['reference' => $report->getReference()]);
+        }
+
         $form = $this->createDeleteForm($report);
         $form->handleRequest($request);
 

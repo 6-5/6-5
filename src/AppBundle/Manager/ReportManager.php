@@ -150,6 +150,11 @@ class ReportManager
      */
     public function canDecide(Report $report, User $user = null)
     {
-        return $this->workflow->can($report, 'accept') && $this->isCurrentDecider($report, $user);
+        return $this->isCurrentDecider($report, $user)
+            && ($this->workflow->can($report, 'accept')
+                || $this->workflow->can($report, 'refuse')
+                || $this->workflow->can($report, 'transfer')
+            )
+        ;
     }
 }
