@@ -10,34 +10,32 @@
             color: white;
             background-color: transparent;
         }
-        .card-received {
-            height: 400px;
-            overflow: auto;
+        .card {
             color: #555
-        }
-        .card-sent {
-            height: 400px;
-            overflow: auto;
         }
         .card:hover {
             box-shadow: 0 4px 12px rgba(0,0,0,.4);
+            transition: box-shadow 0.4s;
+        }
+        .grid {
+            margin: 0 auto;
+        }
+        .grid-item {
+            width: 300px;
         }
     </style>
 {% endblock %}
 
 {% block content %}
     <div class="container-fluid">
-        <div class="block-header">
-            <h2>{{ 'reports.in_progress'|trans }}</h2>
-            {% if reports_in_progress is empty %}
-                {{ 'reports.in_progress.0'|trans }}
-            {% endif %}
-        </div>
-        <div class="row clearfix">
-            {% for report in reports_in_progress %}
-                <a href="{{ path('report_show', { reference: report.reference }) }}">
-                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                        <div class="card-sent">
+        {% if reports_in_progress is not empty %}
+            <div class="block-header text-center">
+                <h3>{{ 'reports.in_progress'|trans }}</h3>
+            </div>
+            <div class="grid">
+                {% for report in reports_in_progress %}
+                    <a href="{{ path('report_show', { reference: report.reference }) }}">
+                        <div class="grid-item">
                             <div class="card">
                                 <div class="header">
                                     <h4>{{ report.object }} <code>{{ report.reference }}</code></h4>
@@ -48,21 +46,18 @@
                                 {{ include('report/_status.html.twig', { decision: report.lastDecision, show_comment: 'n' }) }}
                             </div>
                         </div>
-                    </div>
-                </a>
-            {% endfor %}
-        </div>
-        <div class="block-header">
-            <h2>{{ 'reports.unread'|trans }}</h2>
-            {% if reports_unread is empty %}
-                {{ 'reports.unread.0'|trans }}
-            {% endif %}
-        </div>
-        <div class="row clearfix">
-            {% for report in reports_unread %}
-                <a href="{{ path('report_show', { reference: report.reference }) }}">
-                    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                        <div class="card-received">
+                    </a>
+                {% endfor %}
+            </div>
+        {% endif %}
+        {% if reports_unread is not empty %}
+            <div class="block-header text-center">
+                <h3>{{ 'reports.unread'|trans }}</h3>
+            </div>
+            <div class="grid">
+                {% for report in reports_unread %}
+                    <a href="{{ path('report_show', { reference: report.reference }) }}">
+                        <div class="grid-item">
                             <div class="card">
                                 <div class="header bg-blue-grey">
                                     <h4>{{ report.object }} <code>{{ report.reference }}</code></h4>
@@ -96,9 +91,21 @@
                                 </table>
                             </div>
                         </div>
-                    </div>
-                </a>
-            {% endfor %}
-        </div>
+                    </a>
+                {% endfor %}
+            </div>
+        {% endif %}
     </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('assets/vendor/masonry/dist/masonry.pkgd.min.js') }}"></script>
+    <script>
+        $('.grid').masonry({
+            itemSelector: '.grid-item',
+            columnWidth: 320,
+            fitWidth: true
+        });
+    </script>
 {% endblock %}

@@ -13,6 +13,7 @@
     "tests"
   ],
   "dependencies": {
-    "adminbsb-materialdesign": "^1.0.4"
+    "adminbsb-materialdesign": "^1.0.4",
+    "masonry": "^4.1.1"
   }
 }

@@ -63,39 +63,42 @@ class LoadData implements FixtureInterface, ContainerAwareInterface
         // Report
         /** @var User $private */
         foreach ($users[User::RANK_PRIVATE] as $private) {
-            // draft
-            $report = $this->createReport($private);
-            $manager->persist($report);
+            for ($i = 0; $i < $this->faker->numberBetween(2, 5); $i++) {
+                // draft
+                $report = $this->createReport($private);
+                $manager->persist($report);
 
-            // report without decision but 50% readed
-            $addressTo = $this->faker->randomElement($this->faker->randomElement($users));
-            $report = $this->createReport($private, $addressTo);
-            $report = $this->decide($report, $this->faker->boolean());
-            $manager->persist($report);
+                    // report without decision but 50% readed
 
-            // report with accepted/refused decision
-            $addressTo = $this->faker->randomElement($this->faker->randomElement($users));            
-            $status = $this->faker->boolean() ? Report::STATUS_ACCEPTED : Report::STATUS_REFUSED;
-            $report = $this->createReport($private, $addressTo);
-            $report = $this->decide($report, true, $status);
-            $manager->persist($report);
+                    $addressTo = $this->faker->randomElement($this->faker->randomElement($users));
+                    $report = $this->createReport($private, $addressTo);
+                    $report = $this->decide($report, $this->faker->boolean());
+                    $manager->persist($report);
 
-            // report with transferred decision
-            /** @var User $addressTo */
-            $addressTo = $this->faker->randomElement($this->faker->randomElement($users));
-            $transferTo = $addressTo->getSupervisedBy();
-            if ($transferTo) {
+                // report with transferred decision
+                /** @var User $addressTo */
+                $addressTo = $this->faker->randomElement($this->faker->randomElement($users));
+                $transferTo = $addressTo->getSupervisedBy();
+                if ($transferTo) {
+                    $report = $this->createReport($private, $addressTo);
+                    $report = $this->decide($report, true, Report::STATUS_TRANSFERRED, $transferTo);
+                    $manager->persist($report);
+                }
+
+                // report with accepted/refused decision
+                $addressTo = $this->faker->randomElement($this->faker->randomElement($users));
+                $status = $this->faker->boolean() ? Report::STATUS_ACCEPTED : Report::STATUS_REFUSED;
                 $report = $this->createReport($private, $addressTo);
-                $report = $this->decide($report, true, Report::STATUS_TRANSFERRED, $transferTo);
+                $report = $this->decide($report, true, $status);
+                $manager->persist($report);
+
+                // report with hierarchical transferred decision
+                /** @var User $addressTo */
+                $report = $this->createReport($private, $private->getSupervisedBy());
+                $report->setIsHierarchical(true);
+                $report = $this->decide($report, true, Report::STATUS_TRANSFERRED, $private->getSupervisedBy()->getSupervisedBy());
                 $manager->persist($report);
             }
-
-            // report with hierarchical transferred decision
-            /** @var User $addressTo */
-            $report = $this->createReport($private, $private->getSupervisedBy());
-            $report->setIsHierarchical(true);
-            $report = $this->decide($report, true, Report::STATUS_TRANSFERRED, $private->getSupervisedBy()->getSupervisedBy());
-            $manager->persist($report);
         }
 
         $manager->flush();
@@ -105,7 +108,7 @@ class LoadData implements FixtureInterface, ContainerAwareInterface
     {
         $report = ($this->reportManager->createReport($createdBy))
             ->setCreatedAt($createdAt = $this->faker->dateTimeBetween('-14 days', '-7 days'))
-            ->setObject(ucfirst($this->faker->words(3, true)))
+            ->setObject(ucfirst($this->faker->words($this->faker->numberBetween(5, 25), true)))
             ->setMessage($this->faker->paragraph())
             ->setStartedAt($this->faker->dateTimeBetween('+ 1 day', '+ 14 days'))
             ->setPlace($this->faker->city)
