@@ -3,7 +3,7 @@ parameters:
 services:
     app.report_manager:
         class: AppBundle\Manager\ReportManager
-        arguments: ["@doctrine.orm.entity_manager", "@workflow.report", "@security.token_storage"]
+        arguments: ["@doctrine.orm.entity_manager", "@workflow.report", "@security.token_storage", "@event_dispatcher"]
 
     app.user_manager:
         class: AppBundle\Manager\UserManager
@@ -26,3 +26,13 @@ services:
         public: false
         tags:
             - { name: twig.extension }
+
+    app.mailer:
+        class: AppBundle\Mailer\Mailer
+        arguments: ["@mailer", "@templating"]
+
+    app.mailer_listener:
+        class: AppBundle\EventListener\MailerListener
+        arguments: ['@app.mailer']
+        tags:
+            - { name: kernel.event_subscriber }

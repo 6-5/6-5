@@ -5,7 +5,10 @@ namespace AppBundle\Manager;
 use AppBundle\Entity\Decision;
 use AppBundle\Entity\Report;
 use AppBundle\Entity\User;
+use AppBundle\Event\ReportEvent;
 use Doctrine\ORM\EntityManager;
+use Symfony\Component\Console\ReportEvents;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 use Symfony\Component\Workflow\Workflow;
 
@@ -14,12 +17,14 @@ class ReportManager
     private $em;
     private $workflow;
     private $tokenStorage;
+    private $dispatcher;
 
-    public function __construct(EntityManager $em, Workflow $workflow, TokenStorage $tokenStorage)
+    public function __construct(EntityManager $em, Workflow $workflow, TokenStorage $tokenStorage, EventDispatcherInterface $dispatcher)
     {
         $this->em = $em;
         $this->workflow = $workflow;
         $this->tokenStorage = $tokenStorage;
+        $this->dispatcher = $dispatcher;
     }
 
     public function createReport(User $createdBy = null)
@@ -56,6 +61,9 @@ class ReportManager
             ->setAddressedTo($user)
             ->addDecision($decision)
         ;
+
+        $event = new ReportEvent($report);
+        $this->dispatcher->dispatch(ReportEvent::ADDRESSED, $event);
 
         return $report;
     }
