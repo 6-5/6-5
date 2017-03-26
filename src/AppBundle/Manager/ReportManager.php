@@ -84,6 +84,9 @@ class ReportManager
             ->setStatus(Report::STATUS_READED)
         ;
 
+        $event = new ReportEvent($report);
+        $this->dispatcher->dispatch(ReportEvent::READED, $event);
+
         return $report;
     }
 
@@ -91,14 +94,24 @@ class ReportManager
     {
         $this->workflow->apply($report, 'accept');
 
-        return $this->decideTo($report, Report::STATUS_ACCEPTED, $comment, $decidedAt);
+        $report = $this->decideTo($report, Report::STATUS_ACCEPTED, $comment, $decidedAt);
+
+        $event = new ReportEvent($report);
+        $this->dispatcher->dispatch(ReportEvent::ACCEPTED, $event);
+
+        return $report;
     }
 
     public function decideToRefuse(Report $report, $comment, $decidedAt = null)
     {
         $this->workflow->apply($report, 'refuse');
 
-        return $this->decideTo($report, Report::STATUS_REFUSED, $comment, $decidedAt);
+        $report = $this->decideTo($report, Report::STATUS_REFUSED, $comment, $decidedAt);
+
+        $event = new ReportEvent($report);
+        $this->dispatcher->dispatch(ReportEvent::ACCEPTED, $event);
+
+        return $report;
     }
 
     public function decideToTransfer(Report $report, $newUser, $comment, $decidedAt = null)
@@ -113,6 +126,10 @@ class ReportManager
         ;
 
         $report->addDecision($decision);
+
+        $event = new ReportEvent($report);
+        $this->dispatcher->dispatch(ReportEvent::TRANSFERRED, $event);
+        $this->dispatcher->dispatch(ReportEvent::ADDRESSED, $event);
 
         return $report;
     }
