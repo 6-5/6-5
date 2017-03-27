@@ -39,6 +39,7 @@ services:
         tags:
             - { name: twig.extension }
 
+
     app.mailer:
         class: AppBundle\Mailer\Mailer
         arguments: ["@mailer", "@templating"]
