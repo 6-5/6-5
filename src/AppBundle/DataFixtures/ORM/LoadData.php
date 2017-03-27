@@ -108,7 +108,7 @@ class LoadData implements FixtureInterface, ContainerAwareInterface
     {
         $report = ($this->reportManager->createReport($createdBy))
             ->setCreatedAt($createdAt = $this->faker->dateTimeBetween('-14 days', '-7 days'))
-            ->setObject(ucfirst($this->faker->words($this->faker->numberBetween(5, 25), true)))
+            ->setObject(ucfirst($this->faker->words($this->faker->numberBetween(5, 10), true)))
             ->setMessage($this->faker->paragraph())
             ->setStartedAt($this->faker->dateTimeBetween('+ 1 day', '+ 14 days'))
             ->setPlace($this->faker->city)

@@ -59,9 +59,8 @@ class UserManager
         $locale = $locale ?: $this->requestStack->getCurrentRequest()->getLocale();
         $rank = $abbreviated ? $user->getRank() . '.abbr' : $user->getRank();
 
-        return sprintf(
-            '%s %s %s',
-            $this->translator->trans($rank, [], 'ranks', $locale),
+        return sprintf('%s %s %s',
+            ucfirst($this->translator->trans($rank, [], 'ranks', $locale)),
             strtoupper($user->getLastname()),
             ucfirst($user->getFirstname())
         );
