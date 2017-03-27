@@ -4,6 +4,7 @@ namespace AppBundle\Twig;
 
 use AppBundle\Entity\Report;
 use AppBundle\Manager\ReportManager;
+use AppBundle\Entity\User;
 
 class AppExtension extends \Twig_Extension
 {
@@ -19,6 +20,7 @@ class AppExtension extends \Twig_Extension
         return array(
             new \Twig_SimpleFilter('status_to_icon', array($this, 'statusToIcon')),
             new \Twig_SimpleFilter('status_to_bg', array($this, 'statusToBg')),
+            new \Twig_SimpleFilter('user_fullname', array($this, 'displayFullName')),
         );
     }
 
@@ -59,5 +61,15 @@ class AppExtension extends \Twig_Extension
     public function isCurrentDecider(Report $report)
     {
         return $this->rm->isCurrentDecider($report);
+    }
+
+    public function displayFullName(User $user)
+    {
+        return sprintf(
+            '%s %s %s',
+            ucfirst($user->getRank()),
+            ucfirst($user->getFirstname()),
+            ucfirst($user->getLastname())
+        );
     }
 }
