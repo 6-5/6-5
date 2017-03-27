@@ -166,6 +166,19 @@ class ReportManager
         return $classifications;
     }
 
+    public function getUrgencies($locale = null)
+    {
+        $locale = $locale ?: $this->requestStack->getCurrentRequest()->getLocale();
+
+        $urgencies = [];
+        foreach (Utils::getConstants(Report::class, 'URGENCY_') as $id) {
+            $classifications[$id] = $this->translator->trans($id, [], 'urgency', $locale);
+        }
+
+        return $urgencies;
+    }
+
+
     /**
      * Checks if given user is current decider of report.
      *
