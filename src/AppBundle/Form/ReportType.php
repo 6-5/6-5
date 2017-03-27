@@ -56,6 +56,7 @@ class ReportType extends AbstractType
                 'choice_label' => function (User $user) { return $this->userManager->getFullName($user, true); },
                 'label' => 'report.addressedTo',
             ])
+            /*
             ->add('isHierarchical', CheckboxType::class, [
                 'label' => 'report.isHierarchical',
             ])
@@ -63,6 +64,7 @@ class ReportType extends AbstractType
                 'entry_type' => FileType::class,
                 'label' => 'report.files',
             ])
+            */
         ;
     }
     
