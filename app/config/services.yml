@@ -11,9 +11,16 @@ services:
         
     app.report_serializer:
         class: AppBundle\Serializer\ReportNormalizer
-        arguments: ["@router", "@app.report_manager", "@templating"]
+        arguments: ["@router", "@app.report_manager", "@app.user_manager", "@templating"]
         tags:
             - { name: serializer.normalizer }
+
+    app.form.type.report:
+        class: AppBundle\Form\ReportType
+        arguments:
+            - "@app.user_manager"
+        tags:
+            - { name: form.type }
 
     twig.extension.intl:
         class: Twig_Extensions_Extension_Intl
@@ -26,3 +33,4 @@ services:
         public: false
         tags:
             - { name: twig.extension }
+

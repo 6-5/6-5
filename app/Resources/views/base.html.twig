@@ -84,7 +84,7 @@
                 <aside id="leftsidebar" class="sidebar">
                     <div class="user-info">
                         <div class="info-container">
-                            <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ app.user.firstname }} {{ app.user.lastname }}</div>
+                            <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ app.user|user_fullname }}</div>
                             <div class="email">{{ app.user.email }}</div>
                             <div class="btn-group user-helper-dropdown">
                                 <i class="material-icons" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">keyboard_arrow_down</i>

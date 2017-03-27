@@ -2,6 +2,10 @@
 
 namespace AppBundle\Form;
 
+use AppBundle\Entity\User;
+use AppBundle\Manager\UserManager;
+use AppBundle\Repository\ReportRepository;
+use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
@@ -14,6 +18,13 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ReportType extends AbstractType
 {
+    private $userManager;
+
+    public function __construct(UserManager $userManager)
+    {
+        $this->userManager = $userManager;
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -42,7 +53,7 @@ class ReportType extends AbstractType
             ])
             ->add('addressedTo', EntityType::class, [
                 'class' => 'AppBundle\Entity\User',
-                'choice_label' => 'username',
+                'choice_label' => function (User $user) { return $this->userManager->getFullName($user, true); },
                 'label' => 'report.addressedTo',
             ])
             ->add('isHierarchical', CheckboxType::class, [
