@@ -169,8 +169,8 @@ class ReportManager
     /**
      * Checks if given user is current decider of report.
      *
-     * @param Report    $report
-     * @param User|null $user   Default to logged user
+     * @param Report $report
+     * @param User|null $user Default to logged user
      *
      * @return bool
      */
@@ -187,7 +187,7 @@ class ReportManager
     /**
      * Checks if given user can decide to accept/refuse/transfer report.
      *
-     * @param Report    $report Default to logged user
+     * @param Report $report Default to logged user
      * @param User|null $user
      *
      * @return bool
@@ -198,7 +198,6 @@ class ReportManager
             && ($this->workflow->can($report, 'accept')
                 || $this->workflow->can($report, 'refuse')
                 || $this->workflow->can($report, 'transfer')
-            )
-        ;
+            );
     }
 }
