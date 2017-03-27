@@ -5,7 +5,10 @@ namespace AppBundle\Manager;
 use AppBundle\Entity\Decision;
 use AppBundle\Entity\Report;
 use AppBundle\Entity\User;
+use AppBundle\Event\ReportEvent;
 use Doctrine\ORM\EntityManager;
+use Symfony\Component\Console\ReportEvents;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 use Symfony\Component\Workflow\Workflow;
 
@@ -14,12 +17,14 @@ class ReportManager
     private $em;
     private $workflow;
     private $tokenStorage;
+    private $dispatcher;
 
-    public function __construct(EntityManager $em, Workflow $workflow, TokenStorage $tokenStorage)
+    public function __construct(EntityManager $em, Workflow $workflow, TokenStorage $tokenStorage, EventDispatcherInterface $dispatcher)
     {
         $this->em = $em;
         $this->workflow = $workflow;
         $this->tokenStorage = $tokenStorage;
+        $this->dispatcher = $dispatcher;
     }
 
     public function createReport(User $createdBy = null)
@@ -57,6 +62,9 @@ class ReportManager
             ->addDecision($decision)
         ;
 
+        $event = new ReportEvent($report);
+        $this->dispatcher->dispatch(ReportEvent::ADDRESSED, $event);
+
         return $report;
     }
 
@@ -76,6 +84,9 @@ class ReportManager
             ->setStatus(Report::STATUS_READED)
         ;
 
+        $event = new ReportEvent($report);
+        $this->dispatcher->dispatch(ReportEvent::READED, $event);
+
         return $report;
     }
 
@@ -83,14 +94,24 @@ class ReportManager
     {
         $this->workflow->apply($report, 'accept');
 
-        return $this->decideTo($report, Report::STATUS_ACCEPTED, $comment, $decidedAt);
+        $report = $this->decideTo($report, Report::STATUS_ACCEPTED, $comment, $decidedAt);
+
+        $event = new ReportEvent($report);
+        $this->dispatcher->dispatch(ReportEvent::ACCEPTED, $event);
+
+        return $report;
     }
 
     public function decideToRefuse(Report $report, $comment, $decidedAt = null)
     {
         $this->workflow->apply($report, 'refuse');
 
-        return $this->decideTo($report, Report::STATUS_REFUSED, $comment, $decidedAt);
+        $report = $this->decideTo($report, Report::STATUS_REFUSED, $comment, $decidedAt);
+
+        $event = new ReportEvent($report);
+        $this->dispatcher->dispatch(ReportEvent::ACCEPTED, $event);
+
+        return $report;
     }
 
     public function decideToTransfer(Report $report, $newUser, $comment, $decidedAt = null)
@@ -105,6 +126,10 @@ class ReportManager
         ;
 
         $report->addDecision($decision);
+
+        $event = new ReportEvent($report);
+        $this->dispatcher->dispatch(ReportEvent::TRANSFERRED, $event);
+        $this->dispatcher->dispatch(ReportEvent::ADDRESSED, $event);
 
         return $report;
     }

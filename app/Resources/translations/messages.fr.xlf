@@ -197,6 +197,42 @@
         <source>report.read_only</source>
         <target>Le rapport n'est plus modifiable/supprimable une fois envoyé.</target>
       </trans-unit>
+      <trans-unit id="ef6edce19cc8618d55cf60ed7e9209d3" resname="report.sent">
+        <source>report.sent</source>
+        <target>Rapport envoyé</target>
+      </trans-unit>
+      <trans-unit id="3e4715bbdc6d7e341575b70522e872b5" resname="report.reference">
+        <source>report.reference</source>
+        <target>Référence</target>
+      </trans-unit>
+      <trans-unit id="a6105c0a611b41b08f1209506350279e" resname="yes">
+        <source>yes</source>
+        <target>Oui</target>
+      </trans-unit>
+      <trans-unit id="7fa3b767c460b54a2be4d49030b349c7" resname="no">
+        <source>no</source>
+        <target>Non</target>
+      </trans-unit>
+      <trans-unit id="2ce73406ff39d2b5a03822e3518ebda2" resname="report.transfered">
+        <source>report.transfered</source>
+        <target>Rapport transféré</target>
+      </trans-unit>
+      <trans-unit id="32fca2685d2073591904651ab40ca96e" resname="report.received">
+        <source>report.received</source>
+        <target>Rapport reçu</target>
+      </trans-unit>
+      <trans-unit id="39f2c85e22829572f69161e1de2dccc3" resname="report.accepted">
+        <source>report.accepted</source>
+        <target>Rapport accepté</target>
+      </trans-unit>
+      <trans-unit id="7dead88a0a912bbaf5dd9a28362d77ac" resname="report.refused">
+        <source>report.refused</source>
+        <target>Rapport refusé</target>
+      </trans-unit>
+      <trans-unit id="370ac6ad453828f7d17c7c4a298b87f7" resname="report.readed">
+        <source>report.readed</source>
+        <target>Rapport consulté</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

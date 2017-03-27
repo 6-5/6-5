@@ -1,0 +1,22 @@
+{{ 'report.reference'|trans }}: {{ report.reference }}
+{{ 'report.createdBy'|trans }}: {{ report.createdBy }}
+{{ 'report.addressedTo'|trans }}: {{ report.addressedTo.username }}
+{{ 'report.object'|trans }}: {{ report.object }}
+{{ 'report.message'|trans }}:
+{{ report.message }}
+-------------------------------
+{{ 'report.isHierarchical'|trans }}: {{ report.isHierarchical ? 'yes'|trans : 'no'|trans }}
+{{ 'report.startedAt'|trans }}: {{ report.startedAt|localizeddate('short', 'short') }}
+{{ 'report.place'|trans }}: {{ report.place }}
+{{ 'report.urgency'|trans }}: {{ report.urgency }}
+{{ 'report.classification'|trans }}: {{ report.classification }}
+-------------------------------
+{{ 'report.status'|trans }}:
+{% for decision in report.decisions|reverse %}
+- {{ decision.user }}: {{ decision.status|trans({}, 'status') }}
+{%- if decision.decidedAt is not empty %} - {{ decision.decidedAt|localizeddate('short', 'short') }}{% endif %}
+{%- if decision.comment is not empty %} - {{ decision.comment }}{% endif %}
+
+{% endfor %}
+-------------------------------
+{{ absolute_url(path('report_show', { 'reference': report.reference })) }}

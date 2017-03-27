@@ -40,3 +40,6 @@ security:
         main:
             http_basic:
                 provider: fos_userbundle
+
+swiftmailer:
+    delivery_addresses: ["%mailer_user%"]
