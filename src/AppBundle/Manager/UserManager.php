@@ -27,7 +27,7 @@ class UserManager
      */
     public function getRanks($abbreviated = false, $locale = null)
     {
-        $locale = $locale ?: $this->requestStack->getCurrentRequest()->getLocale();
+        $locale = $locale ?: ($request = $this->requestStack->getCurrentRequest()) ? $request->getLocale() : 'en';
         $r = new \ReflectionClass(User::class);
         $filter = function ($constant) {
             return false !== strpos($constant, 'RANK_');
@@ -56,7 +56,7 @@ class UserManager
      */
     public function getFullName(User $user, $abbreviated = false, $locale = null)
     {
-        $locale = $locale ?: $this->requestStack->getCurrentRequest()->getLocale();
+        $locale = $locale ?: ($request = $this->requestStack->getCurrentRequest()) ? $request->getLocale() : 'en';
         $rank = $abbreviated ? $user->getRank() . '.abbr' : $user->getRank();
 
         return sprintf('%s %s %s',

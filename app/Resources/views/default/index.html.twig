@@ -11,7 +11,11 @@
             background-color: transparent;
         }
         .card {
-            color: #555
+            color: #555;
+        }
+        .card .header {
+            height: 200px;
+            overflow: auto;
         }
         .card:hover {
             box-shadow: 0 4px 12px rgba(0,0,0,.4);
@@ -37,10 +41,10 @@
                     <a href="{{ path('report_show', { reference: report.reference }) }}">
                         <div class="grid-item">
                             <div class="card">
-                                <div class="header">
+                                <div class="header bg-camo bg-camo-2">
                                     <h4>{{ report.object }} <code>{{ report.reference }}</code></h4>
                                     <blockquote>
-                                        {{ report.addressedTo.username }}
+                                        {{ report.addressedTo|user_fullname }}
                                     </blockquote>
                                 </div>
                                 {{ include('report/_status.html.twig', { decision: report.lastDecision, show_comment: 'n' }) }}
@@ -59,10 +63,10 @@
                     <a href="{{ path('report_show', { reference: report.reference }) }}">
                         <div class="grid-item">
                             <div class="card">
-                                <div class="header bg-blue-grey">
+                                <div class="header bg-camo bg-camo-2">
                                     <h4>{{ report.object }} <code>{{ report.reference }}</code></h4>
                                     <blockquote>
-                                        {{ report.createdBy.username }}
+                                        {{ report.createdBy|user_fullname }}
                                     </blockquote>
                                 </div>
                                 <table class="table table-striped">

@@ -10,14 +10,14 @@
         <div class="row clearfix">
             <div class="col-sm-12">
                 <div class="card">
-                    <div class="header bg-red">
+                    <div class="header bg-camo bg-camo-2">
                         <h1>{{ 'report.creation'|trans }}</h1>
                     </div>
                     <div class="body">
                         {{ form_start(form) }}
                         {{ form_errors(form) }}
                             <div class="row">
-                                <div class="col-sm-6">
+                                <div class="col-sm-6 input-bg">
                                     {{ form_row(form.object) }}
                                     {{ form_row(form.message, { attr: { rows: 20 } }) }}
                                 </div>
@@ -32,11 +32,13 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-sm-6">{{ form_row(form.addressedTo) }}</div>
-                                        <div class="col-sm-6">{{ form_row(form.isHierarchical) }}</div>
+                                        {#<div class="col-sm-6">{{ form_row(form.isHierarchical) }}</div>#}
                                     </div>
+                                    {#
                                     <div class="row">
                                         <div class="col-sm-12">{{ form_row(form.files) }}</div>
                                     </div>
+                                    #}
                                 </div>
                             </div>
                             <div class="pull-right">

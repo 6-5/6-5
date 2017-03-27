@@ -10,7 +10,7 @@
         <div class="row clearfix">
             <div class="col-sm-12">
                 <div class="card">
-                    <div class="header bg-red">
+                    <div class="header bg-camo bg-camo-2">
                         <h1>{{ 'reports.sent'|trans }}</h1>
                     </div>
                     <div class="body">
@@ -54,7 +54,7 @@
                     {
                         data: "reference",
                         render: function ( data, type, row, meta ) {
-                            return '<a href="' + row.path_show + '"><span class="label label-default">' + data + '</span></a>';
+                            return '<a class="ref" href="' + row.path_show + '">' + data + '</a>';
                         }
                     },
                     { data: "object" },
@@ -64,9 +64,13 @@
                     { data: "classification" },
                     { data: "status_rendered" }
                 ],
+                language: {
+                    processing: "<div class='preloader'> <div class='spinner-layer'> <div class='circle-clipper left'> <div class='circle'></div> </div> <div class='circle-clipper right'> <div class='circle'></div> </div> </div> </div>"
+                },
                 searching: false,
                 ordering: false,
-                lengthChange: false
+                lengthChange: false,
+                stateSave: true
             });
         });
     </script>

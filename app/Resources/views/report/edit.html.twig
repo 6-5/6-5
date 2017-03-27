@@ -1,18 +1,23 @@
 {% extends 'base.html.twig' %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="{{ asset('assets/vendor/adminbsb-materialdesign/plugins/bootstrap-select/css/bootstrap-select.min.css') }}" rel="stylesheet" />
+{% endblock %}
+
 {% block content %}
     <div class="container-fluid">
         <div class="row clearfix">
             <div class="col-sm-12">
                 <div class="card">
-                    <div class="header bg-red">
+                    <div class="header bg-camo bg-camo-2">
                         <h1>{{ 'report.edition'|trans }}</h1>
                     </div>
                     <div class="body">
                         {{ form_start(edit_form) }}
                         {{ form_errors(edit_form) }}
                             <div class="row">
-                                <div class="col-sm-6">
+                                <div class="col-sm-6 input-bg">
                                     {{ form_row(edit_form.object) }}
                                     {{ form_row(edit_form.message, { attr: {rows: 20}}) }}
                                 </div>
@@ -27,11 +32,13 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-sm-6">{{ form_row(edit_form.addressedTo) }}</div>
-                                        <div class="col-sm-6">{{ form_row(edit_form.isHierarchical) }}</div>
+                                        {#<div class="col-sm-6">{{ form_row(edit_form.isHierarchical) }}</div>#}
                                     </div>
+                                    {#
                                     <div class="row">
                                         <div class="col-sm-12">{{ form_row(edit_form.files) }}</div>
                                     </div>
+                                    #}
                                 </div>
                             </div>
                             <div class="pull-right">
@@ -49,4 +56,9 @@
             </div>
         </div>
     </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('assets/vendor/adminbsb-materialdesign/plugins/bootstrap-select/js/bootstrap-select.min.js') }}"></script>
 {% endblock %}

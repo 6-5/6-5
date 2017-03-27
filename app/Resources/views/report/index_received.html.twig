@@ -10,8 +10,8 @@
         <div class="row clearfix">
             <div class="col-sm-12">
                 <div class="card">
-                    <div class="header bg-red">
-                        <h1>{{ 'reports.sent'|trans }}</h1>
+                    <div class="header bg-camo bg-camo-2">
+                        <h1>{{ 'reports.received'|trans }}</h1>
                     </div>
                     <div class="body">
                         <a href="{{ path('report_new') }}" class="btn btn-default btn-lg font-bold">{{ 'report.new'|trans }}</a>
@@ -53,7 +53,7 @@
                     {
                         data: "reference",
                         render: function ( data, type, row, meta ) {
-                            return '<a href="' + row.path_show + '"><span class="label label-default">' + data + '</span></a>';
+                            return '<a class="ref" href="' + row.path_show + '">' + data + '</a>';
                         }
                     },
                     { data: "created_by" },
@@ -64,7 +64,8 @@
                 ],
                 searching: false,
                 ordering: false,
-                lengthChange: false
+                lengthChange: false,
+                stateSave: true
             });
         });
     </script>

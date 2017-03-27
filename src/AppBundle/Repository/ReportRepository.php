@@ -85,6 +85,7 @@ class ReportRepository extends \Doctrine\ORM\EntityRepository
                 ->getDQL()
             ))
             ->where('r.createdBy = :createdBy')->setParameter('createdBy', $createdBy)
+            ->orderBy('d.createdAt', 'desc')
             ->getQuery()
             ->getResult()
         ;
@@ -103,6 +104,7 @@ class ReportRepository extends \Doctrine\ORM\EntityRepository
             ))
             ->andWhere('d.user = :addressedTo')->setParameter('addressedTo', $addressedTo)
             ->andWhere('d.status = :status')->setParameter('status', Report::STATUS_ADDRESSED)
+            ->orderBy('d.createdAt', 'desc')
             ->getQuery()
             ->getResult()
         ;

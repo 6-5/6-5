@@ -30,9 +30,13 @@ class DecisionType extends AbstractType
             ])
             ->add('transfertTo', EntityType::class, [
                 'class' => 'AppBundle\Entity\User',
+                'label' => false,
                 'choice_label' => function (User $user) { return $this->userManager->getFullName($user, true); },
-                'label' => 'report.addressedTo',
                 'mapped' => false,
+                'attr' => [
+                    'data-live-search' => true,
+                    'data-size' => 5,
+                ],
             ])
         ;
     }
