@@ -2,6 +2,8 @@
 
 namespace AppBundle\Form;
 
+use AppBundle\Entity\User;
+use AppBundle\Manager\UserManager;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -10,6 +12,13 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class DecisionType extends AbstractType
 {
+    private $userManager;
+
+    public function __construct(UserManager $userManager)
+    {
+        $this->userManager = $userManager;
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -21,7 +30,7 @@ class DecisionType extends AbstractType
             ])
             ->add('transfertTo', EntityType::class, [
                 'class' => 'AppBundle\Entity\User',
-                'choice_label' => 'username',
+                'choice_label' => function (User $user) { return $this->userManager->getFullName($user, true); },
                 'label' => 'report.addressedTo',
                 'mapped' => false,
             ])

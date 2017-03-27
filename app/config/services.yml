@@ -15,10 +15,15 @@ services:
         tags:
             - { name: serializer.normalizer }
 
+    app.form.type.decision:
+        class: AppBundle\Form\DecisionType
+        arguments: ["@app.user_manager"]
+        tags:
+            - { name: form.type }
+
     app.form.type.report:
         class: AppBundle\Form\ReportType
-        arguments:
-            - "@app.user_manager"
+        arguments: ["@app.user_manager"]
         tags:
             - { name: form.type }
 
@@ -29,7 +34,7 @@ services:
 
     app.twig_extension:
         class: AppBundle\Twig\AppExtension
-        arguments: ["@app.report_manager"]
+        arguments: ["@app.report_manager", "@app.user_manager"]
         public: false
         tags:
             - { name: twig.extension }

@@ -5,14 +5,17 @@ namespace AppBundle\Twig;
 use AppBundle\Entity\Report;
 use AppBundle\Manager\ReportManager;
 use AppBundle\Entity\User;
+use AppBundle\Manager\UserManager;
 
 class AppExtension extends \Twig_Extension
 {
     private $rm;
+    private $um;
 
-    public function __construct(ReportManager $rm)
+    public function __construct(ReportManager $rm, UserManager $um)
     {
         $this->rm = $rm;
+        $this->um = $um;
     }
 
     public function getFilters()
@@ -63,13 +66,8 @@ class AppExtension extends \Twig_Extension
         return $this->rm->isCurrentDecider($report);
     }
 
-    public function displayFullName(User $user)
+    public function displayFullName(User $user, $abbreviated = false, $locale = null)
     {
-        return sprintf(
-            '%s %s %s',
-            ucfirst($user->getRank()),
-            ucfirst($user->getFirstname()),
-            ucfirst($user->getLastname())
-        );
+        return $this->um->getFullName($user, $abbreviated, $locale);
     }
 }

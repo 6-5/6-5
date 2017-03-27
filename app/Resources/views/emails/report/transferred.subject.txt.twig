@@ -1,1 +1,1 @@
-[{{ report.reference }}] {{ 'report.transfered'|trans }} ({{ report.decisions[report.decisions.count - 2].user ~ ' -> ' ~ report.lastDecision.user }})
+[{{ report.reference }}] {{ 'report.transfered'|trans }} ({{ report.decisions[report.decisions.count - 2].user|user_fullname ~ ' -> ' ~ report.lastDecision.user|user_fullname }})
