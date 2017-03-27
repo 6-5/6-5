@@ -2,6 +2,11 @@
 
 {% block title %}{{ parent() }} - {{ 'report'|trans }} {{ report.reference }} - {{ report.object }}{% endblock %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="{{ asset('assets/vendor/adminbsb-materialdesign/plugins/bootstrap-select/css/bootstrap-select.min.css') }}" rel="stylesheet" />
+{% endblock %}
+
 {% block content %}
     <div class="container-fluid">
         <div class="row clearfix">
@@ -107,4 +112,9 @@
             </div>
         </div>
     </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('assets/vendor/adminbsb-materialdesign/plugins/bootstrap-select/js/bootstrap-select.min.js') }}"></script>
 {% endblock %}
