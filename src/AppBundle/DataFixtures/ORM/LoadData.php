@@ -35,8 +35,10 @@ class LoadData implements FixtureInterface, ContainerAwareInterface
         $this->faker = \Faker\Factory::create();
         $userManager = $this->container->get('fos_user.user_manager');
         $this->reportManager = $this->container->get('app.report_manager');
-        $ranks = [User::RANK_COLONEL, User::RANK_CAPTAIN, User::RANK_SECOND_LIEUTENANT, User::RANK_PRIVATE] ;
-        $users = [User::RANK_COLONEL => [], User::RANK_CAPTAIN => [], User::RANK_SECOND_LIEUTENANT => [],  User::RANK_PRIVATE => []];
+        $ranks = [User::RANK_COLONEL, User::RANK_CAPTAIN, User::RANK_SECOND_LIEUTENANT, User::RANK_PRIVATE];
+        $users = [User::RANK_COLONEL => [], User::RANK_CAPTAIN => [], User::RANK_SECOND_LIEUTENANT => [], User::RANK_PRIVATE => []];
+        $classifications = [Report::CLASSIFICATION_UNCLASSIFIED, Report::CLASSIFICATION_INTERN,
+            Report::CLASSIFICATION_CONFIDENTIAL, Report::CLASSIFICATION_SECRET];
 
         // User
         foreach ($ranks as $k => $rank) {
@@ -46,9 +48,9 @@ class LoadData implements FixtureInterface, ContainerAwareInterface
                 $user->setLastname($this->faker->lastName);
                 $user->setRank($rank);
 
-                $user->setUsername($rank.$i);
-                $user->setPlainPassword($rank.$i);
-                $user->setEmail($rank.$i.'@6-5.ch');
+                $user->setUsername($rank . $i);
+                $user->setPlainPassword($rank . $i);
+                $user->setEmail($rank . $i . '@6-5.ch');
                 $user->addRole('ROLE_USER');
                 $user->setEnabled(true);
 
@@ -65,22 +67,22 @@ class LoadData implements FixtureInterface, ContainerAwareInterface
         foreach ($users[User::RANK_PRIVATE] as $private) {
             for ($i = 0; $i < 2; $i++) {
                 // draft
-                $report = $this->createReport($private);
+                $report = $this->createReport($private, null, $this->faker->randomElement($classifications));
                 $manager->persist($report);
 
-                    // report without decision but 50% readed
+                // report without decision but 50% readed
 
-                    $addressTo = $this->faker->randomElement($this->faker->randomElement($users));
-                    $report = $this->createReport($private, $addressTo);
-                    $report = $this->decide($report, $this->faker->boolean());
-                    $manager->persist($report);
+                $addressTo = $this->faker->randomElement($this->faker->randomElement($users));
+                $report = $this->createReport($private, $addressTo, $this->faker->randomElement($classifications));
+                $report = $this->decide($report, $this->faker->boolean());
+                $manager->persist($report);
 
                 // report with transferred decision
                 /** @var User $addressTo */
                 $addressTo = $this->faker->randomElement($this->faker->randomElement($users));
                 $transferTo = $addressTo->getSupervisedBy();
                 if ($transferTo) {
-                    $report = $this->createReport($private, $addressTo);
+                    $report = $this->createReport($private, $addressTo, $this->faker->randomElement($classifications));
                     $report = $this->decide($report, true, Report::STATUS_TRANSFERRED, $transferTo);
                     $manager->persist($report);
                 }
@@ -88,13 +90,13 @@ class LoadData implements FixtureInterface, ContainerAwareInterface
                 // report with accepted/refused decision
                 $addressTo = $this->faker->randomElement($this->faker->randomElement($users));
                 $status = $this->faker->boolean() ? Report::STATUS_ACCEPTED : Report::STATUS_REFUSED;
-                $report = $this->createReport($private, $addressTo);
+                $report = $this->createReport($private, $addressTo, $this->faker->randomElement($classifications));
                 $report = $this->decide($report, true, $status);
                 $manager->persist($report);
 
                 // report with hierarchical transferred decision
                 /** @var User $addressTo */
-                $report = $this->createReport($private, $private->getSupervisedBy());
+                $report = $this->createReport($private, $private->getSupervisedBy(), $this->faker->randomElement($classifications));
                 $report->setIsHierarchical(true);
                 $report = $this->decide($report, true, Report::STATUS_TRANSFERRED, $private->getSupervisedBy()->getSupervisedBy());
                 $manager->persist($report);
@@ -104,15 +106,15 @@ class LoadData implements FixtureInterface, ContainerAwareInterface
         $manager->flush();
     }
 
-    public function createReport(User $createdBy, User $addressTo = null)
+    public function createReport(User $createdBy, User $addressTo = null, $classification = Report::CLASSIFICATION_UNCLASSIFIED)
     {
-        $report = ($this->reportManager->createReport($createdBy))
+        $report = ($this->reportManager->createReport($createdBy, $classification))
             ->setCreatedAt($createdAt = $this->faker->dateTimeBetween('-14 days', '-7 days'))
             ->setObject(ucfirst($this->faker->words($this->faker->numberBetween(5, 10), true)))
             ->setMessage($this->faker->paragraph())
             ->setStartedAt($this->faker->dateTimeBetween('+ 1 day', '+ 14 days'))
             ->setPlace($this->faker->city)
-        ;
+            ->setClassification($classification);
 
         $file = new File();
         $report->addFile($file);
