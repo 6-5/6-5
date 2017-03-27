@@ -32,11 +32,32 @@
                 .input-bg input, .input-bg textarea {
                     background-color: #eee;
                 }
+                .login-page .login-box a {
+                    color: #1e2e23;
+                }
+                .bg-camo {
+                    background: url(/assets/img/bg.jpg);
+                }
+                .bg-camo .logo, .bg-camo a, .bg-camo .logo a, .card .header.bg-camo, .card .header.bg-camo h2 {
+                    color: white;
+                    text-shadow: 0 0 3px black;
+                }
+                .bg-camo-2 {
+                    filter: grayscale(50%);
+                }
+                .sidebar .user-info {
+                    background-image: none;
+                    background-color: #8c9458;
+                    height: auto;
+                }
+                .sidebar .user-info .info-container {
+                    top: 0;
+                }
             </style>
         {% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
-    <body class="{% block body_class %}theme-red{% endblock %}">
+    <body class="{% block body_class %}{% endblock %}">
         <div class="hidden" id="notification">
             {% for type, messages in app.session.flashbag.all() %}
                 {% for message in messages %}
@@ -69,7 +90,7 @@
                     <i class="material-icons">close</i>
                 </div>
             </div>
-            <nav class="navbar">
+            <nav class="navbar bg-camo">
                 <div class="container-fluid">
                     <div class="navbar-header">
                         <a href="javascript:void(0);" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false"></a>

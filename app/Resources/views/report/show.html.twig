@@ -12,19 +12,19 @@
         <div class="row clearfix">
             <div class="col-sm-6">
                 <div class="card">
-                    <div class="header bg-red">
-                        <h1>{{ 'report'|trans }} <code>{{ report.reference }}</code></h1>
+                    <div class="header bg-camo bg-camo-2">
+                        <h1>{{ 'report'|trans }} {{ report.reference }}</h1>
                     </div>
                     <div class="body">
                         <p class="lead">{{ report.object }}</p>
                         <blockquote>
                             <p>{{ report.message }}</p>
-                            <footer>{{ report.createdBy.username }}</footer>
+                            <footer>{{ report.createdBy|user_fullname }}</footer>
                         </blockquote>
                     </div>
                 </div>
                 <div class="card">
-                    <div class="header bg-red">
+                    <div class="header bg-camo bg-camo-2">
                         <h2>{{ 'infos'|trans }}</h2>
                     </div>
                     <div>
@@ -64,7 +64,7 @@
                 <div class="col-sm-6">
                     {% if workflow_can(report, 'accept') and is_current_decider(report) %}
                         <div class="card">
-                            <div class="header bg-red">
+                            <div class="header bg-camo bg-camo-2">
                                 <h2>{{ 'decision'|trans }}</h2>
                             </div>
                             <div class="body">

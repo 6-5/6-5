@@ -3,7 +3,7 @@
         <i class="material-icons col-black">{{ decision.status|status_to_icon }}</i>
     </div>
     <div class="content">
-        <div class="text">{{ decision.user }}</div>
+        <div class="text">{{ decision.user|user_fullname }}</div>
         <div class="number text-uppercase font-bold">{{ decision.status|trans({}, 'status') }}</div>
     </div>
     <i
