@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="en" target-language="en" datatype="plaintext" original="file.ext">
+        <body>
+            <trans-unit id="low">
+                <source>low</source>
+                <target>niedrig</target>
+            </trans-unit>
+            <trans-unit id="normal">
+                <source>normal</source>
+                <target>normal</target>
+            </trans-unit>
+            <trans-unit id="high">
+                <source>high</source>
+                <target>hoch</target>
+            </trans-unit>
+            <trans-unit id="critical">
+                <source>critical</source>
+                <target>kritisch</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>
