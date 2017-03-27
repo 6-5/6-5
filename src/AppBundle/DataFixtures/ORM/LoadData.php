@@ -63,7 +63,7 @@ class LoadData implements FixtureInterface, ContainerAwareInterface
         // Report
         /** @var User $private */
         foreach ($users[User::RANK_PRIVATE] as $private) {
-            for ($i = 0; $i < $this->faker->numberBetween(2, 5); $i++) {
+            for ($i = 0; $i < 2; $i++) {
                 // draft
                 $report = $this->createReport($private);
                 $manager->persist($report);
