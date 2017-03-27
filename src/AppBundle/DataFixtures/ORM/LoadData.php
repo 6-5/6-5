@@ -106,20 +106,14 @@ class LoadData implements FixtureInterface, ContainerAwareInterface
 
     public function createReport(User $createdBy, User $addressTo = null, $classification = Report::CLASSIFICATION_UNCLASSIFIED)
     {
-        $classifications = [
-            Report::CLASSIFICATION_UNCLASSIFIED,
-            Report::CLASSIFICATION_INTERN,
-            Report::CLASSIFICATION_CONFIDENTIAL,
-            Report::CLASSIFICATION_SECRET,
-        ];
-
         $report = ($this->reportManager->createReport($createdBy, $classification))
             ->setCreatedAt($createdAt = $this->faker->dateTimeBetween('-14 days', '-7 days'))
             ->setObject(ucfirst($this->faker->words($this->faker->numberBetween(5, 10), true)))
             ->setMessage($this->faker->paragraph())
             ->setStartedAt($this->faker->dateTimeBetween('+ 1 day', '+ 14 days'))
             ->setPlace($this->faker->city)
-            ->setClassification($this->faker->randomElement($classifications));
+            ->setClassification($this->faker->randomElement($this->reportManager->getClassifications()))
+            ->setUrgency($this->faker->randomElement($this->reportManager->getUrgencies()));
 
         $file = new File();
         $report->addFile($file);
