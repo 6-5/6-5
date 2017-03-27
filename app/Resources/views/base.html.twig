@@ -132,15 +132,9 @@
                         <ul class="list">
                             <li class="header">{{ 'reports'|trans }}</li>
                             <li>
-                                <a href="{{ path('report_index_sent') }}">
-                                    <i class="material-icons">mail</i>
-                                    <span>{{ 'reports.sent'|trans }}</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="{{ path('report_index_received') }}">
-                                    <i class="material-icons">inbox</i>
-                                    <span>{{ 'reports.received'|trans }}</span>
+                                <a href="{{ path('report_new') }}">
+                                    <i class="material-icons">add_box</i>
+                                    <span>{{ 'report.new'|trans }}</span>
                                 </a>
                             </li>
                             <li>
@@ -150,9 +144,15 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="{{ path('report_new') }}">
-                                    <i class="material-icons">add_box</i>
-                                    <span>{{ 'report.new'|trans }}</span>
+                                <a href="{{ path('report_index_sent') }}">
+                                    <i class="material-icons">mail</i>
+                                    <span>{{ 'reports.sent'|trans }}</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ path('report_index_received') }}">
+                                    <i class="material-icons">inbox</i>
+                                    <span>{{ 'reports.received'|trans }}</span>
                                 </a>
                             </li>
                         </ul>
