@@ -11,7 +11,7 @@
             <div class="col-sm-12">
                 <div class="card">
                     <div class="header bg-camo bg-camo-2">
-                        <h1>{{ 'reports.sent'|trans }}</h1>
+                        <h1>{{ 'reports.received'|trans }}</h1>
                     </div>
                     <div class="body">
                         <a href="{{ path('report_new') }}" class="btn btn-default btn-lg font-bold">{{ 'report.new'|trans }}</a>
@@ -64,7 +64,8 @@
                 ],
                 searching: false,
                 ordering: false,
-                lengthChange: false
+                lengthChange: false,
+                stateSave: true
             });
         });
     </script>
