@@ -20,7 +20,7 @@ class Report
     const URGENCY_HIGH = 'high';
     const URGENCY_CRITICAL = 'critical';
 
-    const CLASSIFICATION_PUBLIC = 'public';
+    const CLASSIFICATION_UNCLASSIFIED = 'unclassified';
     const CLASSIFICATION_INTERN = 'intern';
     const CLASSIFICATION_CONFIDENTIAL = 'confidential';
     const CLASSIFICATION_SECRET = 'secret';
@@ -152,7 +152,7 @@ class Report
         $this->files = new \Doctrine\Common\Collections\ArrayCollection();
         $this->decisions = new \Doctrine\Common\Collections\ArrayCollection();
         $this->urgency = self::URGENCY_NORMAL;
-        $this->classification = self::CLASSIFICATION_INTERN;
+        $this->classification = self::CLASSIFICATION_UNCLASSIFIED;
         $this->createdAt = new \DateTime();
         $this->isDraft = true;
         $this->isHierarchical = false;

@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="en" target-language="en" datatype="plaintext" original="file.ext">
+        <body>
+            <trans-unit id="unclassified">
+                <source>unclassified</source>
+                <target>unclassified</target>
+            </trans-unit>
+            <trans-unit id="intern">
+                <source>intern</source>
+                <target>intern</target>
+            </trans-unit>
+            <trans-unit id="confidential">
+                <source>confidential</source>
+                <target>confidential</target>
+            </trans-unit>
+            <trans-unit id="secret">
+                <source>secret</source>
+                <target>secret</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>
