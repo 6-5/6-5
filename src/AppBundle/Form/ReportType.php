@@ -3,13 +3,11 @@
 namespace AppBundle\Form;
 
 use AppBundle\Entity\User;
+use AppBundle\Manager\ReportManager;
 use AppBundle\Manager\UserManager;
-use AppBundle\Repository\ReportRepository;
-use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
-use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -19,10 +17,12 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class ReportType extends AbstractType
 {
     private $userManager;
+    private $reportManager;
 
-    public function __construct(UserManager $userManager)
+    public function __construct(UserManager $userManager, ReportManager $reportManager)
     {
         $this->userManager = $userManager;
+        $this->reportManager = $reportManager;
     }
 
     /**
@@ -45,11 +45,13 @@ class ReportType extends AbstractType
             ->add('place', TextType::class, [
                 'label' => 'report.place',
             ])
-            ->add('urgency', null, [
+            ->add('urgency', ChoiceType::class, [
                 'label' => 'report.urgency',
+                'choices' => array_flip($this->reportManager->getUrgencies()),
             ])
-            ->add('classification', null, [
+            ->add('classification', ChoiceType::class, [
                 'label' => 'report.classification',
+                'choices' => array_flip($this->reportManager->getClassifications()),
             ])
             ->add('addressedTo', EntityType::class, [
                 'class' => 'AppBundle\Entity\User',
@@ -59,6 +61,9 @@ class ReportType extends AbstractType
                     'data-live-search' => true,
                     'data-size' => 5,
                 ],
+                'group_by' => function(User $user, $key, $index) {
+                    return ucfirst($this->userManager->getRanks()[$user->getRank()]);
+                },
             ])
             /*
             ->add('isHierarchical', CheckboxType::class, [

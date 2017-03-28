@@ -10,6 +10,7 @@ use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Symfony\Component\Serializer\SerializerAwareInterface;
 use Symfony\Component\Serializer\SerializerAwareTrait;
+use Symfony\Component\Translation\TranslatorInterface;
 
 class ReportNormalizer implements NormalizerInterface, SerializerAwareInterface
 {
@@ -17,15 +18,22 @@ class ReportNormalizer implements NormalizerInterface, SerializerAwareInterface
     private $router;
     private $userManager;
     private $templating;
+    private $translator;
 
     use SerializerAwareTrait;
 
-    public function __construct(RouterInterface $router, ReportManager $rm, UserManager $userManager, TwigEngine $templating)
-    {
+    public function __construct(
+        RouterInterface $router,
+        ReportManager $rm,
+        UserManager $userManager,
+        TwigEngine $templating,
+        TranslatorInterface $translator
+    ) {
         $this->rm = $rm;
         $this->router = $router;
         $this->userManager = $userManager;
         $this->templating = $templating;
+        $this->translator = $translator;
     }
 
     /**
@@ -41,8 +49,8 @@ class ReportNormalizer implements NormalizerInterface, SerializerAwareInterface
             'created_by' => $this->userManager->getFullName($object->getCreatedBy()),
             'addressed_to' => ($u = $object->getAddressedTo()) ? $this->userManager->getFullName($u) : '',
             'started_at' => ($d = $object->getStartedAt()) ? $d->format('d.m.Y H:i') : '',
-            'urgency' => $object->getUrgency(),
-            'classification' => $object->getClassification(),
+            'urgency' => $this->translator->trans($object->getUrgency(), [], 'urgency'),
+            'classification' => $this->translator->trans($object->getClassification(), [], 'classification'),
             'status' => $object->getStatus(),
             'status_rendered' => ($d = $object->getLastDecision()) ? $this->templating->render(':report:_status_inline.html.twig', ['decision' => $d]) : '',
             'path_show' => $this->router->generate('report_show', ['reference' => $object->getReference()]),

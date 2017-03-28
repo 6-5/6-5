@@ -6,10 +6,10 @@ use AppBundle\Entity\Decision;
 use AppBundle\Entity\Report;
 use AppBundle\Entity\User;
 use AppBundle\Event\ReportEvent;
+use AppBundle\Utils\Utils;
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Translation\TranslatorInterface;
-use Symfony\Component\Console\ReportEvents;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 use Symfony\Component\Workflow\Workflow;
@@ -23,9 +23,14 @@ class ReportManager
     private $tokenStorage;
     private $dispatcher;
 
-    public function __construct(EntityManager $em, TranslatorInterface $translator, RequestStack $requestStack,
-                                Workflow $workflow, TokenStorage $tokenStorage, EventDispatcherInterface $dispatcher)
-    {
+    public function __construct(
+        EntityManager $em,
+        TranslatorInterface $translator,
+        RequestStack $requestStack,
+        Workflow $workflow,
+        TokenStorage $tokenStorage,
+        EventDispatcherInterface $dispatcher
+    ) {
         $this->em = $em;
         $this->translator = $translator;
         $this->requestStack = $requestStack;
@@ -151,15 +156,10 @@ class ReportManager
 
     public function getClassifications($locale = null)
     {
-        $locale = $locale ?: $this->requestStack->getCurrentRequest()->getLocale();
-        $reflection = new \ReflectionClass(Report::class);
-        $filter = function ($value) {
-            return false !== strpos($value, 'CLASSIFICATION_');
-        };
-        $constants = array_filter($reflection->getConstants(), $filter, ARRAY_FILTER_USE_KEY);
+        $locale = $locale ?: ($request = $this->requestStack->getCurrentRequest()) ? $request->getLocale() : 'en';
 
         $classifications = [];
-        foreach ($constants as $id) {
+        foreach (Utils::getConstants(Report::class, 'CLASSIFICATION_') as $id) {
             $classifications[$id] = $this->translator->trans($id, [], 'classification', $locale);
         }
 
@@ -168,11 +168,11 @@ class ReportManager
 
     public function getUrgencies($locale = null)
     {
-        $locale = $locale ?: $this->requestStack->getCurrentRequest()->getLocale();
+        $locale = $locale ?: ($request = $this->requestStack->getCurrentRequest()) ? $request->getLocale() : 'en';
 
         $urgencies = [];
         foreach (Utils::getConstants(Report::class, 'URGENCY_') as $id) {
-            $classifications[$id] = $this->translator->trans($id, [], 'urgency', $locale);
+            $urgencies[$id] = $this->translator->trans($id, [], 'urgency', $locale);
         }
 
         return $urgencies;
