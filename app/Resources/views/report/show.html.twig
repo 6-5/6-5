@@ -50,11 +50,11 @@
                             </tr>
                             <tr>
                                 <th>{{ 'report.urgency'|trans }}</th>
-                                <td>{{ report.urgency }}</td>
+                                <td>{{ report.urgency|trans([], 'urgency') }}</td>
                             </tr>
                             <tr>
                                 <th>{{ 'report.classification'|trans }}</th>
-                                <td>{{ report.classification }}</td>
+                                <td>{{ report.classification|trans([], 'urgency') }}</td>
                             </tr>
                             </tbody>
                         </table>

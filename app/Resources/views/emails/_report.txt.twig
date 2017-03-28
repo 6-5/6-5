@@ -8,8 +8,8 @@
 {{ 'report.isHierarchical'|trans }}: {{ report.isHierarchical ? 'yes'|trans : 'no'|trans }}
 {{ 'report.startedAt'|trans }}: {{ report.startedAt|localizeddate('short', 'short') }}
 {{ 'report.place'|trans }}: {{ report.place }}
-{{ 'report.urgency'|trans }}: {{ report.urgency }}
-{{ 'report.classification'|trans }}: {{ report.classification }}
+{{ 'report.urgency'|trans }}: {{ report.urgency|trans([], 'urgency') }}
+{{ 'report.classification'|trans }}: {{ report.classification|trans([], 'classification') }}
 -------------------------------
 {{ 'report.status'|trans }}:
 {% for decision in report.decisions|reverse %}
