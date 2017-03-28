@@ -11,7 +11,7 @@ services:
         
     app.report_serializer:
         class: AppBundle\Serializer\ReportNormalizer
-        arguments: ["@router", "@app.report_manager", "@app.user_manager", "@templating"]
+        arguments: ["@router", "@app.report_manager", "@app.user_manager", "@templating", "@translator"]
         tags:
             - { name: serializer.normalizer }
 
@@ -23,7 +23,7 @@ services:
 
     app.form.type.report:
         class: AppBundle\Form\ReportType
-        arguments: ["@app.user_manager"]
+        arguments: ["@app.user_manager", "@app.report_manager"]
         tags:
             - { name: form.type }
 

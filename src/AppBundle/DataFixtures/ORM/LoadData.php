@@ -2,7 +2,6 @@
 
 namespace AppBundle\DataFixtures\ORM;
 
-use AppBundle\Entity\Decision;
 use AppBundle\Entity\File;
 use AppBundle\Entity\Report;
 use AppBundle\Entity\User;
@@ -37,6 +36,9 @@ class LoadData implements FixtureInterface, ContainerAwareInterface
         $this->reportManager = $this->container->get('app.report_manager');
         $ranks = [User::RANK_COLONEL, User::RANK_CAPTAIN, User::RANK_SECOND_LIEUTENANT, User::RANK_PRIVATE];
         $users = [User::RANK_COLONEL => [], User::RANK_CAPTAIN => [], User::RANK_SECOND_LIEUTENANT => [], User::RANK_PRIVATE => []];
+
+        // removes sending mails
+        $this->container->get('event_dispatcher')->removeSubscriber($this->container->get('app.mailer_listener'));
 
         // User
         foreach ($ranks as $k => $rank) {
@@ -112,8 +114,8 @@ class LoadData implements FixtureInterface, ContainerAwareInterface
             ->setMessage($this->faker->paragraph())
             ->setStartedAt($this->faker->dateTimeBetween('+ 1 day', '+ 14 days'))
             ->setPlace($this->faker->city)
-            ->setClassification($this->faker->randomElement($this->reportManager->getClassifications()))
-            ->setUrgency($this->faker->randomElement($this->reportManager->getUrgencies()));
+            ->setClassification($this->faker->randomKey($this->reportManager->getClassifications()))
+            ->setUrgency($this->faker->randomKey($this->reportManager->getUrgencies()));
 
         $file = new File();
         $report->addFile($file);

@@ -37,6 +37,9 @@ class DecisionType extends AbstractType
                     'data-live-search' => true,
                     'data-size' => 5,
                 ],
+                'group_by' => function(User $user, $key, $index) {
+                    return ucfirst($this->userManager->getRanks()[$user->getRank()]);
+                },
             ])
         ;
     }
