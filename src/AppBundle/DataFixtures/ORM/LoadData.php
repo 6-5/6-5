@@ -106,9 +106,9 @@ class LoadData implements FixtureInterface, ContainerAwareInterface
         $manager->flush();
     }
 
-    public function createReport(User $createdBy, User $addressTo = null, $classification = Report::CLASSIFICATION_UNCLASSIFIED)
+    public function createReport(User $createdBy, User $addressTo = null)
     {
-        $report = ($this->reportManager->createReport($createdBy, $classification))
+        $report = ($this->reportManager->createReport($createdBy))
             ->setCreatedAt($createdAt = $this->faker->dateTimeBetween('-14 days', '-7 days'))
             ->setObject(ucfirst($this->faker->words($this->faker->numberBetween(5, 10), true)))
             ->setMessage($this->faker->paragraph())

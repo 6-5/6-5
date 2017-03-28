@@ -39,13 +39,13 @@ class ReportManager
         $this->dispatcher = $dispatcher;
     }
 
-    public function createReport(User $createdBy = null, $classification = Report::CLASSIFICATION_UNCLASSIFIED)
+    public function createReport(User $createdBy = null)
     {
         $repo = $this->em->getRepository('AppBundle:Report');
         while ($repo->findOneByReference($reference = strtoupper(bin2hex(random_bytes(3))))) {
         };
 
-        return (new Report($classification))
+        return (new Report())
             ->setCreatedBy($createdBy)
             ->setReference($reference);
     }
@@ -154,6 +154,22 @@ class ReportManager
         return $report;
     }
 
+    /**
+     * Gets all translated classifications of a report.
+     *
+     * Example in FR:
+     * <code>
+     * [
+     *     'unclassified' => 'non classifié',
+     *     'intern' => 'intern',
+     *     ...
+     * ]
+     * </code>
+     *
+     * @param null $locale Locale used to translate (default: locale in current request)
+     *
+     * @return array
+     */
     public function getClassifications($locale = null)
     {
         $locale = $locale ?: ($request = $this->requestStack->getCurrentRequest()) ? $request->getLocale() : 'en';
@@ -166,6 +182,22 @@ class ReportManager
         return $classifications;
     }
 
+    /**
+     * Gets all translated urgencies of a report.
+     *
+     * Example in FR:
+     * <code>
+     * [
+     *     'low' => 'faible',
+     *     'normal' => 'normale',
+     *     ...
+     * ]
+     * </code>
+     *
+     * @param null $locale Locale used to translate (default: locale in current request)
+     *
+     * @return array
+     */
     public function getUrgencies($locale = null)
     {
         $locale = $locale ?: ($request = $this->requestStack->getCurrentRequest()) ? $request->getLocale() : 'en';
